@@ -19,8 +19,7 @@ public class LPSolver {
     private BigDecimal epsilon;
     private BigDecimal INF;
 
-    private boolean printProgress;
-    private PrintWriter out;
+    private BufferedWriter out;
 
     private static class LPState {
         ArrayList<ArrayList<BigDecimal>> A;
@@ -40,25 +39,48 @@ public class LPSolver {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    public LPSolver(LPStandardForm stForm, MathContext rounder, MathContext printRounder, BigDecimal epsilon, boolean printProgress) {
+    public LPSolver(LPStandardForm stForm, MathContext rounder, MathContext printRounder, BigDecimal epsilon, BigDecimal INF, String outPath) throws IOException {
         this.stForm = stForm;
         initialize(stForm);
 
-        this.INF = new BigDecimal("1e50");
+        this.INF = INF;
         this.epsilon = epsilon;
         this.rounder = rounder;
         this.printRounder = printRounder;
 
-        this.printProgress = printProgress;   //whether to print solution steps
+        setOut(outPath);
+    }
+
+    public LPSolver(LPStandardForm stForm, MathContext rounder, MathContext printRounder, BigDecimal epsilon, BigDecimal INF) {
+        this.stForm = stForm;
+        initialize(stForm);
+
+        this.INF = INF;
+        this.epsilon = epsilon;
+        this.rounder = rounder;
+        this.printRounder = printRounder;
+
         this.out = null;
     }
 
-    public LPSolver(LPStandardForm stFrom, boolean printProgress){
+    public LPSolver(LPStandardForm stFrom, String outPath) throws IOException {
         this.stForm = stFrom;
         initialize(stFrom);
 
-        this.printProgress = printProgress;
+        this.out = null;
+
+        this.INF = new BigDecimal("1e50");
+        this.epsilon = new BigDecimal("1e-9");
+        this.rounder = new MathContext(12, RoundingMode.HALF_UP);
+        this.printRounder = new MathContext(3, RoundingMode.HALF_UP);
+
+        setOut(outPath);
+    }
+
+    public LPSolver(LPStandardForm stFrom) {
+        this.stForm = stFrom;
+        initialize(stFrom);
+
         this.out = null;
 
         this.INF = new BigDecimal("1e50");
@@ -67,7 +89,7 @@ public class LPSolver {
         this.printRounder = new MathContext(3, RoundingMode.HALF_UP);
     }
 
-    private void initialize(LPStandardForm stForm){
+    private void initialize(LPStandardForm stForm) {
         this.A = (ArrayList<ArrayList<BigDecimal>>) stForm.getA().clone();
         this.b = (ArrayList<BigDecimal>) stForm.getb().clone();
         this.c = null;  // gets value in initialize simplex
@@ -81,41 +103,52 @@ public class LPSolver {
         this.slackVariables = null;  // initialized in method convert into slack form
     }
 
-    public boolean setOut(String path){
-        try{
-            PrintWriter out = new PrintWriter(path);
-            this.out = out;
-            return true;
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
-            return false;
+    public void setOut(String path) throws IOException {
+        out = new BufferedWriter(new FileWriter(new File(path)));
+    }
+
+    public BigDecimal solve() throws IOException, SolutionException {
+        return simplex(-1);
+    }
+
+    public BigDecimal solve(int iterationInterval) throws SolutionException, IOException {
+        if(iterationInterval < 1){
+            throw new SolutionException("Wrong iteration Interval");
+        }else {
+            return simplex(iterationInterval);
         }
     }
 
-    public void solve(boolean printIterationProgress, int numOfIterations) throws SolutionException, IOException {
+    private BigDecimal simplex(int iterationInterval) throws SolutionException, IOException {
         printLinearProgramme();
-        simplex(printIterationProgress, numOfIterations);
-    }
-
-    private void simplex(boolean printIterationProgress, int numOfIterations) throws SolutionException, IOException {
         initializeSimplex();
-        printStatement("Starting simplex\n\n");
-        int entering;
-        int count = 0;
-        while ((entering = getEntering()) != -1) {
-            ++count;
-            int leaving = getLeaving(entering);
+        int entering, leaving, iterationCount = 0;
+        while ((entering = getEntering(0)) != -1) {
+            ++iterationCount;
+            leaving = getLeaving(entering);
             if (leaving == -1) {
-                throw new LPException("This linear is unbounded");
+                throw new SolutionException("This linear programme is unbounded");
             }
-            pivot(entering, leaving);
-            printProgress(entering, leaving, "\n\n");
-            if(count % numOfIterations == 0 && printIterationProgress){
-                System.out.println("Current objective function value is " + this.v.toPlainString() + ", number of iterations " + count);
+            int initialEntering = entering, initialLeaving = leaving;
+            while (leaving != -1 && b.get(leaving).abs().compareTo(epsilon) < 0) {
+                entering = getEntering(entering + 1);
+                if (entering == -1) {
+                    break;
+                }
+                leaving = getLeaving(entering);
+            }
+            if (entering == -1 || leaving == -1) {
+                pivot(initialEntering, initialLeaving);
+            } else {
+                pivot(entering, leaving);
+            }
+            if (iterationInterval > 0 && iterationCount % iterationInterval == 0) {
+                System.out.println("Current objective function value is " + this.v.toPlainString() + ", number of iterations " + iterationCount);
             }
         }
-        printSolution("\n\n");
-        System.out.println("This linear programme has optimal objective function value: " + this.v.toPlainString());
+        printSolution();
+        System.out.println("This linear programme has optimal objective function value: " + this.v.toPlainString() + ", number of iterations: " + iterationCount);
+        return this.v;
     }
 
     private void pivot(int entering, int leaving) {
@@ -142,7 +175,7 @@ public class LPSolver {
         }
         pivotRow.set(entering, BigDecimal.ONE.divide(pivotRow.get(entering), rounder));
         // Computing initialCoefficients in other equations
-        BigDecimal newPivotEnteringCoef = pivotRow.get(entering);
+        BigDecimal newPivotEnteringCoefficient = pivotRow.get(entering);
         BigDecimal bEntering = b.get(leaving);
         for (int i = 0; i < m; i++) {
             if (i == leaving) {
@@ -151,7 +184,7 @@ public class LPSolver {
             ArrayList<BigDecimal> row = A.get(i);
             BigDecimal enteringCoefficient = row.get(entering);
             b.set(i, b.get(i).subtract(enteringCoefficient.multiply(bEntering, rounder), rounder));
-            row.set(entering, enteringCoefficient.multiply(newPivotEnteringCoef, rounder).negate());  //changed
+            row.set(entering, enteringCoefficient.multiply(newPivotEnteringCoefficient, rounder).negate());  //changed
             for (int j = 0; j < n; j++) {
                 if (j == entering) {
                     continue;
@@ -162,7 +195,7 @@ public class LPSolver {
         // computing new objective function
         BigDecimal pivotCoefficientInC = c.get(entering);
         v = v.add(b.get(leaving).multiply(pivotCoefficientInC, rounder), rounder);
-        c.set(entering, pivotCoefficientInC.multiply(newPivotEnteringCoef).negate());
+        c.set(entering, pivotCoefficientInC.multiply(newPivotEnteringCoefficient).negate());
         for (int i = 0; i < n; i++) {
             if (i == entering) {
                 continue;
@@ -187,10 +220,30 @@ public class LPSolver {
         coefficients.put(leavingVarName, entering);
     }
 
-    @SuppressWarnings("unchecked")
+
     private void initializeSimplex() throws SolutionException, IOException {
-        //finding minimum value in b
-        printStatement("Initializing simplex\n\n");
+        if (n == 0 || m == 0) {
+            throw new SolutionException("Can't initialize simplex, lp is incorrect");
+        }
+        int indexOfMinInB = findIndexOfMinInB();
+        if (indexOfMinInB == -1) {
+            throw new SolutionException("Can't find minimum element in vector b");
+        }
+        if (b.get(indexOfMinInB).compareTo(BigDecimal.ZERO) < 0) {  //Basic solution is infeasible
+            String x0Identifier = convertIntoLaux();
+            this.n += 1;
+            int indexOfX0 = n - 1;
+            pivot(indexOfX0, indexOfMinInB);
+            solveLaux();
+            handleInitialization(x0Identifier);
+            this.n -= 1;
+        } else {
+            c = (ArrayList<BigDecimal>) this.stForm.getc().clone();
+            convertIntoSlackForm("");
+        }
+    }
+
+    private int findIndexOfMinInB() {
         BigDecimal minInB = INF;
         int indexOfMinInB = -1;
         for (int i = 0; i < m; i++) {
@@ -199,120 +252,115 @@ public class LPSolver {
                 indexOfMinInB = i;
             }
         }
-        if (indexOfMinInB == -1) {
-            throw new SolutionException("Numbers in vector b are too big");
+        return indexOfMinInB;
+    }
+
+    private String convertIntoLaux() throws IOException {
+        BigDecimal x0Coefficient = BigDecimal.ONE.negate();
+        for (int i = 0; i < m; i++) {
+            A.get(i).add(x0Coefficient);
         }
-        if (b.get(indexOfMinInB).compareTo(BigDecimal.ZERO) < 0) {  //Basic solution is infeasible
-            printStatement("Basis solution is infeasible\n\n");
-            //adding auxiliary variable x0 for auxiliary linear programme Laux
-            for (int i = 0; i < m; i++) {
-                A.get(i).add(BigDecimal.ONE.negate());
+        c = new ArrayList<>();
+        BigDecimal variablesCoefficient = BigDecimal.ZERO;
+        for (int i = 0; i < n; i++) {
+            c.add(variablesCoefficient);
+        }
+        c.add(x0Coefficient);
+        int x0Position = n;
+        String x0Identifier = "x0";
+        variables.put(x0Position, x0Identifier);
+        coefficients.put(x0Identifier, x0Position);
+        convertIntoSlackForm(x0Identifier);
+        return x0Identifier;
+    }
+
+    private void solveLaux() throws IOException, SolutionException {
+        for (int i = 0; ; i++) {
+            int entering = getEntering(0);
+            if (entering == -1) {
+                break;
             }
-            //creating new objective for Laux
-            c = new ArrayList<BigDecimal>();
-            for (int i = 0; i < n; i++) {
-                c.add(BigDecimal.ZERO);
+            int leaving = getLeaving(entering);
+            if (leaving == -1) {
+                throw new SolutionException("Can't find leaving on the " + String.valueOf(i + 1) + " iteration (solve L auxiliary)");
             }
-            c.add(BigDecimal.ONE.negate());
-            //Adding variable x0 to variables
-            String x0 = "x0";
-            variables.put(n, x0);
-            coefficients.put(x0, n);
-            this.n += 1;
-            //converting Laux into slack form
-            convertIntoSlackForm(x0);
-            printState("\n\n");
-            //Performing first pivot for x0
-            pivot(n - 1, indexOfMinInB);
-            printProgress(n - 1, indexOfMinInB, "\n\n");
-            //Solving Laux
-            for (int i = 0; ; i++) {
-                int entering = getEntering();
-                if (entering == -1) {
-                    break;
-                }
-                int leaving = getLeaving(entering);
-                if (leaving == -1) {
-                    throw new SolutionException("Can't find leaving on the " + String.valueOf(i + 1) + " iteration (initialize simplex)");
-                }
-                pivot(entering, leaving);
-                printProgress(entering, leaving, "\n\n");
-            }
-            handleInitialization(x0);
-            this.n -= 1;
-        } else {
-            printStatement("Basis solution is feasible\n\n");
-            c = (ArrayList<BigDecimal>) this.stForm.getc().clone();
-            convertIntoSlackForm("");
-            printState("\n\n");
+            pivot(entering, leaving);
         }
     }
 
-    private void handleInitialization(String x0) throws SolutionException, IOException {
-        if (coefficients.containsKey(x0)) {
+
+    private void handleInitialization(String x0Identifier) throws SolutionException, IOException {
+        if (coefficients.containsKey(x0Identifier)) {
             ArrayList<BigDecimal> initialC = stForm.getc();
-            int indexOfx0 = coefficients.get(x0);
+            int indexOfx0 = coefficients.get(x0Identifier);
             BigDecimal x0Value = (indexOfx0 < n) ? BigDecimal.ZERO : b.get(indexOfx0 - n);
             if (x0Value.abs().compareTo(epsilon) > 0) {
-                throw new LPException("This linear programme is infeasible");
+                throw new SolutionException("This linear programme is infeasible");
             }
             if (indexOfx0 >= n) { //x0 is basis variable
-                //Performing degenerate pivot
-                int entering = -1;
-                ArrayList<BigDecimal> row = A.get(indexOfx0);
-                for (int i = 0; i < n; i++) {
-                    if (row.get(i).compareTo(epsilon) > 0) {
-                        entering = i;
-                        break;
-                    }
-                }
-                if (entering == -1) {
-                    throw new SolutionException("Can't perform degenerate pivot");
-                }
-                pivot(entering, indexOfx0 - n);
-                printProgress(entering, indexOfx0 - n, "\n\n");
-                indexOfx0 = entering;
+                indexOfx0 = performDegeneratePivot(indexOfx0);
             }
-            //Restoring original linear programme with initial feasible solution
-            for (int i = 0; i < n; i++) {
-                c.set(i, BigDecimal.ZERO);
-            }
-            v = BigDecimal.ZERO;
-            for (int i = 0; i < n - 1; i++) {
-                String varName = initialVariables.get(i);
-                int currentIndex = coefficients.get(varName);
-                if (currentIndex >= n) {
-                    v = v.add(b.get(currentIndex - n));
-                    ArrayList<BigDecimal> row = A.get(currentIndex - n);
-                    for (int j = 0; j < n; j++) {
-                        String varj = variables.get(j);
-                        int index = coefficients.get(varj);
-                        c.set(index, c.get(index).add(row.get(j), rounder));
-                    }
-                } else {
-                    c.set(i, c.get(i).add(initialC.get(i), rounder));
-                }
-            }
-            for (int i = 0; i < m; i++) {
-                A.get(i).remove(indexOfx0);
-            }
-            c.remove(indexOfx0);
-            variables.remove(indexOfx0);
-            coefficients.remove(x0);
-            for (int i = indexOfx0 + 1; i < n + m; i++) {
-                String vari = variables.get(i);
-                variables.put(i - 1, vari);
-                coefficients.put(vari, i - 1);
-            }
-            variables.remove(n + m - 1);
+            restoreInitialLP(indexOfx0, x0Identifier, initialC);
 
         } else {
-            throw new SolutionException("No such variable x0 " + x0);
+            throw new SolutionException("No such variable x0 " + x0Identifier);
         }
     }
 
+    private int performDegeneratePivot(int indexOfx0) throws SolutionException, IOException {
+        int entering = -1;
+        ArrayList<BigDecimal> row = A.get(indexOfx0);
+        for (int i = 0; i < n; i++) {
+            if (row.get(i).compareTo(epsilon) > 0) {
+                entering = i;
+                break;
+            }
+        }
+        if (entering == -1) {
+            throw new SolutionException("Can't perform degenerate pivot");
+        }
+        pivot(entering, indexOfx0 - n);
+        indexOfx0 = entering;
+        return indexOfx0;
+    }
+    //need to refactor
+    private void restoreInitialLP(int indexOfx0, String x0Identifier, ArrayList<BigDecimal> initialC) {
+        for (int i = 0; i < n; i++) {
+            c.set(i, BigDecimal.ZERO);
+        }
+        v = BigDecimal.ZERO;
+        for (int i = 0; i < n - 1; i++) {
+            String varToPutInC = initialVariables.get(i);
+            int currentIndex = coefficients.get(varToPutInC);
+            if (currentIndex >= n) {
+                v = v.add(b.get(currentIndex - n));
+                ArrayList<BigDecimal> row = A.get(currentIndex - n);
+                for (int j = 0; j < n; j++) {
+                    String varj = variables.get(j);
+                    int index = coefficients.get(varj);
+                    c.set(index, c.get(index).add(row.get(j), rounder));
+                }
+            } else {
+                c.set(i, c.get(i).add(initialC.get(i), rounder));
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            A.get(i).remove(indexOfx0);
+        }
+        c.remove(indexOfx0);
+        variables.remove(indexOfx0);
+        coefficients.remove(x0Identifier);
+        for (int i = indexOfx0 + 1; i < n + m; i++) {
+            String vari = variables.get(i);
+            variables.put(i - 1, vari);
+            coefficients.put(vari, i - 1);
+        }
+        variables.remove(n + m - 1);
+    }
+
+
     private void convertIntoSlackForm(String x0) {
-        slackVariables = new ArrayList<String>();
+        slackVariables = new ArrayList<>();
         int addedVariables = 0, variableIndexCounter = 1;
         while (addedVariables < m) {
             String varName = "x" + String.valueOf(variableIndexCounter);
@@ -328,20 +376,17 @@ public class LPSolver {
         }
     }
 
-    public int getEntering() {
-        int maxInCIndex = -1;
-        for (int i = 0; i < n; i++) {
+    public int getEntering(int startPoint) {
+        int positiveInC = -1;
+        for (int i = startPoint; i < n; i++) {
             if (c.get(i).compareTo(epsilon) > 0) {
-                maxInCIndex = i;
+                positiveInC = i;
                 break;
             }
         }
-        return maxInCIndex;
+        return positiveInC;
     }
 
-    public BigDecimal getOptimalObjectiveValue(){
-        return this.v;
-    }
 
     public int getLeaving(int entering) throws SolutionException {
         if (entering >= 0 && entering < n) {
@@ -350,7 +395,7 @@ public class LPSolver {
             for (int i = 0; i < m; i++) {
                 BigDecimal aie = A.get(i).get(entering);
                 BigDecimal slack;
-                if (aie.compareTo(epsilon) < 0 || aie.compareTo(BigDecimal.ZERO) < 0) {
+                if (aie.compareTo(epsilon) < 0) {
                     slack = INF;
                 } else {
                     slack = b.get(i).divide(aie, rounder);
@@ -368,56 +413,35 @@ public class LPSolver {
     }
 
     private void printStatement(String statement) throws IOException {
-        if(printProgress && out != null){
-            out.print(statement);
-            out.flush();
-        }
-    }
-
-    private void printProgress(int entering, int leaving, String end) throws IOException {
-        if(printProgress && out != null){
-            printStatement("Entering variable is " + variables.get(leaving + n) + "\n");
-            printStatement("Leaving variables is " + variables.get(entering) + "\n");
-            printStatement(this.toString(end));
-        }
-    }
-
-    private void printState(String end) throws IOException {
-        if(printProgress && out != null){
-            printStatement(this.toString(end));
+        if (out != null) {
+            out.write(statement);
         }
     }
 
     public void printLinearProgramme() throws IOException {
-        if(printProgress && out != null){
-            printStatement(this.stForm.toString("\n\n"));
+        if (out != null) {
+            this.stForm.printLP(out);
         }
     }
 
-    private void printSolution(String end) throws IOException {
-        if(printProgress){
-            ArrayList<BigDecimal> solution = new ArrayList(n);
-            for (int i = 0; i < n; i++) {
-                solution.add(BigDecimal.ZERO);
-            }
-            for (int i = n; i < n + m; i++) {
-                String varName = variables.get(i);
-                int coefficient = initialCoefficients.get(varName);
-                if (coefficient < n) {
-                    solution.set(coefficient, b.get(i - n));
-                }
-            }
-            printStatement("Optimal objective value: " + v.setScale(printRounder.getPrecision(), printRounder.getRoundingMode()).toPlainString() + "\n");
-            printStatement("Solution " + "\n");
-            for (int i = 0; i < n; i++) {
-                printStatement(initialVariables.get(i) + " = " + solution.get(i).setScale(printRounder.getPrecision(), printRounder.getRoundingMode()).toPlainString() + "\n");
-            }
-            printStatement(end);
+    private void printSolution() throws IOException {
+        ArrayList<BigDecimal> solution = new ArrayList(n);
+        for (int i = 0; i < n; i++) {
+            solution.add(BigDecimal.ZERO);
         }
-    }
-
-    public String toString(String end) {
-        return this.toString() + end;
+        for (int i = n; i < n + m; i++) {
+            String varName = variables.get(i);
+            int coefficient = initialCoefficients.get(varName);
+            if (coefficient < n) {
+                solution.set(coefficient, b.get(i - n));
+            }
+        }
+        printStatement("Optimal objective value: " + v.setScale(printRounder.getPrecision(), printRounder.getRoundingMode()).toPlainString() + "\n");
+        printStatement("Solution " + "\n");
+        for (int i = 0; i < n; i++) {
+            printStatement(initialVariables.get(i) + " = " + solution.get(i).setScale(printRounder.getPrecision(), printRounder.getRoundingMode()).toPlainString() + "\n");
+        }
+        printStatement("\n\n");
     }
 
     public String toString() {
@@ -430,8 +454,15 @@ public class LPSolver {
         builder.deleteCharAt(builder.length() - 1);
         builder.append(") = " + v.round(printRounder).toPlainString() + " ");
         for (int i = 0; i < n; i++) {
-            if (c.get(i).abs().compareTo(epsilon) > 0) {
-                builder.append(formatter.format(c.get(i).round(printRounder)) + "*" + variables.get(i) + " ");
+            BigDecimal coefficient = c.get(i);
+            if (coefficient.abs().compareTo(epsilon) > 0) {
+                if (coefficient.abs().compareTo(BigDecimal.ONE) != 0) {
+                    builder.append(formatter.format(coefficient.round(printRounder)) + "*" + variables.get(i) + " ");
+                } else if (coefficient.signum() == 1) {
+                    builder.append(variables.get(i) + " ");
+                } else {
+                    builder.append("-" + variables.get(i) + " ");
+                }
             }
         }
         builder.append("\nSubject to\n");
@@ -455,5 +486,9 @@ public class LPSolver {
         builder.deleteCharAt(builder.length() - 2);
         builder.append(">= 0\n");
         return builder.toString();
+    }
+
+    public BigDecimal getOptimalObjectiveValue() {
+        return this.v;
     }
 }

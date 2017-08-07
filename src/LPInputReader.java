@@ -1,6 +1,5 @@
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.math.*;
 import java.util.*;
 import java.util.regex.*;
@@ -24,18 +23,17 @@ public class LPInputReader {
         this.numOfInequalities = 0;
     }
 
-    public void readInput(String path) throws SolutionException {
+    public void readInput(String path) throws IOException, SolutionException {
         int counter = 0;
-        try {
-            File file = new File(path);
-            if(!file.exists()){
-                throw new SolutionException("No such file found");
-            }
-            Scanner in = new Scanner(file);
-            String objective = in.nextLine();
+        File file = new File(path);
+        if(!file.exists()){
+            throw new FileNotFoundException();
+        }
+        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+            String objective = in.readLine();
             readObjective(objective);
-            while (true) {
-                String constraint = in.nextLine();
+            String constraint;
+            while ((constraint = in.readLine()) != null) {
                 if (constraint.compareTo("") != 0) {
                     this.readConstraint(constraint);
                     ++counter;
@@ -43,13 +41,6 @@ public class LPInputReader {
                     break;
                 }
             }
-        } catch (NoSuchElementException e) {
-            if(counter == 0) {
-                e.printStackTrace();
-                throw new SolutionException("No data in input file");
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
         for (ArrayList<BigDecimal> row : A) {
             int size = row.size();
@@ -62,7 +53,7 @@ public class LPInputReader {
         stForm.setc(c);
         stForm.setVariables(variables);
         stForm.setCoefficients(coefficients);
-        stForm.setMinimize(true);
+        stForm.setMaximize(true);
         stForm.setNumOfInequalities(this.numOfInequalities);
         stForm.setNumOfVariables(numOfVariables);
     }
@@ -89,20 +80,20 @@ public class LPInputReader {
 
     @SuppressWarnings("unchecked")
     private boolean readConstraint(String constraint) throws SolutionException {
-        ArrayList<BigDecimal> coefs = new ArrayList<BigDecimal>(numOfVariables + 1);
-        BigDecimal bi = null;
+        ArrayList<BigDecimal> coefficients = new ArrayList<BigDecimal>(numOfVariables + 1);
+        BigDecimal bi;
         for (int i = 0; i < numOfVariables; i++) {
-            coefs.add(BigDecimal.ZERO);
+            coefficients.add(BigDecimal.ZERO);
         }
         Pattern pat = Pattern.compile("(([+-]?\\s*\\d*\\.?\\d*)\\*?([a-zA-Z]+\\d*))");
         Matcher matcher = pat.matcher(constraint);
         while (matcher.find()) {
             String varName = matcher.group(3);
-            if (!coefficients.containsKey(varName)) {
+            if (!this.coefficients.containsKey(varName)) {
                 variables.put(numOfVariables, varName);
-                coefficients.put(varName, numOfVariables);
+                this.coefficients.put(varName, numOfVariables);
                 numOfVariables += 1;
-                coefs.add(null);
+                coefficients.add(null);
                 c.add(BigDecimal.ZERO);
             }
             String t = matcher.group(2);
@@ -112,12 +103,12 @@ public class LPInputReader {
             } else if (t.compareTo("-") == 0) {
                 t = "-1";
             }
-            coefs.set(coefficients.get(varName), new BigDecimal(t));
+            coefficients.set(this.coefficients.get(varName), new BigDecimal(t));
         }
         pat = Pattern.compile("(>=|<=|=|==)");
         matcher = pat.matcher(constraint);
         if (matcher.find()) {
-            String ineqSign = matcher.group(1);
+            String inequalitySign = matcher.group(1);
             pat = Pattern.compile("(>=|<=|=|==)\\s*(-?\\d+(\\.?\\d+)?)");
             matcher = pat.matcher(constraint);
             if (matcher.find()) {
@@ -126,25 +117,25 @@ public class LPInputReader {
             } else {
                 throw new SolutionException("No numeric value after constraint sign");
             }
-            if (ineqSign.compareTo(">=") == 0) {
-                for (int i = 0; i < coefs.size(); i++) {
-                    coefs.set(i, coefs.get(i).negate());
+            if (inequalitySign.compareTo(">=") == 0) {
+                for (int i = 0; i < coefficients.size(); i++) {
+                    coefficients.set(i, coefficients.get(i).negate());
                 }
                 b.add(bi.negate());
-                A.add(coefs);
+                A.add(coefficients);
                 this.numOfInequalities += 1;
-            } else if (ineqSign.compareTo("==") == 0 || ineqSign.compareTo("=") == 0) {
-                ArrayList<BigDecimal> auxiliaryCoefs = (ArrayList<BigDecimal>) coefs.clone();
-                for (int i = 0; i < coefs.size(); i++) {
-                    auxiliaryCoefs.set(i, coefs.get(i).negate());
+            } else if (inequalitySign.compareTo("==") == 0 || inequalitySign.compareTo("=") == 0) {
+                ArrayList<BigDecimal> auxiliaryCoefficients = (ArrayList<BigDecimal>) coefficients.clone();
+                for (int i = 0; i < coefficients.size(); i++) {
+                    auxiliaryCoefficients.set(i, coefficients.get(i).negate());
                 }
-                A.add(coefs);
-                A.add(auxiliaryCoefs);
+                A.add(coefficients);
+                A.add(auxiliaryCoefficients);
                 b.add(bi);
                 b.add(bi.negate());
                 this.numOfInequalities += 2;
             } else {
-                A.add(coefs);
+                A.add(coefficients);
                 b.add(bi);
                 this.numOfInequalities += 1;
             }

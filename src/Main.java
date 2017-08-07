@@ -8,9 +8,9 @@ public class Main {
         LPInputReader reader = new LPInputReader();
         try{
             reader.readInput("D:\\Java_Projects\\LPSolver\\input.txt");
-            LPSolver solver = new LPSolver(reader.getLPStandardForm(), true);
+            LPSolver solver = new LPSolver(reader.getLPStandardForm());
             solver.setOut("D:\\Java_Projects\\LPSolver\\output.txt");
-            solver.solve(true, 10);
+            solver.solve(10);
         }catch(SolutionException e){
             System.out.println(e.getMessage());
             e.printStackTrace();
