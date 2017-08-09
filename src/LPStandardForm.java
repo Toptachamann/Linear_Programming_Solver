@@ -20,7 +20,7 @@ public class LPStandardForm {
         coefficients = new HashMap<String, Integer>();
         numOfVariables = 0;
         numOfInequalities = 0;
-        maximize = false;
+        maximize = true;
     }
 
     public LPStandardForm(ArrayList<ArrayList<BigDecimal>> A, ArrayList<BigDecimal> b, ArrayList<BigDecimal> c,
@@ -98,14 +98,10 @@ public class LPStandardForm {
         return this.maximize;
     }
 
-    public String toString(String end) {
-        return this.toString() + end;
-    }
-
 
     public void printLP(BufferedWriter out) throws IOException {
         StringBuilder builder = new StringBuilder();
-        builder.append("Linear programme has following structure:\n" + (maximize ? "Minimize " : "Maximize ") + "the objective function f(");
+        builder.append("Linear programme has following structure:\n" + (maximize ? "Maximize " : "Minimize  ") + "the objective function f(");
         for (Map.Entry<Integer, String> var : variables.entrySet()) {
             builder.append(var.getValue() + ',');
         }
@@ -129,6 +125,7 @@ public class LPStandardForm {
         builder.deleteCharAt(builder.length() - 1);
         builder.append(" >= 0\n");
         out.write(builder.toString());
+        out.write("\n\n");
         builder.setLength(0);
     }
 
@@ -151,7 +148,14 @@ public class LPStandardForm {
                 }
             }
         }
-        builder.delete(initialLength, initialLength + 3);
+        if(builder.length() > 0){
+            if(builder.charAt(initialLength + 1) != '-'){
+                builder.delete(initialLength, initialLength + 3);
+            }else{
+                builder.deleteCharAt(initialLength);
+                builder.deleteCharAt(initialLength + 1);
+            }
+        }
     }
 
     public LPStandardForm getDual() {
