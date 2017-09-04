@@ -13,25 +13,37 @@ public class LPInputReader {
     private int numOfVariables, numOfInequalities;
 
     public LPInputReader() {
-        stForm = new LPStandardForm();
-        A = new ArrayList<ArrayList<BigDecimal>>();
-        b = new ArrayList<BigDecimal>();
-        c = new ArrayList<BigDecimal>();
-        variables = new HashMap<Integer, String>();
-        coefficients = new HashMap<String, Integer>();
-        numOfVariables = 0;
+    }
+
+    private void reload(){
+        this.stForm = new LPStandardForm();
+        this.A = new ArrayList<>();
+        this.b = new ArrayList<>();
+        this.c = new ArrayList<>();
+        this.variables = new HashMap<>();
+        this.coefficients = new HashMap<>();
+        this.numOfVariables = 0;
         this.numOfInequalities = 0;
     }
 
     public void readInput(String path) throws IOException, SolutionException {
+        reload();
         int counter = 0;
         File file = new File(path);
         if(!file.exists()){
             throw new FileNotFoundException();
         }
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+            String maxOrMin = in.readLine();
             String objective = in.readLine();
             readObjective(objective);
+            if(maxOrMin.equals("min") || maxOrMin.equals("Min")){
+                for(int i = 0; i < c.size(); i++){
+                    c.set(i, c.get(i).negate());
+                }
+            }else if(!maxOrMin.equals("Max") && !maxOrMin.equals("max")){
+                throw new LPException("Incorrect max/min parameter");
+            }
             String constraint;
             while ((constraint = in.readLine()) != null) {
                 if (constraint.compareTo("") != 0) {

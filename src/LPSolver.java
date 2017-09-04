@@ -41,7 +41,7 @@ public class LPSolver {
 
     public LPSolver(LPStandardForm stForm, MathContext rounder, MathContext printRounder, BigDecimal epsilon, BigDecimal INF, String outPath) throws IOException {
         this.stForm = stForm;
-        initialize(stForm);
+        setLP(stForm);
 
         this.INF = INF;
         this.epsilon = epsilon;
@@ -53,7 +53,7 @@ public class LPSolver {
 
     public LPSolver(LPStandardForm stForm, MathContext rounder, MathContext printRounder, BigDecimal epsilon, BigDecimal INF) {
         this.stForm = stForm;
-        initialize(stForm);
+        setLP(stForm);
 
         this.INF = INF;
         this.epsilon = epsilon;
@@ -65,7 +65,7 @@ public class LPSolver {
 
     public LPSolver(LPStandardForm stFrom, String outPath) throws IOException {
         this.stForm = stFrom;
-        initialize(stFrom);
+        setLP(stFrom);
 
         this.out = null;
 
@@ -79,7 +79,7 @@ public class LPSolver {
 
     public LPSolver(LPStandardForm stFrom) {
         this.stForm = stFrom;
-        initialize(stFrom);
+        setLP(stFrom);
 
         this.out = null;
 
@@ -89,10 +89,10 @@ public class LPSolver {
         this.printRounder = new MathContext(3, RoundingMode.HALF_UP);
     }
 
-    private void initialize(LPStandardForm stForm) {
+    public void setLP(LPStandardForm stForm) {
         this.A = (ArrayList<ArrayList<BigDecimal>>) stForm.getA().clone();
         this.b = (ArrayList<BigDecimal>) stForm.getb().clone();
-        this.c = null;  // gets value in initialize simplex
+        this.c = null;  // gets value in setLP simplex
         this.variables = (HashMap<Integer, String>) stForm.getVariables().clone();
         this.initialCoefficients = (HashMap<String, Integer>) stForm.getCoefs().clone();
         this.coefficients = (HashMap<String, Integer>) stForm.getCoefs().clone();
@@ -234,7 +234,7 @@ public class LPSolver {
     private void initializeSimplex() throws SolutionException, IOException {
         printStatement("Initializing simplex\n\n");
         if (n == 0 || m == 0) {
-            throw new SolutionException("Can't initialize simplex, lp is incorrect");
+            throw new SolutionException("Can't setLP simplex, lp is incorrect");
         }
         int indexOfMinInB = findIndexOfMinInB();
         if (indexOfMinInB == -1) {
