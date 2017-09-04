@@ -5,7 +5,7 @@ line of a source and all constraints are specified further one per line. For exa
 
 max  
 2x1 + 3.05*x3  
-1.05*x4 + 25x1 == 0  
+1.05*x4 + 25*x1 == 0  
 3.66x1 = 3  
 2x2 + x3 <= 0  
 x1 + x2 + x3 + x24 >= 0  
