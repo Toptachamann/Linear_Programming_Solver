@@ -3,12 +3,12 @@ LPInputReader - a class for reading lp from a source using several assumptions a
 i.e. min/max is specified in the first line (Min/Max works as well), objective function is specified in the second
 line of a source and all constraints are specified further one per line. For example:
 
-max
-2x1 + 3.05*x3
-1.05*x4 + 25x1 == 0
-3.66x1 = 3
-2x2 + x3 <= 0
-x1 + x2 + x3 + x24 >= 0
+max  
+2x1 + 3.05*x3  
+1.05*x4 + 25x1 == 0  
+3.66x1 = 3  
+2x2 + x3 <= 0  
+x1 + x2 + x3 + x24 >= 0  
 
 is a valid linear programme.
 An auxiliary class called LPStandardForm is used to hold all important data about linear program.
