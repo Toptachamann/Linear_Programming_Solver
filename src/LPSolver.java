@@ -89,6 +89,7 @@ public class LPSolver {
         this.printRounder = new MathContext(3, RoundingMode.HALF_UP);
     }
 
+    @SuppressWarnings("unchecked")
     public void setLP(LPStandardForm stForm) {
         this.A = (ArrayList<ArrayList<BigDecimal>>) stForm.getA().clone();
         this.b = (ArrayList<BigDecimal>) stForm.getb().clone();
@@ -104,7 +105,15 @@ public class LPSolver {
     }
 
     public void setOut(String path) throws IOException {
-        out = new BufferedWriter(new FileWriter(new File(path)));
+        File file = new File(path);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        if (file.isFile() && file.canWrite()) {
+            this.out = new BufferedWriter(new FileWriter(file));
+        } else {
+            throw new IOException("Can't write to such file");
+        }
     }
 
     public BigDecimal solve() throws IOException, SolutionException {
@@ -114,9 +123,9 @@ public class LPSolver {
     }
 
     public BigDecimal solve(int iterationInterval) throws SolutionException, IOException {
-        if(iterationInterval < 1){
+        if (iterationInterval < 1) {
             throw new SolutionException("Wrong iteration Interval");
-        }else {
+        } else {
             BigDecimal answer = simplex(iterationInterval);
             out.close();
             return answer;
@@ -124,16 +133,17 @@ public class LPSolver {
     }
 
     private BigDecimal simplex(int iterationInterval) throws SolutionException, IOException {
-        printLinearProgramme();
+        printLinearProgram();
         initializeSimplex();
-        printStatement("Linear programme after initialization with initial feasible solution\n");
+        printStatement("Linear program after initialization with initial feasible solution\n");
         printState();
         int entering, leaving, iterationCount = 0;
         while ((entering = getEntering(0)) != -1) {
             ++iterationCount;
             leaving = getLeaving(entering);
             if (leaving == -1) {
-                throw new LPException("This linear programme is unbounded");
+                printStatement("This linear program is unbounded\n\n");
+                throw new LPException("This linear program is unbounded");
             }
             int initialEntering = entering, initialLeaving = leaving;
             while (leaving != -1 && b.get(leaving).abs().compareTo(epsilon) < 0) {
@@ -156,7 +166,7 @@ public class LPSolver {
             }
         }
         printSolution();
-        System.out.println("This linear programme has optimal objective function value: " +
+        System.out.println("This linear program has optimal objective function value: " +
                 this.v.setScale(printRounder.getPrecision(), printRounder.getRoundingMode()).toPlainString() + ", number of iterations: " + iterationCount);
         return this.v.setScale(printRounder.getPrecision(), printRounder.getRoundingMode());
     }
@@ -242,6 +252,7 @@ public class LPSolver {
         }
         if (b.get(indexOfMinInB).compareTo(BigDecimal.ZERO) < 0) {
             printStatement("Basic solution is infeasible\n\n");
+            printStatement("Solving auxiliary linear program\n\n");
             int indexOfX0 = n;
             String x0Identifier = convertIntoLaux(indexOfX0);
             printState();
@@ -303,14 +314,14 @@ public class LPSolver {
     }
 
 
-
     private void handleInitialization(String x0Identifier) throws SolutionException, IOException {
         if (coefficients.containsKey(x0Identifier)) {
             ArrayList<BigDecimal> initialC = stForm.getc();
             int currentIndexOfX0 = coefficients.get(x0Identifier);
             BigDecimal x0Value = (currentIndexOfX0 < n) ? BigDecimal.ZERO : b.get(currentIndexOfX0 - n);
             if (x0Value.abs().compareTo(epsilon) > 0) {
-                throw new LPException("This linear programme is infeasible");
+                printStatement("This linear program is infeasible\n\n");
+                throw new LPException("This linear program is infeasible");
             }
             if (currentIndexOfX0 >= n) { //x0 is basis variable
                 printStatement("Performing degenerate pivot");
@@ -340,6 +351,7 @@ public class LPSolver {
         indexOfx0 = entering;
         return indexOfx0;
     }
+
     //need to refactor
     private void restoreInitialLP(int indexOfx0, String x0Identifier, ArrayList<BigDecimal> initialC) {
         for (int i = 0; i < n; i++) {
@@ -437,7 +449,7 @@ public class LPSolver {
         }
     }
 
-    public void printLinearProgramme() throws IOException {
+    public void printLinearProgram() throws IOException {
         if (out != null) {
             this.stForm.printLP(out);
         }
@@ -471,7 +483,7 @@ public class LPSolver {
     }
 
     public void printState() throws IOException {
-        printStatement("Current lp state is:\n\n");
+        printStatement("Current lp state is:\n");
         printStatement(this.toString());
         printStatement("\n\n");
     }
@@ -520,5 +532,7 @@ public class LPSolver {
         return builder.toString();
     }
 
-    public BigDecimal getOptimalObjectiveValue() {return this.v.setScale(printRounder.getPrecision(), printRounder.getRoundingMode());}
+    public BigDecimal getOptimalObjectiveValue() {
+        return this.v.setScale(printRounder.getPrecision(), printRounder.getRoundingMode());
+    }
 }

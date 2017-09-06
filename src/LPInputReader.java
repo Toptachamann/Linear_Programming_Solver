@@ -1,4 +1,6 @@
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import java.io.*;
 import java.math.*;
 import java.util.*;
@@ -11,11 +13,17 @@ public class LPInputReader {
     private HashMap<Integer, String> variables;
     private HashMap<String, Integer> coefficients;
     private int numOfVariables, numOfInequalities;
+    private Pattern tokenPattern;
+    private Pattern inequalitySignPattern;
+    private Pattern constraintNumberPattern;
 
     public LPInputReader() {
+        this.tokenPattern = Pattern.compile("(([+-]?\\s*\\d*\\.?\\d*)\\*?([a-zA-Z]+\\d*))");
+        this.inequalitySignPattern = Pattern.compile("(>=|<=|=|==)");
+        this.constraintNumberPattern = Pattern.compile("(>=|<=|=|==)\\s*(-?\\d+(\\.?\\d+)?)");
     }
 
-    private void reload(){
+    private void reload() {
         this.stForm = new LPStandardForm();
         this.A = new ArrayList<>();
         this.b = new ArrayList<>();
@@ -28,21 +36,29 @@ public class LPInputReader {
 
     public void readInput(String path) throws IOException, SolutionException {
         reload();
-        int counter = 0;
+
         File file = new File(path);
-        if(!file.exists()){
-            throw new FileNotFoundException();
+        System.out.println(file.getAbsolutePath());
+        if (!file.exists()) {
+            file.createNewFile();
         }
+        if(!file.isFile() || !file.canRead()){
+            throw new IOException("Can't read from such file");
+        }
+        int counter = 0;
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             String maxOrMin = in.readLine();
+            if(maxOrMin == null){
+                throw new IOException("Input file is empty");
+            }
             String objective = in.readLine();
             readObjective(objective);
-            if(maxOrMin.equals("min") || maxOrMin.equals("Min")){
-                for(int i = 0; i < c.size(); i++){
+            if (maxOrMin.equals("min") || maxOrMin.equals("Min")) {
+                for (int i = 0; i < c.size(); i++) {
                     c.set(i, c.get(i).negate());
                 }
-            }else if(!maxOrMin.equals("Max") && !maxOrMin.equals("max")){
-                throw new LPException("Incorrect max/min parameter");
+            } else if (!maxOrMin.equals("Max") && !maxOrMin.equals("max")) {
+                throw new SolutionException("Incorrect max/min parameter");
             }
             String constraint;
             while ((constraint = in.readLine()) != null) {
@@ -51,6 +67,8 @@ public class LPInputReader {
                     ++counter;
                 } else if (counter > 0) {
                     break;
+                }else{
+                    throw new IOException("No constraints in the input file");
                 }
             }
         }
@@ -70,9 +88,11 @@ public class LPInputReader {
         stForm.setNumOfVariables(numOfVariables);
     }
 
-    private void readObjective(String objective) {
-        Pattern pat = Pattern.compile("(([+-]?\\s*\\d*\\.?\\d*)\\*?([a-zA-Z]+\\d*))");
-        Matcher matcher = pat.matcher(objective);
+    private void readObjective(String objective) throws IOException {
+        if(objective == null){
+            throw new IOException("No objective in the input file");
+        }
+        Matcher matcher = this.tokenPattern.matcher(objective);
         String t;
         for (int i = 0; matcher.find(); i++) {
             variables.put(i, matcher.group(3));
@@ -92,23 +112,22 @@ public class LPInputReader {
 
     @SuppressWarnings("unchecked")
     private boolean readConstraint(String constraint) throws SolutionException {
-        ArrayList<BigDecimal> coefficients = new ArrayList<BigDecimal>(numOfVariables + 1);
-        BigDecimal bi;
+        ArrayList<BigDecimal> coefficients = new ArrayList<>(numOfVariables + 1);
+        BigDecimal constraintNumber;
         for (int i = 0; i < numOfVariables; i++) {
             coefficients.add(BigDecimal.ZERO);
         }
-        Pattern pat = Pattern.compile("(([+-]?\\s*\\d*\\.?\\d*)\\*?([a-zA-Z]+\\d*))");
-        Matcher matcher = pat.matcher(constraint);
-        while (matcher.find()) {
-            String varName = matcher.group(3);
+        Matcher tokenMatcher = this.tokenPattern.matcher(constraint);
+        while (tokenMatcher.find()) {
+            String varName = tokenMatcher.group(3);
             if (!this.coefficients.containsKey(varName)) {
-                variables.put(numOfVariables, varName);
+                this.variables.put(numOfVariables, varName);
                 this.coefficients.put(varName, numOfVariables);
-                numOfVariables += 1;
+                this.numOfVariables += 1;
                 coefficients.add(null);
-                c.add(BigDecimal.ZERO);
+                this.c.add(BigDecimal.ZERO);
             }
-            String t = matcher.group(2);
+            String t = tokenMatcher.group(2);
             t = t.replaceAll("\\s+", "");
             if (t.compareTo("") == 0 || t.compareTo("+") == 0) {
                 t = "1";
@@ -117,15 +136,13 @@ public class LPInputReader {
             }
             coefficients.set(this.coefficients.get(varName), new BigDecimal(t));
         }
-        pat = Pattern.compile("(>=|<=|=|==)");
-        matcher = pat.matcher(constraint);
-        if (matcher.find()) {
-            String inequalitySign = matcher.group(1);
-            pat = Pattern.compile("(>=|<=|=|==)\\s*(-?\\d+(\\.?\\d+)?)");
-            matcher = pat.matcher(constraint);
-            if (matcher.find()) {
-                String t = matcher.group(2);
-                bi = new BigDecimal(t);
+        Matcher inequalitySignMatcher = inequalitySignPattern.matcher(constraint);
+        if (inequalitySignMatcher.find()) {
+            String inequalitySign = inequalitySignMatcher.group(1);
+            Matcher constraintNumberMatcher = constraintNumberPattern.matcher(constraint);
+            if (constraintNumberMatcher.find()) {
+                String constraintNumberStr = constraintNumberMatcher.group(2);
+                constraintNumber = new BigDecimal(constraintNumberStr);
             } else {
                 throw new SolutionException("No numeric value after constraint sign");
             }
@@ -133,7 +150,7 @@ public class LPInputReader {
                 for (int i = 0; i < coefficients.size(); i++) {
                     coefficients.set(i, coefficients.get(i).negate());
                 }
-                b.add(bi.negate());
+                b.add(constraintNumber.negate());
                 A.add(coefficients);
                 this.numOfInequalities += 1;
             } else if (inequalitySign.compareTo("==") == 0 || inequalitySign.compareTo("=") == 0) {
@@ -143,12 +160,12 @@ public class LPInputReader {
                 }
                 A.add(coefficients);
                 A.add(auxiliaryCoefficients);
-                b.add(bi);
-                b.add(bi.negate());
+                b.add(constraintNumber);
+                b.add(constraintNumber.negate());
                 this.numOfInequalities += 2;
             } else {
                 A.add(coefficients);
-                b.add(bi);
+                b.add(constraintNumber);
                 this.numOfInequalities += 1;
             }
             return true;

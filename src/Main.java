@@ -5,13 +5,31 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] argc){
+        final String defaultPathToInput = "io_files\\input.txt";
+        final String defaultPathToOutput = "io_files\\output.txt";
+        String pathToOutput, pathToInput;
+        if(argc.length > 0){
+            pathToInput = argc[0];
+            if(argc.length > 1){
+                pathToOutput = argc[1];
+            }else{
+                pathToOutput = defaultPathToOutput;
+            }
+        }else{
+            pathToInput = defaultPathToInput;
+            pathToOutput = defaultPathToOutput;
+        }
+
         LPInputReader reader = new LPInputReader();
         try{
-            reader.readInput("D:\\Java_Projects\\LPSolver\\input.txt");
+            reader.readInput(pathToInput);
             LPSolver solver = new LPSolver(reader.getLPStandardForm());
-            solver.setOut("D:\\Java_Projects\\LPSolver\\output.txt");
+            solver.setOut(pathToOutput);
             solver.solve(10);
-        }catch(SolutionException e){
+        }catch(LPException e){
+            System.out.println(e.getMessage());
+        }
+        catch(SolutionException e){
             System.out.println(e.getMessage());
             e.printStackTrace();
         }catch(IOException e){

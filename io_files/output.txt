@@ -1,5 +1,5 @@
 Linear programme has following structure:
-Maximize the objective function f(x,y) = -x - y
+Maximize the objective function f(x,y) = x + y
 Subject to
 -x + 2*y <= 6
 9*x + 4*y <= 56
@@ -11,8 +11,9 @@ Initializing simplex
 
 Basic solution is infeasible
 
-Current lp state is:
+Solving auxiliary linear program
 
+Current lp state is:
 Objective f(x,y,x0) = 0.000  - x0 
 Subject to
 x1 = 6.000 +1.00*x -2.00*y +1.00*x0 
@@ -41,10 +42,9 @@ x = 1.333 -0.33*x0 -1.67*y +0.33*x3
 x, y, x1, x2, x3 >= 0
 
 
-Linear programme after initialization with initial feasible solution
+Linear program after initialization with initial feasible solution
 Current lp state is:
-
-Objective f(y,x3) = -1.333 +0.67*y -0.33*x3 
+Objective f(y,x3) = 1.333 -0.67*y +0.33*x3 
 Subject to
 x1 = 7.333 -3.67*y +0.33*x3 
 x2 = 44.000 +11.00*y -3.00*x3 
@@ -52,19 +52,29 @@ x = 1.333 -1.67*y +0.33*x3
 x, y, x1, x2, x3 >= 0
 
 
-Entering variable is y
-Leaving variable is x
-Objective f(x,x3) = -0.800 -0.40*x -0.20*x3 
+Entering variable is x3
+Leaving variable is x2
+Objective f(y,x2) = 6.222 +0.56*y -0.11*x2 
 Subject to
-x1 = 4.400 +2.20*x -0.40*x3 
-x2 = 52.800 -6.60*x -0.80*x3 
-y = 0.800 -0.60*x +0.20*x3 
+x1 = 12.222 -2.44*y -0.11*x2 
+x3 = 14.667 +3.67*y -0.33*x2 
+x = 6.222 -0.44*y -0.11*x2 
 x, y, x1, x2, x3 >= 0
 
 
-Optimal objective value: -0.800
+Entering variable is y
+Leaving variable is x1
+Objective f(x1,x2) = 9.000 -0.23*x1 -0.14*x2 
+Subject to
+y = 5.000 -0.41*x1 -0.04*x2 
+x3 = 33.000 -1.50*x1 -0.50*x2 
+x = 4.000 +0.18*x1 -0.09*x2 
+x, y, x1, x2, x3 >= 0
+
+
+Optimal objective value: 9.000
 Solution 
-x = 0.000
-y = 0.800
+x = 4.000
+y = 5.000
 
 
