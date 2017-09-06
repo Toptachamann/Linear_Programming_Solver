@@ -1,13 +1,12 @@
 max
+x1 + x2
+x1 + x2 <= -2
+
+max
 x + y
 -x + 2y <= 6
 9x + 4y <= 56
 3x + 5y >= 4
-
-
-max
-x1 + x2
-x1 + x2 <= -2
 
 
 max
