@@ -1,40 +1,17 @@
-import java.io.IOException;
+import graphics.LPSolverFrame;
 
-/**
- * Created by Timofey on 8/3/2017.
- */
+import javax.swing.JFrame;
+import java.awt.EventQueue;
+
 public class Main {
-    public static void main(String[] argc){
-        final String defaultPathToInput = "io_files\\input.txt";
-        final String defaultPathToOutput = "io_files\\output.txt";
-        String pathToOutput, pathToInput;
-        if(argc.length > 0){
-            pathToInput = argc[0];
-            if(argc.length > 1){
-                pathToOutput = argc[1];
-            }else{
-                pathToOutput = defaultPathToOutput;
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                LPSolverFrame frame = new LPSolverFrame();
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);
             }
-        }else{
-            pathToInput = defaultPathToInput;
-            pathToOutput = defaultPathToOutput;
-        }
-
-        LPInputReader reader = new LPInputReader();
-        try{
-            reader.readInput(pathToInput);
-            LPSolver solver = new LPSolver(reader.getLPStandardForm());
-            solver.setOut(pathToOutput);
-            solver.solve(10);
-        }catch(LPException e){
-            System.out.println(e.getMessage());
-        }
-        catch(SolutionException e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-
+        });
     }
 }

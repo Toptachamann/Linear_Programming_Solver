@@ -1,4 +1,4 @@
-
+package lpsolver;
 
 public class SolutionException extends Exception{
     public SolutionException(){}
