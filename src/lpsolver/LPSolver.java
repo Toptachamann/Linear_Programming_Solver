@@ -10,8 +10,11 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class LPSolver {
+  private static final int THREAD_AMOUNT = 4;
   private LPStandardForm stForm;
 
   private ArrayList<ArrayList<BigDecimal>> A;
@@ -28,29 +31,7 @@ public class LPSolver {
   private BigDecimal INF;
 
   private BufferedWriter out;
-
-  private static class LPState {
-    ArrayList<ArrayList<BigDecimal>> A;
-    ArrayList<BigDecimal> b, c;
-    BigDecimal v;
-    HashMap<Integer, String> variables;
-    HashMap<String, Integer> coefficients;
-
-    public LPState(
-        ArrayList<ArrayList<BigDecimal>> A,
-        ArrayList<BigDecimal> b,
-        ArrayList<BigDecimal> c,
-        BigDecimal v,
-        HashMap<Integer, String> variables,
-        HashMap<String, Integer> coefficients) {
-      this.A = A;
-      this.b = b;
-      this.c = c;
-      this.variables = variables;
-      this.coefficients = coefficients;
-      this.v = v;
-    }
-  }
+  private static ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREAD_AMOUNT);
 
   public LPSolver(
       LPStandardForm stForm,
@@ -112,6 +93,141 @@ public class LPSolver {
     this.epsilon = new BigDecimal("1e-7");
     this.rounder = new MathContext(12, RoundingMode.HALF_UP);
     this.printRounder = new MathContext(3, RoundingMode.HALF_UP);
+  }
+
+  private static LPState pivot(
+      ArrayList<ArrayList<BigDecimal>> A,
+      ArrayList<BigDecimal> b,
+      ArrayList<BigDecimal> c,
+      BigDecimal v,
+      HashMap<Integer, String> variables,
+      HashMap<String, Integer> coefficients,
+      MathContext rounder,
+      int n,
+      int m,
+      int entering,
+      int leaving) {
+    // Computing initialCoefficients for a new basis variable
+    ArrayList<BigDecimal> pivotRow = A.get(leaving);
+    BigDecimal pivotEnteringCoefficient = pivotRow.get(entering);
+    b.set(leaving, b.get(leaving).divide(pivotEnteringCoefficient, rounder));
+    for (int i = 0; i < n; i++) {
+      if (i == entering) {
+        continue;
+      }
+      pivotRow.set(i, pivotRow.get(i).divide(pivotEnteringCoefficient, rounder));
+    }
+    pivotRow.set(entering, BigDecimal.ONE.divide(pivotRow.get(entering), rounder));
+    // Computing initialCoefficients in other equations
+    BigDecimal newPivotEnteringCoefficient = pivotRow.get(entering);
+    if (m * n < 100) {
+      pivotSequentially(A, b, rounder, entering, leaving, m, n);
+    } else {
+
+    }
+    // computing new objective function
+    BigDecimal pivotCoefficientInC = c.get(entering);
+    v = v.add(b.get(leaving).multiply(pivotCoefficientInC, rounder), rounder);
+    c.set(entering, pivotCoefficientInC.multiply(newPivotEnteringCoefficient).negate());
+    for (int i = 0; i < n; i++) {
+      if (i == entering) {
+        continue;
+      }
+      c.set(i, c.get(i).subtract(pivotCoefficientInC.multiply(pivotRow.get(i), rounder), rounder));
+    }
+    // updating hash tables for variables' names and their initialCoefficients
+    exchangeIndexes(variables, coefficients, n, entering, leaving);
+    return new LPState(A, b, c, v, variables, coefficients);
+  }
+
+  @SuppressWarnings("Duplicates")
+  private static void pivotSequentially(
+      ArrayList<ArrayList<BigDecimal>> A,
+      ArrayList<BigDecimal> b,
+      MathContext rounder,
+      int entering,
+      int leaving,
+      int m,
+      int n) {
+    ArrayList<BigDecimal> pivotRow = A.get(leaving);
+    BigDecimal newPivotEnteringCoefficient = pivotRow.get(entering);
+    BigDecimal bEntering = b.get(leaving);
+    for (int i = 0; i < m; i++) {
+      if (i == leaving) {
+        continue;
+      }
+      ArrayList<BigDecimal> row = A.get(i);
+      BigDecimal enteringCoefficient = row.get(entering);
+      b.set(i, b.get(i).subtract(enteringCoefficient.multiply(bEntering, rounder), rounder));
+      row.set(
+          entering,
+          enteringCoefficient.multiply(newPivotEnteringCoefficient, rounder).negate()); // changed
+      for (int j = 0; j < n; j++) {
+        if (j == entering) {
+          continue;
+        }
+        row.set(
+            j,
+            row.get(j).subtract(enteringCoefficient.multiply(pivotRow.get(j), rounder), rounder));
+      }
+    }
+  }
+
+  @SuppressWarnings("Duplicates")
+  private static void pivotConcurrently(
+      ArrayList<ArrayList<BigDecimal>> A,
+      ArrayList<BigDecimal> b,
+      MathContext rounder,
+      int entering,
+      int leaving,
+      int m,
+      int n) {
+    ArrayList<BigDecimal> pivotRow = A.get(leaving);
+    BigDecimal newPivotEnteringCoefficient = pivotRow.get(entering);
+    BigDecimal bEntering = b.get(leaving);
+    for(int k = 0; k < THREAD_AMOUNT; k++){
+      int from = (k*m)/THREAD_AMOUNT;
+      int to = ((k + 1)*m)/THREAD_AMOUNT;
+      pool.execute(()->{
+        for (int i = from; i < to; i++) {
+          if (i == leaving) {
+            continue;
+          }
+          ArrayList<BigDecimal> row = A.get(i);
+          BigDecimal enteringCoefficient = row.get(entering);
+          b.set(i, b.get(i).subtract(enteringCoefficient.multiply(bEntering, rounder), rounder));
+          row.set(
+              entering,
+              enteringCoefficient.multiply(newPivotEnteringCoefficient, rounder).negate()); // changed
+          for (int j = 0; j < n; j++) {
+            if (j == entering) {
+              continue;
+            }
+            row.set(
+                j,
+                row.get(j).subtract(enteringCoefficient.multiply(pivotRow.get(j), rounder), rounder));
+          }
+        }
+      });
+    }
+  }
+
+  private static void exchangeIndexes(
+      HashMap<Integer, String> variables,
+      HashMap<String, Integer> coefficients,
+      int n,
+      int entering,
+      int leaving) {
+    String enteringVarName = variables.get(entering), leavingVarName = variables.get(leaving + n);
+    variables.remove(entering);
+    variables.remove(n + leaving);
+    coefficients.remove(enteringVarName);
+    coefficients.remove(leavingVarName);
+
+    variables.put(entering, leavingVarName);
+    variables.put(leaving + n, enteringVarName);
+    coefficients.put(enteringVarName, leaving + n);
+    coefficients.put(leavingVarName, entering);
   }
 
   @SuppressWarnings("unchecked")
@@ -218,84 +334,6 @@ public class LPSolver {
     this.v = state.v;
     this.variables = state.variables;
     this.coefficients = state.coefficients;
-  }
-
-  private static LPState pivot(
-      ArrayList<ArrayList<BigDecimal>> A,
-      ArrayList<BigDecimal> b,
-      ArrayList<BigDecimal> c,
-      BigDecimal v,
-      HashMap<Integer, String> variables,
-      HashMap<String, Integer> coefficients,
-      MathContext rounder,
-      int n,
-      int m,
-      int entering,
-      int leaving) {
-    // Computing initialCoefficients for a new basis variable
-    ArrayList<BigDecimal> pivotRow = A.get(leaving);
-    BigDecimal pivotEnteringCoefficient = pivotRow.get(entering);
-    b.set(leaving, b.get(leaving).divide(pivotEnteringCoefficient, rounder));
-    for (int i = 0; i < n; i++) {
-      if (i == entering) {
-        continue;
-      }
-      pivotRow.set(i, pivotRow.get(i).divide(pivotEnteringCoefficient, rounder));
-    }
-    pivotRow.set(entering, BigDecimal.ONE.divide(pivotRow.get(entering), rounder));
-    // Computing initialCoefficients in other equations
-    BigDecimal newPivotEnteringCoefficient = pivotRow.get(entering);
-    BigDecimal bEntering = b.get(leaving);
-    for (int i = 0; i < m; i++) {
-      if (i == leaving) {
-        continue;
-      }
-      ArrayList<BigDecimal> row = A.get(i);
-      BigDecimal enteringCoefficient = row.get(entering);
-      b.set(i, b.get(i).subtract(enteringCoefficient.multiply(bEntering, rounder), rounder));
-      row.set(
-          entering,
-          enteringCoefficient.multiply(newPivotEnteringCoefficient, rounder).negate()); // changed
-      for (int j = 0; j < n; j++) {
-        if (j == entering) {
-          continue;
-        }
-        row.set(
-            j,
-            row.get(j).subtract(enteringCoefficient.multiply(pivotRow.get(j), rounder), rounder));
-      }
-    }
-    // computing new objective function
-    BigDecimal pivotCoefficientInC = c.get(entering);
-    v = v.add(b.get(leaving).multiply(pivotCoefficientInC, rounder), rounder);
-    c.set(entering, pivotCoefficientInC.multiply(newPivotEnteringCoefficient).negate());
-    for (int i = 0; i < n; i++) {
-      if (i == entering) {
-        continue;
-      }
-      c.set(i, c.get(i).subtract(pivotCoefficientInC.multiply(pivotRow.get(i), rounder), rounder));
-    }
-    // updating hash tables for variables' names and their initialCoefficients
-    exchangeIndexes(variables, coefficients, n, entering, leaving);
-    return new LPState(A, b, c, v, variables, coefficients);
-  }
-
-  private static void exchangeIndexes(
-      HashMap<Integer, String> variables,
-      HashMap<String, Integer> coefficients,
-      int n,
-      int entering,
-      int leaving) {
-    String enteringVarName = variables.get(entering), leavingVarName = variables.get(leaving + n);
-    variables.remove(entering);
-    variables.remove(n + leaving);
-    coefficients.remove(enteringVarName);
-    coefficients.remove(leavingVarName);
-
-    variables.put(entering, leavingVarName);
-    variables.put(leaving + n, enteringVarName);
-    coefficients.put(enteringVarName, leaving + n);
-    coefficients.put(leavingVarName, entering);
   }
 
   private void initializeSimplex() throws SolutionException, IOException {
@@ -626,5 +664,28 @@ public class LPSolver {
 
   public BigDecimal getOptimalObjectiveValue() {
     return this.v.setScale(printRounder.getPrecision(), printRounder.getRoundingMode());
+  }
+
+  private static class LPState {
+    ArrayList<ArrayList<BigDecimal>> A;
+    ArrayList<BigDecimal> b, c;
+    BigDecimal v;
+    HashMap<Integer, String> variables;
+    HashMap<String, Integer> coefficients;
+
+    public LPState(
+        ArrayList<ArrayList<BigDecimal>> A,
+        ArrayList<BigDecimal> b,
+        ArrayList<BigDecimal> c,
+        BigDecimal v,
+        HashMap<Integer, String> variables,
+        HashMap<String, Integer> coefficients) {
+      this.A = A;
+      this.b = b;
+      this.c = c;
+      this.variables = variables;
+      this.coefficients = coefficients;
+      this.v = v;
+    }
   }
 }

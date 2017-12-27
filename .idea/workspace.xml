@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b402064c-40a7-41d6-a536-84ee71562cb6" name="Default" comment="" />
+    <list default="true" id="b402064c-40a7-41d6-a536-84ee71562cb6" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LPSolver/lpsolver/LPInputReader.class" afterPath="$PROJECT_DIR$/out/production/LPSolver/lpsolver/LPInputReader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/io_files/input.txt" afterPath="$PROJECT_DIR$/io_files/input.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/io_files/output.txt" afterPath="$PROJECT_DIR$/io_files/output.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lpsolver/LPInputReader.java" afterPath="$PROJECT_DIR$/src/lpsolver/LPInputReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lpsolver/LPSolver.java" afterPath="$PROJECT_DIR$/src/lpsolver/LPSolver.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,10 +24,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lpsolver/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
+            <state relative-caret-position="1432">
               <caret line="62" column="42" lean-forward="false" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -28,11 +36,64 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="LPSolver.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/lpsolver/LPSolver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-418">
+              <caret line="159" column="27" lean-forward="true" selection-start-line="159" selection-start-column="27" selection-end-line="159" selection-end-column="27" />
+              <folding>
+                <element signature="method#LPSolver#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#LPSolver#1;class#LPSolver#0" expanded="false" />
+                <element signature="method#LPSolver#2;class#LPSolver#0" expanded="false" />
+                <element signature="method#LPSolver#3;class#LPSolver#0" expanded="false" />
+                <element signature="e#4280#4311#0" expanded="true" />
+                <element signature="e#5348#5379#0" expanded="true" />
+                <element signature="method#exchangeIndexes#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#setLP#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#setOut#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#solve#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#solve#1;class#LPSolver#0" expanded="false" />
+                <element signature="method#simplex#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#pivot#1;class#LPSolver#0" expanded="false" />
+                <element signature="method#initializeSimplex#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#findIndexOfMinInB#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#convertIntoLaux#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#solveLaux#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#handleInitialization#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#performDegeneratePivot#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#restoreInitialLP#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#convertIntoSlackForm#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#getEntering#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#getLeaving#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#printStatement#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#printLinearProgram#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#printSolution#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#printProgress#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#printState#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#toString#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#getOptimalObjectiveValue#0;class#LPSolver#0" expanded="false" />
+                <element signature="class#LPState#0;class#LPSolver#0" expanded="false" />
+                <element signature="method#LPState#0;class#LPState#0;class#LPSolver#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="input.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/io_files/input.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+            <state relative-caret-position="425">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="output.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/io_files/output.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2017">
+              <caret line="223" column="10" lean-forward="false" selection-start-line="223" selection-start-column="10" selection-end-line="223" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -41,8 +102,8 @@
       <file leaf-file-name="LPInputReader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lpsolver/LPInputReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+            <state relative-caret-position="300">
+              <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,14 +160,14 @@
         <option value="$PROJECT_DIR$/src/graphics/LPSolver.java" />
         <option value="$PROJECT_DIR$/src/graphics/LPSolver.form" />
         <option value="$PROJECT_DIR$/src/lpsolver/LPException.java" />
-        <option value="$PROJECT_DIR$/src/lpsolver/LPInputReader.java" />
-        <option value="$PROJECT_DIR$/src/lpsolver/LPSolver.java" />
         <option value="$PROJECT_DIR$/src/lpsolver/LPStandardForm.java" />
         <option value="$PROJECT_DIR$/src/lpsolver/SolutionException.java" />
         <option value="$PROJECT_DIR$/src/graphics/Main.java" />
         <option value="$PROJECT_DIR$/src/graphics/LPSolverFrame.java" />
         <option value="$PROJECT_DIR$/src/lpsolver/Main.java" />
+        <option value="$PROJECT_DIR$/src/lpsolver/LPInputReader.java" />
         <option value="$PROJECT_DIR$/io_files/input.txt" />
+        <option value="$PROJECT_DIR$/src/lpsolver/LPSolver.java" />
       </list>
     </option>
   </component>
@@ -272,6 +333,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -293,12 +355,6 @@
               <item name="LPSolver" type="b2602c69:ProjectViewProjectNode" />
               <item name="LPSolver" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="graphics" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LPSolver" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LPSolver" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="lpsolver" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -306,19 +362,18 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JARs/commons-cli-1.4" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -590,12 +645,15 @@
       <workItem from="1509006566531" duration="1026000" />
       <workItem from="1509020252720" duration="1082000" />
       <workItem from="1509090649135" duration="27000" />
-      <workItem from="1509882379995" duration="2432000" />
+      <workItem from="1509882379995" duration="3009000" />
+      <workItem from="1510142544186" duration="741000" />
+      <workItem from="1510336565041" duration="910000" />
+      <workItem from="1514402965659" duration="2309000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15219000" />
+    <option name="totallyTimeSpent" value="19756000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -612,13 +670,12 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12315271" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24630542" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24630542" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -640,6 +697,7 @@
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12315271" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="100" y="100" width="1166" height="568" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32906404" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -686,6 +744,11 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/src" />
+    </ignored-roots>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <option name="time" value="57" />
@@ -701,7 +764,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/output.txt" />
     <entry file="file://$PROJECT_DIR$/src/lpsolver/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -757,17 +819,17 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/io/File.java" />
     <entry file="file://$PROJECT_DIR$/src/LPSolver.java" />
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="0">
             <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -786,19 +848,10 @@
     <entry file="file://$PROJECT_DIR$/src/graphics/GBC.java" />
     <entry file="file://$PROJECT_DIR$/src/graphics/LPSolver.java" />
     <entry file="file://$PROJECT_DIR$/src/graphics/LPSolver.form" />
-    <entry file="file://$PROJECT_DIR$/io_files/output.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/graphics/utils/GBC.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
           <caret line="25" column="5" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -807,8 +860,8 @@
         <state relative-caret-position="75">
           <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
           <folding>
-            <element signature="e#175#176#0" expanded="true" />
-            <element signature="e#199#200#0" expanded="true" />
+            <element signature="e#175#176#0" expanded="false" />
+            <element signature="e#199#200#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -818,39 +871,39 @@
         <state relative-caret-position="550">
           <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1323#1324#0" expanded="true" />
-            <element signature="e#1386#1387#0" expanded="true" />
-            <element signature="e#1433#1434#0" expanded="true" />
-            <element signature="e#1485#1486#0" expanded="true" />
-            <element signature="e#1532#1533#0" expanded="true" />
-            <element signature="e#1584#1585#0" expanded="true" />
-            <element signature="e#1639#1640#0" expanded="true" />
-            <element signature="e#1685#1686#0" expanded="true" />
-            <element signature="e#1746#1747#0" expanded="true" />
-            <element signature="e#1798#1799#0" expanded="true" />
-            <element signature="e#1864#1865#0" expanded="true" />
-            <element signature="e#1900#1901#0" expanded="true" />
-            <element signature="e#1972#1973#0" expanded="true" />
-            <element signature="e#2014#2015#0" expanded="true" />
-            <element signature="e#2061#2062#0" expanded="true" />
-            <element signature="e#2095#2096#0" expanded="true" />
-            <element signature="e#2147#2148#0" expanded="true" />
-            <element signature="e#2170#2171#0" expanded="true" />
-            <element signature="e#2211#2212#0" expanded="true" />
-            <element signature="e#2234#2235#0" expanded="true" />
-            <element signature="e#2275#2276#0" expanded="true" />
-            <element signature="e#2298#2299#0" expanded="true" />
-            <element signature="e#2334#2335#0" expanded="true" />
-            <element signature="e#2370#2371#0" expanded="true" />
-            <element signature="e#2409#2410#0" expanded="true" />
-            <element signature="e#2448#2449#0" expanded="true" />
-            <element signature="e#2500#2501#0" expanded="true" />
-            <element signature="e#2531#2532#0" expanded="true" />
-            <element signature="e#2579#2580#0" expanded="true" />
-            <element signature="e#2613#2614#0" expanded="true" />
-            <element signature="e#2647#2648#0" expanded="true" />
-            <element signature="e#2677#2678#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1323#1324#0" expanded="false" />
+            <element signature="e#1386#1387#0" expanded="false" />
+            <element signature="e#1433#1434#0" expanded="false" />
+            <element signature="e#1485#1486#0" expanded="false" />
+            <element signature="e#1532#1533#0" expanded="false" />
+            <element signature="e#1584#1585#0" expanded="false" />
+            <element signature="e#1639#1640#0" expanded="false" />
+            <element signature="e#1685#1686#0" expanded="false" />
+            <element signature="e#1746#1747#0" expanded="false" />
+            <element signature="e#1798#1799#0" expanded="false" />
+            <element signature="e#1864#1865#0" expanded="false" />
+            <element signature="e#1900#1901#0" expanded="false" />
+            <element signature="e#1972#1973#0" expanded="false" />
+            <element signature="e#2014#2015#0" expanded="false" />
+            <element signature="e#2061#2062#0" expanded="false" />
+            <element signature="e#2095#2096#0" expanded="false" />
+            <element signature="e#2147#2148#0" expanded="false" />
+            <element signature="e#2170#2171#0" expanded="false" />
+            <element signature="e#2211#2212#0" expanded="false" />
+            <element signature="e#2234#2235#0" expanded="false" />
+            <element signature="e#2275#2276#0" expanded="false" />
+            <element signature="e#2298#2299#0" expanded="false" />
+            <element signature="e#2334#2335#0" expanded="false" />
+            <element signature="e#2370#2371#0" expanded="false" />
+            <element signature="e#2409#2410#0" expanded="false" />
+            <element signature="e#2448#2449#0" expanded="false" />
+            <element signature="e#2500#2501#0" expanded="false" />
+            <element signature="e#2531#2532#0" expanded="false" />
+            <element signature="e#2579#2580#0" expanded="false" />
+            <element signature="e#2613#2614#0" expanded="false" />
+            <element signature="e#2647#2648#0" expanded="false" />
+            <element signature="e#2677#2678#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -860,8 +913,8 @@
         <state relative-caret-position="225">
           <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
-            <element signature="e#146#147#0" expanded="true" />
-            <element signature="e#170#171#0" expanded="true" />
+            <element signature="e#146#147#0" expanded="false" />
+            <element signature="e#170#171#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -870,9 +923,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="617">
           <caret line="62" column="35" lean-forward="false" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -880,21 +930,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#174#419#0" expanded="false" />
-            <element signature="e#418#419#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lpsolver/LPSolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9">
-          <caret line="18" column="15" lean-forward="false" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -902,7 +937,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-9">
           <caret line="336" column="29" lean-forward="false" selection-start-line="336" selection-start-column="29" selection-end-line="336" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -910,14 +944,32 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
           <caret line="141" column="18" lean-forward="false" selection-start-line="141" selection-start-column="18" selection-end-line="141" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/io_files/boom.txt" />
+    <entry file="file://$PROJECT_DIR$/io_files/output.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2017">
+          <caret line="223" column="10" lean-forward="false" selection-start-line="223" selection-start-column="10" selection-end-line="223" selection-end-column="10" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lpsolver/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1432">
+          <caret line="62" column="42" lean-forward="false" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lpsolver/LPInputReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+        <state relative-caret-position="300">
+          <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -926,18 +978,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/io_files/input.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+        <state relative-caret-position="425">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lpsolver/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/lpsolver/LPSolver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="62" column="42" lean-forward="false" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
+        <state relative-caret-position="-418">
+          <caret line="159" column="27" lean-forward="true" selection-start-line="159" selection-start-column="27" selection-end-line="159" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#LPSolver#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#LPSolver#1;class#LPSolver#0" expanded="false" />
+            <element signature="method#LPSolver#2;class#LPSolver#0" expanded="false" />
+            <element signature="method#LPSolver#3;class#LPSolver#0" expanded="false" />
+            <element signature="e#4280#4311#0" expanded="true" />
+            <element signature="e#5348#5379#0" expanded="true" />
+            <element signature="method#exchangeIndexes#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#setLP#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#setOut#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#solve#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#solve#1;class#LPSolver#0" expanded="false" />
+            <element signature="method#simplex#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#pivot#1;class#LPSolver#0" expanded="false" />
+            <element signature="method#initializeSimplex#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#findIndexOfMinInB#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#convertIntoLaux#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#solveLaux#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#handleInitialization#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#performDegeneratePivot#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#restoreInitialLP#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#convertIntoSlackForm#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#getEntering#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#getLeaving#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#printStatement#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#printLinearProgram#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#printSolution#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#printProgress#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#printState#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#toString#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#getOptimalObjectiveValue#0;class#LPSolver#0" expanded="false" />
+            <element signature="class#LPState#0;class#LPSolver#0" expanded="false" />
+            <element signature="method#LPState#0;class#LPState#0;class#LPSolver#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1018,6 +1101,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>commons-cli-1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -17,15 +17,17 @@ public class LPInputReader {
   private HashMap<Integer, String> variables;
   private HashMap<String, Integer> coefficients;
   private int numOfVariables, numOfInequalities;
-  private Pattern tokenPattern;
-  private Pattern inequalitySignPattern;
-  private Pattern constraintNumberPattern;
+  private static final Pattern tokenPattern;
+  private static final Pattern inequalitySignPattern;
+  private static final Pattern constraintNumberPattern;
 
-  public LPInputReader() {
-    this.tokenPattern = Pattern.compile("(([+-]?\\s*\\d*\\.?\\d*)\\*?([a-zA-Z]+\\d*))");
-    this.inequalitySignPattern = Pattern.compile("(>=|<=|=|==)");
-    this.constraintNumberPattern = Pattern.compile("(>=|<=|=|==)\\s*(-?\\d+(\\.?\\d+)?)");
+  static {
+    tokenPattern = Pattern.compile("(([+-]?\\s*\\d*\\.?\\d*)\\*?([a-zA-Z]+\\d*))");
+    inequalitySignPattern = Pattern.compile("(>=|<=|=|==)");
+    constraintNumberPattern = Pattern.compile("(>=|<=|=|==)\\s*(-?\\d+(\\.?\\d+)?)");
   }
+
+  public LPInputReader() {}
 
   private void reload() {
     this.stForm = new LPStandardForm();
@@ -42,9 +44,8 @@ public class LPInputReader {
     reload();
 
     File file = new File(path);
-    System.out.println(file.getAbsolutePath());
     if (!file.exists()) {
-      file.createNewFile();
+      throw new IOException("Can't find input file specified");
     }
     if (!file.isFile() || !file.canRead()) {
       throw new IOException("Can't read from such file");
