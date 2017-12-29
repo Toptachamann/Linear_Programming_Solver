@@ -42,10 +42,6 @@ public class LPStandardForm {
     this.c = c;
   }
 
-  public void setCoefficients(HashMap<String, Integer> coefficients) {
-    this.coefficients = coefficients;
-  }
-
   public ArrayList<ArrayList<BigDecimal>> getA() {
     return this.A;
   }
@@ -88,6 +84,10 @@ public class LPStandardForm {
 
   public HashMap<String, Integer> getCoefficients() {
     return this.coefficients;
+  }
+
+  public void setCoefficients(HashMap<String, Integer> coefficients) {
+    this.coefficients = coefficients;
   }
 
   public boolean getMaximize() {
@@ -165,7 +165,7 @@ public class LPStandardForm {
       int m = A.size(), n = A.get(0).size();
       ArrayList<ArrayList<BigDecimal>> B = new ArrayList<>(n);
       for (int i = 0; i < n; i++) {
-        B.add(new ArrayList<BigDecimal>(m));
+        B.add(new ArrayList<>(m));
       }
       for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
@@ -179,7 +179,7 @@ public class LPStandardForm {
         variables.put(i - 1, x + i);
         coefficients.put(x + i, i - 1);
       }
-      return new LPStandardForm(B, c, b, coefficients, variables, m, n, false);
+      return new LPStandardForm(B, c, b, coefficients, variables, m, n, !maximize);
     } else {
       return null;
     }
