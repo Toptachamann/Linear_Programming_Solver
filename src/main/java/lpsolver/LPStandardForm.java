@@ -86,7 +86,7 @@ public class LPStandardForm {
     this.variables = variables;
   }
 
-  public HashMap<String, Integer> getCoefs() {
+  public HashMap<String, Integer> getCoefficients() {
     return this.coefficients;
   }
 

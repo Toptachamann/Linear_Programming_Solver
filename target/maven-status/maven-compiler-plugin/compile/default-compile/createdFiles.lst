@@ -1,0 +1,7 @@
+lpsolver\LPStandardForm.class
+Main.class
+lpsolver\LPException.class
+lpsolver\LPInputReader.class
+lpsolver\SolutionException.class
+lpsolver\LPSolver$LPState.class
+lpsolver\LPSolver.class

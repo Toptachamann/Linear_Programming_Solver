@@ -240,8 +240,8 @@ public class LPSolver {
     this.b = (ArrayList<BigDecimal>) stForm.getb().clone();
     this.c = null; // gets value in setLP simplex
     this.variables = (HashMap<Integer, String>) stForm.getVariables().clone();
-    this.initialCoefficients = (HashMap<String, Integer>) stForm.getCoefs().clone();
-    this.coefficients = (HashMap<String, Integer>) stForm.getCoefs().clone();
+    this.initialCoefficients = (HashMap<String, Integer>) stForm.getCoefficients().clone();
+    this.coefficients = (HashMap<String, Integer>) stForm.getCoefficients().clone();
     this.n = stForm.getNumOfVariables();
     this.m = stForm.getNumOfInequalities();
     this.v = BigDecimal.ZERO;

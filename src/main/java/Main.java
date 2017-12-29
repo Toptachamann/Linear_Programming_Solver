@@ -1,5 +1,6 @@
 import lpsolver.LPInputReader;
 import lpsolver.LPSolver;
+import lpsolver.LPStandardForm;
 import lpsolver.SolutionException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -61,8 +62,8 @@ public class Main {
         }
       }
       LPInputReader lpInputReader = new LPInputReader();
-      lpInputReader.readLP(strInputFile);
-      LPSolver solver = new LPSolver(lpInputReader.getLPStandardForm());
+      LPStandardForm stForm = lpInputReader.readLP(new File(strInputFile));
+      LPSolver solver = new LPSolver(stForm);
       solver.setOut(strOutputFile);
       solver.solve(10);
     } catch (SolutionException | IOException e) {

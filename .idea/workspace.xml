@@ -2,9 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b402064c-40a7-41d6-a536-84ee71562cb6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java" afterPath="$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lpsolver/LPInputReaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/lpsolver/LPInputReaderTest.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java" afterPath="$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lpsolver/LPSolver.java" afterPath="$PROJECT_DIR$/src/main/java/lpsolver/LPSolver.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lpsolver/LPStandardForm.java" afterPath="$PROJECT_DIR$/src/main/java/lpsolver/LPStandardForm.java" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lpsolver/LPInputReaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/lpsolver/LPInputReaderTest.java" />
+      <change beforePath="$PROJECT_DIR$/target/classes/lpsolver/LPInputReader.class" afterPath="$PROJECT_DIR$/target/classes/lpsolver/LPInputReader.class" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/LPInputReaderTest.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-LPInputReaderTest.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-lpsolver.LPInputReaderTest.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/lpsolver.LPInputReaderTest.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/lpsolver/LPInputReaderTest.class" afterPath="$PROJECT_DIR$/target/test-classes/lpsolver/LPInputReaderTest.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -21,40 +34,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="LPInputReader.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LPInputReader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4000">
-              <caret line="191" column="9" lean-forward="false" selection-start-line="191" selection-start-column="9" selection-end-line="191" selection-end-column="9" />
+            <state relative-caret-position="-3384">
+              <caret line="23" column="95" lean-forward="false" selection-start-line="23" selection-start-column="95" selection-end-line="23" selection-end-column="95" />
               <folding>
                 <element signature="method#reload#0;class#LPInputReader#0" expanded="false" />
-                <element signature="method#readLP#1;class#LPInputReader#0" expanded="false" />
+                <element signature="method#processMaxMinParam#0;class#LPInputReader#0" expanded="false" />
+                <element signature="method#normalizeConstraintMatrix#0;class#LPInputReader#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Matcher.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk-9/lib/src.zip!/java.base/java/util/regex/Matcher.java">
+      <file leaf-file-name="LPStandardForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/lpsolver/LPStandardForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16625">
-              <caret line="711" column="19" lean-forward="false" selection-start-line="711" selection-start-column="19" selection-end-line="711" selection-end-column="19" />
-              <folding>
-                <element signature="e#24818#24819#0" expanded="true" />
-                <element signature="e#24863#24864#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1425">
+              <caret line="88" column="37" lean-forward="true" selection-start-line="88" selection-start-column="37" selection-end-line="88" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LPInputReaderTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LPInputReaderTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/lpsolver/LPInputReaderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1354">
-              <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="114" column="26" lean-forward="true" selection-start-line="114" selection-start-column="26" selection-end-line="114" selection-end-column="26" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#753#758#0" expanded="false" />
+                <element signature="e#1871#1876#0" expanded="false" />
+                <element signature="e#3646#3651#0" expanded="false" />
+                <element signature="e#5629#5634#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="input.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/io_files/input.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="39" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="478">
+              <caret line="65" column="43" lean-forward="false" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -124,8 +158,6 @@
         <option value="$PROJECT_DIR$/src/lpsolver/LPSolver.java" />
         <option value="$PROJECT_DIR$/src/lpsolver/LPInputReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/lpsolver/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lpsolver/LPStandardForm.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.6/commons-lang3-3.6.jar!/org/apache/commons/lang3/Validate.class" />
         <option value="$PROJECT_DIR$/src/test/java/lpsolver/LPStandardFormTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/lpsolver/LPSolverTest.java" />
@@ -133,6 +165,8 @@
         <option value="$PROJECT_DIR$/src/main/java/lpsolver/LPInputReaderTest.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="/Dummy.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lpsolver/LPStandardForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java" />
         <option value="$PROJECT_DIR$/src/test/java/lpsolver/LPInputReaderTest.java" />
       </list>
@@ -167,7 +201,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1" fullScreen="true">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1920" />
     <option name="height" value="1080" />
   </component>
@@ -323,9 +357,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -390,6 +421,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -399,7 +433,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="google-java-format.settings" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
   </component>
   <component name="RecentsManager">
@@ -426,7 +460,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.LPInputReaderTest.processObjectiveTest">
+  <component name="RunManager" selected="JUnit.LPInputReaderTest">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
     <configuration name="LPInputReaderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -452,7 +507,7 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="LPInputReaderTest.processObjectiveTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LPInputReaderTest.complicatedLpTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="lpsolver.*" />
@@ -464,7 +519,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="lpsolver" />
       <option name="MAIN_CLASS_NAME" value="lpsolver.LPInputReaderTest" />
-      <option name="METHOD_NAME" value="processObjectiveTest" />
+      <option name="METHOD_NAME" value="complicatedLpTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -477,7 +532,7 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="LPInputReaderTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LPInputReaderTest.simpleTestLP" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="lpsolver.*" />
@@ -489,7 +544,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="lpsolver" />
       <option name="MAIN_CLASS_NAME" value="lpsolver.LPInputReaderTest" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="METHOD_NAME" value="simpleTestLP" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -502,63 +557,55 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="LPSolver [test]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
-      <MavenSettings>
-        <option name="myGeneralSettings" />
-        <option name="myRunnerSettings" />
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list>
-                <option value="test" />
-              </list>
-            </option>
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$PROJECT_DIR$" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="lpsolver.Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
+    <configuration name="LPInputReaderTest.testLpReadingExceptions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="lpsolver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <module name="LPSolver" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="PACKAGE_NAME" value="lpsolver" />
+      <option name="MAIN_CLASS_NAME" value="lpsolver.LPInputReaderTest" />
+      <option name="METHOD_NAME" value="testLpReadingExceptions" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
       <envs />
+      <patterns />
+    </configuration>
+    <configuration name="LPInputReaderTest.testReadingFromFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="lpsolver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="LPSolver" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="lpsolver" />
+      <option name="MAIN_CLASS_NAME" value="lpsolver.LPInputReaderTest" />
+      <option name="METHOD_NAME" value="testReadingFromFile" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -579,12 +626,6 @@
       </option>
       <envs />
       <patterns />
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -619,6 +660,12 @@
       <envs />
       <properties />
       <listeners />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="" />
@@ -754,24 +801,27 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="Maven.LPSolver [test]" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.test" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.processObjectiveTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.testLpReadingExceptions" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.testReadingFromFile" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.simpleTestLP" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.complicatedLpTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.processObjectiveTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.test" />
-        <item index="3" class="java.lang.String" itemvalue="Maven.LPSolver [test]" />
-        <item index="4" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.complicatedLpTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.simpleTestLP" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.testReadingFromFile" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.LPInputReaderTest.testLpReadingExceptions" />
       </list>
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -798,7 +848,9 @@
       <workItem from="1510336565041" duration="910000" />
       <workItem from="1514402965659" duration="4365000" />
       <workItem from="1514474857401" duration="17152000" />
-      <workItem from="1514536185903" duration="631000" />
+      <workItem from="1514536185903" duration="2433000" />
+      <workItem from="1514539309708" duration="1612000" />
+      <workItem from="1514540947652" duration="5812000" />
     </task>
     <task id="LOCAL-00001" summary="Parallel matrix recomputing">
       <created>1514405455861</created>
@@ -825,39 +877,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="LPInputReaderTest_processObjectiveTest - 2017.12.29 at 10h 29m 59s.xml">
-      <configuration name="LPInputReaderTest.processObjectiveTest" configurationId="JUnit" />
+    <history-entry file="LPInputReaderTest - 2017.12.29 at 18h 25m 06s.xml">
+      <configuration name="LPInputReaderTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LPInputReaderTest_processObjectiveTest - 2017.12.29 at 10h 30m 24s.xml">
-      <configuration name="LPInputReaderTest.processObjectiveTest" configurationId="JUnit" />
+    <history-entry file="LPInputReaderTest - 2017.12.29 at 18h 25m 33s.xml">
+      <configuration name="LPInputReaderTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LPInputReaderTest_processObjectiveTest - 2017.12.29 at 10h 30m 49s.xml">
-      <configuration name="LPInputReaderTest.processObjectiveTest" configurationId="JUnit" />
+    <history-entry file="LPInputReaderTest - 2017.12.29 at 18h 26m 04s.xml">
+      <configuration name="LPInputReaderTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LPInputReaderTest_processObjectiveTest - 2017.12.29 at 10h 32m 08s.xml">
-      <configuration name="LPInputReaderTest.processObjectiveTest" configurationId="JUnit" />
+    <history-entry file="LPInputReaderTest - 2017.12.29 at 18h 26m 14s.xml">
+      <configuration name="LPInputReaderTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LPInputReaderTest_processObjectiveTest - 2017.12.29 at 10h 36m 57s.xml">
-      <configuration name="LPInputReaderTest.processObjectiveTest" configurationId="JUnit" />
+    <history-entry file="LPInputReaderTest_complicatedLpTest - 2017.12.29 at 18h 21m 42s.xml">
+      <configuration name="LPInputReaderTest.complicatedLpTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LPInputReaderTest_processObjectiveTest - 2017.12.29 at 10h 37m 53s.xml">
-      <configuration name="LPInputReaderTest.processObjectiveTest" configurationId="JUnit" />
+    <history-entry file="LPInputReaderTest_complicatedLpTest - 2017.12.29 at 18h 22m 03s.xml">
+      <configuration name="LPInputReaderTest.complicatedLpTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LPInputReaderTest_processObjectiveTest - 2017.12.29 at 10h 38m 25s.xml">
-      <configuration name="LPInputReaderTest.processObjectiveTest" configurationId="JUnit" />
+    <history-entry file="LPInputReaderTest_complicatedLpTest - 2017.12.29 at 18h 22m 50s.xml">
+      <configuration name="LPInputReaderTest.complicatedLpTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LPInputReaderTest_test - 2017.12.28 at 21h 32m 37s.xml">
-      <configuration name="LPInputReaderTest.test" configurationId="JUnit" />
+    <history-entry file="LPInputReaderTest_complicatedLpTest - 2017.12.29 at 18h 23m 20s.xml">
+      <configuration name="LPInputReaderTest.complicatedLpTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LPInputReaderTest_test - 2017.12.28 at 21h 33m 55s.xml">
-      <configuration name="LPInputReaderTest.test" configurationId="JUnit" />
+    <history-entry file="LPInputReaderTest_complicatedLpTest - 2017.12.29 at 18h 24m 29s.xml">
+      <configuration name="LPInputReaderTest.complicatedLpTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LPInputReaderTest_test - 2017.12.28 at 21h 34m 54s.xml">
-      <configuration name="LPInputReaderTest.test" configurationId="JUnit" />
+    <history-entry file="LPInputReaderTest_complicatedLpTest - 2017.12.29 at 18h 24m 54s.xml">
+      <configuration name="LPInputReaderTest.complicatedLpTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39595000" />
+    <option name="totallyTimeSpent" value="48821000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -869,30 +921,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="1" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32906404" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.122593716" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.121703856" sideWeight="0.49785176" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49594322" sideWeight="0.5042965" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16111708" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11144883" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32906404" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0831643" sideWeight="0.49570355" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19554205" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12298603" sideWeight="0.48866996" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20139635" sideWeight="0.48866996" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1659506" sideWeight="0.49655172" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.098277606" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18385416" sideWeight="0.51133007" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36105478" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -961,12 +1013,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java</url>
-          <line>98</line>
+          <line>51</line>
           <properties />
-          <option name="timeStamp" value="59" />
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java</url>
+          <line>159</line>
+          <properties />
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="60" />
+      <option name="time" value="64" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -992,17 +1050,17 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/io/File.java" />
     <entry file="file://$PROJECT_DIR$/src/LPSolver.java" />
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="0">
             <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1051,13 +1109,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/io_files/boom.txt" />
     <entry file="file://$PROJECT_DIR$/src/test.java" />
-    <entry file="file://$PROJECT_DIR$/io_files/input.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/io_files/output.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5575">
@@ -1080,16 +1131,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="732">
-          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-9/lib/src.zip!/java.base/java/lang/Class.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
@@ -1098,17 +1139,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/lpsolver/LPStandardFormTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/lpsolver/LPStandardForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="15" column="27" lean-forward="false" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-          <folding>
-            <element signature="e#1261#1262#0" expanded="false" />
-            <element signature="e#1303#1304#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/LPInputReaderTest.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/lpsolver/LPSolverTest.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/lpsolver/LPInputReaderTest.java" />
@@ -1154,13 +1184,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.1.0-M1/junit-platform-commons-1.1.0-M1.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="164" column="5" lean-forward="true" selection-start-line="164" selection-start-column="5" selection-end-line="164" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.1.0-M1/junit-jupiter-api-5.1.0-M1.jar!/org/junit/jupiter/api/Assertions.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
@@ -1175,41 +1198,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.6/commons-lang3-3.6.jar!/org/apache/commons/lang3/Validate.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="65" column="22" lean-forward="false" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-9/lib/src.zip!/java.base/java/util/regex/Matcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16625">
           <caret line="711" column="19" lean-forward="false" selection-start-line="711" selection-start-column="19" selection-end-line="711" selection-end-column="19" />
           <folding>
-            <element signature="e#24818#24819#0" expanded="true" />
-            <element signature="e#24863#24864#0" expanded="true" />
+            <element signature="e#24818#24819#0" expanded="false" />
+            <element signature="e#24863#24864#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="65" column="43" lean-forward="false" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.6/commons-lang3-3.6.jar!/org/apache/commons/lang3/Validate.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="65" column="22" lean-forward="false" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/io_files/input.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="39" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.1.0-M1/junit-platform-commons-1.1.0-M1.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="176" column="0" lean-forward="false" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lpsolver/LPStandardForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1425">
+          <caret line="88" column="37" lean-forward="true" selection-start-line="88" selection-start-column="37" selection-end-line="88" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3384">
+          <caret line="23" column="95" lean-forward="false" selection-start-line="23" selection-start-column="95" selection-end-line="23" selection-end-column="95" />
+          <folding>
+            <element signature="method#reload#0;class#LPInputReader#0" expanded="false" />
+            <element signature="method#processMaxMinParam#0;class#LPInputReader#0" expanded="false" />
+            <element signature="method#normalizeConstraintMatrix#0;class#LPInputReader#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/lpsolver/LPInputReaderTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1354">
-          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+        <state relative-caret-position="90">
+          <caret line="114" column="26" lean-forward="true" selection-start-line="114" selection-start-column="26" selection-end-line="114" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4000">
-          <caret line="191" column="9" lean-forward="false" selection-start-line="191" selection-start-column="9" selection-end-line="191" selection-end-column="9" />
-          <folding>
-            <element signature="method#reload#0;class#LPInputReader#0" expanded="false" />
-            <element signature="method#readLP#1;class#LPInputReader#0" expanded="false" />
+            <element signature="e#753#758#0" expanded="false" />
+            <element signature="e#1871#1876#0" expanded="false" />
+            <element signature="e#3646#3651#0" expanded="false" />
+            <element signature="e#5629#5634#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1291,7 +1351,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: backport-util-concurrent:backport-util-concurrent:3.1</last-edited>
+          <last-edited>Maven: commons-cli:commons-cli:1.4</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
