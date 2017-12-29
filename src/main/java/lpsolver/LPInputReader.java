@@ -21,7 +21,7 @@ public class LPInputReader {
   private static final Pattern constraintNumberPattern;
 
   static {
-    objectivePattern = Pattern.compile("((\\s*[+-]?\\s*\\d*\\.?\\d*)\\*?([a-zA-Z]+\\d*))+")
+    objectivePattern = Pattern.compile("((\\s*[+-]?\\s*\\d*\\.?\\d*)\\*?([a-zA-Z]+\\d*))+");
     tokenPattern = Pattern.compile("(([+-]?\\s*\\d*\\.?\\d*)\\*?([a-zA-Z]+\\d*))");
     inequalitySignPattern = Pattern.compile("(>=|<=|=|==)");
     constraintNumberPattern = Pattern.compile("(>=|<=|=|==)\\s*(-?\\d+(\\.?\\d+)?)");

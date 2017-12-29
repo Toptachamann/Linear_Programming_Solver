@@ -46,28 +46,43 @@ class LPInputReaderTest {
 
   @Test
   @DisplayName("Objective processing test")
-  public void processObjectiveTest() throws NoSuchMethodException {
+  public void processObjectiveTest()
+      throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    Method reload = reader.getClass().getDeclaredMethod("reload");
+    reload.setAccessible(true);
+    reload.invoke(reader);
     Method processObjective = reader.getClass().getDeclaredMethod("processObjective", String.class);
     processObjective.setAccessible(true);
+
     String s = null;
+    String objective1 = "";
+    String objective2 = "x1";
+    String objective3 = "5*x1 + 1.23x3 + 5.32*vv";
+    ArrayList<BigDecimal> objectiveArr2 = new ArrayList<>(List.of(new BigDecimal(1)));
+    ArrayList<BigDecimal> objectiveArr3 =
+        new ArrayList<>(List.of(new BigDecimal(5), new BigDecimal("1.23"), new BigDecimal("5.32")));
     Throwable exception1 =
         assertThrows(
             InvocationTargetException.class,
             () -> processObjective.invoke(reader, s),
             "Should throw InvocationTargetException");
     assertEquals(NullPointerException.class, exception1.getCause().getClass(), "Should throw NPE");
-    String objective1 = "";
-    String objective2 = "x1";
-    String objective3 = "5*x1 + 1.23x3 + 5.32*vv";
     Throwable exception2 =
         assertThrows(
             InvocationTargetException.class,
             () -> processObjective.invoke(reader, objective1),
             "Should throw InvocationTargetException");
     assertEquals(
-        IllegalAccessException.class,
+        IllegalArgumentException.class,
         exception2.getCause().getClass(),
         "Should throw IllegalArgumentException");
-    ArrayList<BigDecimal> objectiveArr1 = new ArrayList<>(List.of(new BigDecimal(1)));
+    assertEquals(
+        objectiveArr2,
+        processObjective.invoke(reader, objective2),
+        () -> "Should be " + objectiveArr2.toString());
+    assertEquals(
+        objectiveArr3,
+        processObjective.invoke(reader, objective3),
+        () -> "Should be " + objectiveArr3.toString());
   }
 }
