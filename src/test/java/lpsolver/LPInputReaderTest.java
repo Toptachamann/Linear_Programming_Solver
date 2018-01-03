@@ -74,7 +74,8 @@ class LPInputReaderTest {
             InvocationTargetException.class,
             () -> processObjective.invoke(reader, empty),
             "Should throw InvocationTargetException");
-    assertEquals(IllegalArgumentException.class, exception1.getCause().getClass(), "Should throw NPE");
+    assertEquals(
+        IllegalArgumentException.class, exception1.getCause().getClass(), "Should throw NPE");
     assertEquals(
         IllegalArgumentException.class,
         exception2.getCause().getClass(),
@@ -190,8 +191,8 @@ class LPInputReaderTest {
     assertAll(
         "Validating simple LP",
         () -> assertEquals(A, stForm.getA(), "A should be [1,1]"),
-        () -> assertEquals(b, stForm.getb(), "b should be [0]"),
-        () -> assertEquals(c, stForm.getc(), "c should be [1, 1]"),
+        () -> assertEquals(b, stForm.getB(), "b should be [0]"),
+        () -> assertEquals(c, stForm.getC(), "c should be [1, 1]"),
         () ->
             assertEquals(
                 coefficients,
@@ -199,8 +200,8 @@ class LPInputReaderTest {
                 "coefficients should be ['x1'->0, 'x2'->1]"),
         () ->
             assertEquals(variables, stForm.getVariables(), "variables should be [0->'x1', 1->'x2'"),
-        () -> assertEquals(2, stForm.getNumOfVariables(), "Num of vars should be 2"),
-        () -> assertEquals(1, stForm.getNumOfInequalities(), "Num of ineq should be 1"),
+        () -> assertEquals(2, stForm.getM(), "Num of vars should be 2"),
+        () -> assertEquals(1, stForm.getN(), "Num of ineq should be 1"),
         () -> assertTrue(stForm.getMaximize(), "Maximized should be true"));
   }
 
@@ -243,12 +244,12 @@ class LPInputReaderTest {
     assertAll(
         "Complicated LP",
         () -> assertEquals(A, stForm.getA()),
-        () -> assertEquals(b, stForm.getb()),
-        () -> assertEquals(c, stForm.getc()),
+        () -> assertEquals(b, stForm.getB()),
+        () -> assertEquals(c, stForm.getC()),
         () -> assertEquals(variables, stForm.getVariables()),
         () -> assertEquals(coefficients, stForm.getCoefficients()),
-        () -> assertEquals(2, stForm.getNumOfVariables()),
-        () -> assertEquals(5, stForm.getNumOfInequalities()),
+        () -> assertEquals(2, stForm.getM()),
+        () -> assertEquals(5, stForm.getN()),
         () -> assertFalse(stForm.getMaximize()));
   }
 }

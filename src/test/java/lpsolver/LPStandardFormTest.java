@@ -46,8 +46,8 @@ class LPStandardFormTest {
         () -> assertEquals(c, dual.getc()),
         () -> assertEquals(variables, dual.getVariables()),
         () -> assertEquals(coefficients, dual.getCoefficients()),
-        () -> assertEquals(3, dual.getNumOfInequalities()),
-        () -> assertEquals(3, dual.getNumOfVariables()),
+        () -> assertEquals(3, dual.getN()),
+        () -> assertEquals(3, dual.getM()),
         () -> assertTrue(dual.getMaximize()));
   }
 }

@@ -74,7 +74,7 @@ public class LPInputReader {
     }
     normalizeConstraintMatrix();
     return new LPStandardForm(
-        A, b, c, coefficients, variables, numOfVariables, numOfInequalities, maximized);
+        A, b, c, variables, coefficients, numOfVariables, numOfInequalities, maximized);
   }
 
   @Contract("null -> fail")
@@ -90,7 +90,7 @@ public class LPInputReader {
     }
     normalizeConstraintMatrix();
     return new LPStandardForm(
-        A, b, c, coefficients, variables, numOfVariables, numOfInequalities, maximized);
+        A, b, c, variables, coefficients, numOfVariables, numOfInequalities, maximized);
   }
 
   @Contract("null -> fail")

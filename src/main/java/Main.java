@@ -23,7 +23,7 @@ public class Main {
       new File("C:\\Java_Projects\\LPSolver\\conf\\config.properties");
 
   public static void main(String[] args) {
-    Properties properties = new Properties();
+    /*Properties properties = new Properties();
 
     Options options = new Options();
 
@@ -72,6 +72,6 @@ public class Main {
       System.out.println(e.getMessage());
       formatter.printHelp("utility-name", options);
       System.exit(1);
-    }
+    }*/
   }
 }

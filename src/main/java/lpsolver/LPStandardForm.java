@@ -1,111 +1,71 @@
 package lpsolver;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LPStandardForm {
-  private ArrayList<ArrayList<BigDecimal>> A;
-  private ArrayList<BigDecimal> b, c;
-  private HashMap<String, Integer> coefficients; // (variable name : coefficient in the system)
-  private HashMap<Integer, String> variables;
-  private int numOfVariables, numOfInequalities;
-  private boolean maximize;
+  BigDecimal[][] A;
+  BigDecimal[] b, c;
+  HashMap<String, Integer> coefficients; // (variable name : coefficient in the system)
+  HashMap<Integer, String> variables;
+  int m, n;
+  boolean maximize;
 
   public LPStandardForm(
-      ArrayList<ArrayList<BigDecimal>> A,
-      ArrayList<BigDecimal> b,
-      ArrayList<BigDecimal> c,
-      HashMap<String, Integer> coefficients,
+      BigDecimal[][] A,
+      BigDecimal[] b,
+      BigDecimal[] c,
       HashMap<Integer, String> variables,
-      int numOfVariables,
-      int numOfInequalities,
+      HashMap<String, Integer> coefficients,
+      int m,
+      int n,
       boolean maximize) {
     this.A = A;
     this.b = b;
     this.c = c;
     this.coefficients = coefficients;
     this.variables = variables;
-    this.numOfVariables = numOfVariables;
-    this.numOfInequalities = numOfInequalities;
+    this.m = m;
+    this.n = n;
     this.maximize = maximize;
   }
 
-  public void setb(ArrayList<BigDecimal> b) {
-    this.b = b;
-  }
-
-  public void setc(ArrayList<BigDecimal> c) {
-    this.c = c;
-  }
-
-  public ArrayList<ArrayList<BigDecimal>> getA() {
-    return this.A;
-  }
-
-  public void setA(ArrayList<ArrayList<BigDecimal>> A) {
-    this.A = A;
-  }
-
-  public ArrayList<BigDecimal> getb() {
-    return this.b;
-  }
-
-  public ArrayList<BigDecimal> getc() {
-    return this.c;
-  }
-
-  public int getNumOfVariables() {
-    return this.numOfVariables;
-  }
-
-  public void setNumOfVariables(int numOfVariables) {
-    this.numOfVariables = numOfVariables;
-  }
-
-  public int getNumOfInequalities() {
-    return this.numOfInequalities;
-  }
-
-  public void setNumOfInequalities(int numOfInequalities) {
-    this.numOfInequalities = numOfInequalities;
-  }
-
-  public HashMap<Integer, String> getVariables() {
-    return this.variables;
-  }
-
-  public void setVariables(HashMap<Integer, String> variables) {
-    this.variables = variables;
-  }
-
-  public HashMap<String, Integer> getCoefficients() {
-    return this.coefficients;
-  }
-
-  public void setCoefficients(HashMap<String, Integer> coefficients) {
+  @SuppressWarnings("unchecked")
+  public LPStandardForm(
+      ArrayList<ArrayList<BigDecimal>> A,
+      ArrayList<BigDecimal> b,
+      ArrayList<BigDecimal> c,
+      HashMap<Integer, String> variables,
+      HashMap<String, Integer> coefficients,
+      int m,
+      int n,
+      boolean maximize) {
+    this.A = new BigDecimal[m][n];
+    ArrayList<BigDecimal>[] arr = (ArrayList<BigDecimal>[]) A.toArray();
+    for (int i = 0; i < m; i++) {
+      this.A[i] = (BigDecimal[]) arr[i].toArray();
+    }
+    this.b = (BigDecimal[]) b.toArray();
+    this.c = (BigDecimal[]) c.toArray();
     this.coefficients = coefficients;
-  }
-
-  public boolean getMaximize() {
-    return this.maximize;
-  }
-
-  public void setMaximize(boolean maximize) {
+    this.variables = variables;
+    this.m = m;
+    this.n = n;
     this.maximize = maximize;
   }
 
-  public void printLP(BufferedWriter out) throws IOException {
+  public void printLP(Writer out) throws IOException {
     StringBuilder builder = new StringBuilder();
-    builder.append(
-        "Linear programme has following structure:\n"
-            + (maximize ? "Maximize " : "Minimize  ")
-            + "the objective function f(");
+    builder
+        .append("Linear programme has following structure:\n")
+        .append(maximize ? "Maximize " : "Minimize  ")
+        .append("the objective function f(");
     for (Map.Entry<Integer, String> var : variables.entrySet()) {
-      builder.append(var.getValue() + ',');
+      builder.append(var.getValue()).append(',');
     }
     builder.deleteCharAt(builder.length() - 1);
     builder.append(") = ");
@@ -115,9 +75,9 @@ public class LPStandardForm {
     builder.append("\nSubject to\n");
     out.write(builder.toString());
     builder.setLength(0);
-    for (int i = 0; i < A.size(); i++) {
-      appendExpression(builder, A.get(i));
-      builder.append(" <= " + b.get(i).toPlainString() + '\n');
+    for (int i = 0; i < n; i++) {
+      appendExpression(builder, A[i]);
+      builder.append(" <= ").append(b[i].toPlainString()).append('\n');
       out.write(builder.toString());
       builder.setLength(0);
     }
@@ -131,10 +91,10 @@ public class LPStandardForm {
     builder.setLength(0);
   }
 
-  private void appendExpression(StringBuilder builder, ArrayList<BigDecimal> expr) {
+  private void appendExpression(StringBuilder builder, BigDecimal[] expr) {
     int initialLength = builder.length();
-    for (int i = 0; i < expr.size(); i++) {
-      BigDecimal coefficient = expr.get(i);
+    for (int i = 0; i < expr.length; i++) {
+      BigDecimal coefficient = expr[i];
       if (coefficient.signum() == -1) {
         if (coefficient.abs().compareTo(BigDecimal.ONE) != 0) {
           builder.append(" - " + coefficient.abs().toString() + '*' + variables.get(i));
@@ -144,7 +104,7 @@ public class LPStandardForm {
 
       } else if (coefficient.signum() == 1) {
         if (coefficient.compareTo(BigDecimal.ONE) != 0) {
-          builder.append(" + " + expr.get(i).abs().toString() + '*' + variables.get(i));
+          builder.append(" + " + expr[i].abs().toString() + '*' + variables.get(i));
         } else {
           builder.append(" + " + variables.get(i));
         }
@@ -162,24 +122,20 @@ public class LPStandardForm {
 
   public LPStandardForm getDual() {
     if (A != null) {
-      int m = A.size(), n = A.get(0).size();
-      ArrayList<ArrayList<BigDecimal>> B = new ArrayList<>(n);
+      BigDecimal[][] B = new BigDecimal[n][m];
       for (int i = 0; i < n; i++) {
-        B.add(new ArrayList<>(m));
-      }
-      for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-          B.get(j).add(new BigDecimal(A.get(i).get(j).toString()));
+        for (int j = 0; j < m; j++) {
+          B[i][j] = A[j][i];
         }
       }
-      HashMap<Integer, String> variables = new HashMap<>(m);
+      HashMap<Integer, String> variables = new HashMap<>(n);
       HashMap<String, Integer> coefficients = new HashMap<>(m);
       String x = "x";
-      for (int i = 1; i <= m; i++) {
+      for (int i = 1; i <= n; i++) {
         variables.put(i - 1, x + i);
         coefficients.put(x + i, i - 1);
       }
-      return new LPStandardForm(B, c, b, coefficients, variables, m, n, !maximize);
+      return new LPStandardForm(B, c, b, variables, coefficients, m, n, !maximize);
     } else {
       return null;
     }
