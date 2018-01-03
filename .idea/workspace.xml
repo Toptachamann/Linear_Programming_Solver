@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b402064c-40a7-41d6-a536-84ee71562cb6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/LPSolver.iml" afterPath="$PROJECT_DIR$/LPSolver.iml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java" afterPath="$PROJECT_DIR$/src/main/java/lpsolver/LPInputReader.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lpsolver/LPSolver.java" afterPath="$PROJECT_DIR$/src/main/java/lpsolver/LPSolver.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lpsolver/LPStandardForm.java" afterPath="$PROJECT_DIR$/src/main/java/lpsolver/LPStandardForm.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lpsolver/LPInputReaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/lpsolver/LPInputReaderTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lpsolver/LPStandardFormTest.java" afterPath="$PROJECT_DIR$/src/test/java/lpsolver/LPStandardFormTest.java" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" afterPath="" />
       <change beforePath="$PROJECT_DIR$/target/classes/lpsolver/LPException.class" afterPath="" />
       <change beforePath="$PROJECT_DIR$/target/classes/lpsolver/LPInputReader.class" afterPath="" />
@@ -62,10 +54,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
+            <state relative-caret-position="25">
               <caret line="30" column="24" lean-forward="true" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
               <folding />
             </state>
@@ -91,8 +83,8 @@
       <file leaf-file-name="LPState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/lpsolver/LPState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="584">
-              <caret line="176" column="9" lean-forward="false" selection-start-line="176" selection-start-column="9" selection-end-line="176" selection-end-column="9" />
+            <state relative-caret-position="384">
+              <caret line="129" column="42" lean-forward="true" selection-start-line="129" selection-start-column="42" selection-end-line="129" selection-end-column="42" />
               <folding>
                 <element signature="method#convertIntoLPState#0;class#LPState#0" expanded="false" />
                 <element signature="e#2974#3004#0" expanded="true" />
@@ -107,13 +99,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="LPStateTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/lpsolver/LPStateTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="4" column="19" lean-forward="true" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -179,7 +181,6 @@
         <option value="$PROJECT_DIR$/src/main/java/lpsolver/LPInputReaderTest.java" />
         <option value="/Dummy.txt" />
         <option value="$PROJECT_DIR$/src/test/java/lpsolver/LPStandardFormTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/lpsolver/LPSolverTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/lpsolver/LPSolverSpec.groovy" />
         <option value="$PROJECT_DIR$/src/test/groovy/LPSolverSpec.groovy" />
         <option value="$PROJECT_DIR$/src/test/groovy/lpsolver/LPSolverSpec.groovy" />
@@ -191,6 +192,8 @@
         <option value="$PROJECT_DIR$/src/main/java/lpsolver/LPState.java" />
         <option value="$PROJECT_DIR$/src/main/java/lpsolver/LPSolver.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/test/java/lpsolver/LPSolverTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/lpsolver/LPStateTest.java" />
       </list>
     </option>
   </component>
@@ -231,7 +234,7 @@
   <component name="MavenRunner">
     <option name="skipTests" value="true" />
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="1" fullScreen="true">
     <option name="width" value="1366" />
     <option name="height" value="768" />
   </component>
@@ -479,7 +482,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="Spock" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/lpsolver" />
   </component>
   <component name="RecentsManager">
@@ -491,8 +494,8 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
-      <recent name="spock.lang.Specification" />
       <recent name="" />
+      <recent name="spock.lang.Specification" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Java_Projects\LPSolver\src" />
@@ -912,7 +915,7 @@
       <workItem from="1514895989888" duration="354000" />
       <workItem from="1514907029541" duration="222000" />
       <workItem from="1514911622677" duration="5325000" />
-      <workItem from="1514968647411" duration="15376000" />
+      <workItem from="1514968647411" duration="15533000" />
     </task>
     <task id="LOCAL-00001" summary="Parallel matrix recomputing">
       <created>1514405455861</created>
@@ -949,7 +952,14 @@
       <option name="project" value="LOCAL" />
       <updated>1514574399765</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Substantial code optimization">
+      <created>1514997589102</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1514997589102</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -985,7 +995,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78103000" />
+    <option name="totallyTimeSpent" value="78260000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -997,7 +1007,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1084,7 +1094,8 @@
     <MESSAGE value="Added Maven project &amp; basic tests" />
     <MESSAGE value="Full lp input reader test &amp; minor code improvements" />
     <MESSAGE value="Tests for conversion into dual form" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for conversion into dual form" />
+    <MESSAGE value="Substantial code optimization" />
+    <option name="LAST_COMMIT_MESSAGE" value="Substantial code optimization" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1111,7 +1122,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/input.txt" />
     <entry file="file://$PROJECT_DIR$/output.txt" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/io/BufferedReader.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/io/File.java" />
@@ -1341,14 +1351,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/lpsolver/LPSolverTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/lpsolver/LPInputReaderTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5625">
@@ -1393,23 +1395,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lpsolver/LPState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="584">
-          <caret line="176" column="9" lean-forward="false" selection-start-line="176" selection-start-column="9" selection-end-line="176" selection-end-column="9" />
-          <folding>
-            <element signature="method#convertIntoLPState#0;class#LPState#0" expanded="false" />
-            <element signature="e#2974#3004#0" expanded="true" />
-            <element signature="e#5148#5179#0" expanded="true" />
-            <element signature="e#9392#9393#0" expanded="true" />
-            <element signature="e#9410#9411#0" expanded="true" />
-            <element signature="e#9433#9434#0" expanded="true" />
-            <element signature="e#9451#9452#0" expanded="true" />
-            <element signature="method#toString#0;class#LPState#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lpsolver/LPSolver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1094">
@@ -1423,8 +1408,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
+        <state relative-caret-position="25">
           <caret line="30" column="24" lean-forward="true" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/lpsolver/LPSolverTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lpsolver/LPState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="129" column="42" lean-forward="true" selection-start-line="129" selection-start-column="42" selection-end-line="129" selection-end-column="42" />
+          <folding>
+            <element signature="method#convertIntoLPState#0;class#LPState#0" expanded="false" />
+            <element signature="e#2974#3004#0" expanded="true" />
+            <element signature="e#5148#5179#0" expanded="true" />
+            <element signature="e#9392#9393#0" expanded="true" />
+            <element signature="e#9410#9411#0" expanded="true" />
+            <element signature="e#9433#9434#0" expanded="true" />
+            <element signature="e#9451#9452#0" expanded="true" />
+            <element signature="method#toString#0;class#LPState#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/lpsolver/LPStateTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="19" lean-forward="true" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
           <folding />
         </state>
       </provider>

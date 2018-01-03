@@ -1,1 +1,3 @@
 lpsolver\LPInputReaderTest.class
+lpsolver\LPStandardFormTest.class
+lpsolver\LPSolverTest.class
