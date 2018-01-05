@@ -16,12 +16,16 @@ class LPSolverSpec extends Specification {
         a * x == result
 
         where:
-        x   ||   result
-        1   ||   5
-        2   ||   10
-        3   ||   14
-        4   ||   20
-        5   ||   25
+        x   |   result
+        1   |   5
+        2   |   10
+        3   |   14
+        4   |   20
+        5   |   25
+    }
+
+    def "test coefficients exchange"(){
+
     }
 
 }

@@ -41,13 +41,13 @@ class LPStandardFormTest {
     HashMap<Integer, String> variables = new HashMap<>(Map.of(0, "x1", 1, "x2", 2, "x3"));
     assertAll(
         "Testing dual",
-        () -> assertEquals(A, dual.getA()),
-        () -> assertEquals(b, dual.getb()),
-        () -> assertEquals(c, dual.getc()),
-        () -> assertEquals(variables, dual.getVariables()),
-        () -> assertEquals(coefficients, dual.getCoefficients()),
-        () -> assertEquals(3, dual.getN()),
-        () -> assertEquals(3, dual.getM()),
-        () -> assertTrue(dual.getMaximize()));
+        () -> assertEquals(A, dual.A),
+        () -> assertEquals(b, dual.b),
+        () -> assertEquals(c, dual.c),
+        () -> assertEquals(variables, dual.variables),
+        () -> assertEquals(coefficients, dual.coefficients),
+        () -> assertEquals(3, dual.n),
+        () -> assertEquals(3, dual.m),
+        () -> assertTrue(dual.maximize));
   }
 }

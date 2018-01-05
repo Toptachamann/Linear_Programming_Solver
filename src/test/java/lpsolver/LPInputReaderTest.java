@@ -190,19 +190,19 @@ class LPInputReaderTest {
     HashMap<Integer, String> variables = new HashMap<>(Map.of(0, "x1", 1, "x2"));
     assertAll(
         "Validating simple LP",
-        () -> assertEquals(A, stForm.getA(), "A should be [1,1]"),
-        () -> assertEquals(b, stForm.getB(), "b should be [0]"),
-        () -> assertEquals(c, stForm.getC(), "c should be [1, 1]"),
+        () -> assertEquals(A, stForm.A, "A should be [1,1]"),
+        () -> assertEquals(b, stForm.b, "b should be [0]"),
+        () -> assertEquals(c, stForm.c, "c should be [1, 1]"),
         () ->
             assertEquals(
                 coefficients,
-                stForm.getCoefficients(),
+                stForm.coefficients,
                 "coefficients should be ['x1'->0, 'x2'->1]"),
         () ->
-            assertEquals(variables, stForm.getVariables(), "variables should be [0->'x1', 1->'x2'"),
-        () -> assertEquals(2, stForm.getM(), "Num of vars should be 2"),
-        () -> assertEquals(1, stForm.getN(), "Num of ineq should be 1"),
-        () -> assertTrue(stForm.getMaximize(), "Maximized should be true"));
+            assertEquals(variables, stForm.variables, "variables should be [0->'x1', 1->'x2'"),
+        () -> assertEquals(2, stForm.m, "Num of vars should be 2"),
+        () -> assertEquals(1, stForm.n, "Num of ineq should be 1"),
+        () -> assertTrue(stForm.maximize, "Maximized should be true"));
   }
 
   @Test
@@ -243,13 +243,13 @@ class LPInputReaderTest {
     LPStandardForm stForm = reader.readLP(lp);
     assertAll(
         "Complicated LP",
-        () -> assertEquals(A, stForm.getA()),
-        () -> assertEquals(b, stForm.getB()),
-        () -> assertEquals(c, stForm.getC()),
-        () -> assertEquals(variables, stForm.getVariables()),
-        () -> assertEquals(coefficients, stForm.getCoefficients()),
-        () -> assertEquals(2, stForm.getM()),
-        () -> assertEquals(5, stForm.getN()),
-        () -> assertFalse(stForm.getMaximize()));
+        () -> assertEquals(A, stForm.A),
+        () -> assertEquals(b, stForm.b),
+        () -> assertEquals(c, stForm.c),
+        () -> assertEquals(variables, stForm.variables),
+        () -> assertEquals(coefficients, stForm.coefficients),
+        () -> assertEquals(2, stForm.m),
+        () -> assertEquals(5, stForm.n),
+        () -> assertFalse(stForm.maximize));
   }
 }
