@@ -1,19 +1,19 @@
 package lpsolver;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Set;
+import java.util.Collections;
+import java.util.HashMap;
 
 public class LPSolver {
 
-  public static final Logger logger = LogManager.getLogger(LPSolver.class);
+  private static final Logger logger = LogManager.getLogger(LPSolver.class);
 
   private MathContext printRounder;
   private MathContext rounder;
@@ -56,17 +56,17 @@ public class LPSolver {
         // log printStatement("This linear program is unbounded\n\n");
         throw new LPException("This linear program is unbounded");
       }
-        lpState.pivot(entering, leaving);
-        // log printProgress(entering, leaving);
-      }
-      // log
-      /*if (iterationInterval > 0 && iterationCount % iterationInterval == 0) {
-        System.out.println(
-            "Current objective function value is "
-                + this.v.toPlainString()
-                + ", number of iterations "
-                + iterationCount);
-      }*/
+      lpState.pivot(entering, leaving);
+      // log printProgress(entering, leaving);
+    }
+    // log
+    /*if (iterationInterval > 0 && iterationCount % iterationInterval == 0) {
+      System.out.println(
+          "Current objective function value is "
+              + this.v.toPlainString()
+              + ", number of iterations "
+              + iterationCount);
+    }*/
     // log printSolution();
     /*System.out.println(
     "This linear program has optimal objective function value: "
@@ -83,10 +83,10 @@ public class LPSolver {
     int minInB = minInB(standardForm.b);
     if (minInB == -1 || standardForm.b[minInB].compareTo(BigDecimal.ZERO) >= 0) {
       logger.info("Basic solution is feasible");
-      return LPState.convertIntoSlackForm(standardForm);
+      return convertIntoSlackForm(standardForm);
     } else {
       logger.info("Basic solution is infeasible");
-      Pair<LPState, String> result = LPState.convertIntoAuxLP(standardForm);
+      Pair<LPState, String> result = convertIntoAuxLP(standardForm);
       LPState auxLP = result.getKey();
       String x0Identifier = result.getValue();
       int indexOfx0 = auxLP.getN() - 1;
@@ -161,7 +161,7 @@ public class LPSolver {
       BigDecimal initialCoefficient = initialC[i];
       int currentIndex = auxLP.coefficients.get(varToPutInC);
       if (currentIndex >= auxLP.n) {
-        //basis variable, need to substitute
+        // basis variable, need to substitute
         v = v.add(auxLP.b[currentIndex - auxLP.n].multiply(initialCoefficient, rounder), rounder);
         BigDecimal[] row = auxLP.A[currentIndex - auxLP.n];
         for (int j = 0; j < auxLP.n; j++) {
@@ -169,11 +169,82 @@ public class LPSolver {
           c[j] = c[j].add(varCoefficient.multiply(initialCoefficient, rounder), rounder);
         }
       } else {
-        //non-basis variable
+        // non-basis variable
         c[currentIndex] = c[currentIndex].add(initialCoefficient, rounder);
       }
     }
-    return new LPState(auxLP.A, auxLP.b, c, v, initial.variables, initial.coefficients, initial.m, initial.n);
+    return new LPState(
+        auxLP.A, auxLP.b, c, v, initial.variables, initial.coefficients, initial.m, initial.n);
+  }
+
+  public LPState convertIntoSlackForm(LPStandardForm standardForm) {
+    HashMap<String, Integer> coefficients = standardForm.coefficients;
+    HashMap<Integer, String> variables = standardForm.variables;
+    int m = standardForm.m;
+    int n = standardForm.n;
+    int addedVariables = 0;
+    int variableIndexCounter = 1;
+    while (addedVariables < m) {
+      String varName = "x" + String.valueOf(variableIndexCounter);
+      if (!coefficients.containsKey(varName)) {
+        variables.put(n + addedVariables, varName);
+        coefficients.put(varName, n + addedVariables);
+
+        ++addedVariables;
+      }
+      ++variableIndexCounter;
+    }
+    return new LPState(
+        standardForm.A,
+        standardForm.b,
+        standardForm.c,
+        BigDecimal.ZERO,
+        variables,
+        coefficients,
+        m,
+        n);
+  }
+
+  @SuppressWarnings("unchecked")
+  public Pair<LPState, String> convertIntoAuxLP(LPStandardForm standardForm) {
+    BigDecimal[][] A = standardForm.A;
+    int m = standardForm.m;
+    int n = standardForm.n;
+    BigDecimal[][] auxA = new BigDecimal[m][n + 1];
+    BigDecimal x0Coeff = BigDecimal.ONE.negate();
+
+    for (int i = 0; i < m; i++) {
+      System.arraycopy(A[i], 0, auxA[i], 0, n);
+      auxA[i][n] = x0Coeff;
+    }
+    standardForm.A = auxA;
+
+    BigDecimal[] auxC = (BigDecimal[]) Collections.nCopies(n + 1, BigDecimal.ZERO).toArray();
+    auxC[n] = x0Coeff;
+    standardForm.c = auxC;
+
+    String x0Identifier = getNameForX0(standardForm.coefficients);
+    standardForm.variables.put(n, x0Identifier);
+    standardForm.coefficients.put(x0Identifier, n);
+
+    return new ImmutablePair<>(convertIntoSlackForm(standardForm), x0Identifier);
+  }
+
+  private String getNameForX0(HashMap<String, Integer> coefficients) {
+    if (!coefficients.containsKey("x0")) {
+      return "x0";
+    } else {
+      String var = "auxVar";
+      if (!coefficients.containsKey(var)) {
+        return var;
+      } else {
+        int i = 1;
+        while (coefficients.containsKey(var + i)) {
+          ++i;
+        }
+        return var + i;
+      }
+    }
   }
 
   /*private void printSolution() throws IOException {

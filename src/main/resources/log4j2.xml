@@ -4,6 +4,7 @@
         <Console name="STDOUT">
             <PatternLayout pattern="%level - %m%n"/>
         </Console>
+
     </Appenders>
     <Loggers>
         <Root level="trace">
