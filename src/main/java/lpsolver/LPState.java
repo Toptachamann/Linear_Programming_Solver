@@ -102,7 +102,7 @@ public class LPState {
   }
 
   public void pivot(int entering, int leaving) throws SolutionException {
-    if (A.length > PARALLEL_THRESHOLD) {
+    if (A.length >= PARALLEL_THRESHOLD) {
       try {
         pivotConcurrently(entering, leaving);
       } catch (InterruptedException e) {
