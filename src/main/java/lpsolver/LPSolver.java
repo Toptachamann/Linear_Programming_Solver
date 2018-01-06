@@ -198,7 +198,6 @@ public class LPSolver {
         standardForm.A,
         standardForm.b,
         standardForm.c,
-        BigDecimal.ZERO,
         variables,
         coefficients,
         m,

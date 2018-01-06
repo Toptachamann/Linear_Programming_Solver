@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class LPState {
   public static final MathContext DEF_ROUNDER = new MathContext(12, RoundingMode.HALF_UP);
@@ -35,8 +34,6 @@ public class LPState {
   private BigDecimal INF;
   private ExecutorService pool;
 
-  private ThreadPoolExecutor executor;
-
   LPState(
       BigDecimal[][] A,
       BigDecimal[] b,
@@ -50,18 +47,33 @@ public class LPState {
       MathContext rounder,
       BigDecimal epsilon,
       BigDecimal INF) {
+    this(A, b, c, variables, coefficients, m, n);
+    this.printRounder = printRounder;
+    this.rounder = rounder;
+    this.epsilon = epsilon;
+    this.INF = INF;
+  }
+
+  LPState(
+      BigDecimal[][] A,
+      BigDecimal[] b,
+      BigDecimal[] c,
+      HashMap<Integer, String> variables,
+      HashMap<String, Integer> coefficients,
+      int m,
+      int n) {
     this.A = A;
     this.b = b;
     this.c = c;
     this.variables = variables;
     this.coefficients = coefficients;
-    this.v = v;
+    this.v = BigDecimal.ZERO;
     this.m = m;
     this.n = n;
-    this.printRounder = printRounder;
-    this.rounder = rounder;
-    this.epsilon = epsilon;
-    this.INF = INF;
+    this.printRounder = DEF_PRINT_ROUNDER;
+    this.rounder = DEF_ROUNDER;
+    this.epsilon = DEF_EPSILON;
+    this.INF = DEF_INF;
   }
 
   LPState(
@@ -73,18 +85,8 @@ public class LPState {
       HashMap<String, Integer> coefficients,
       int m,
       int n) {
-    this.A = A;
-    this.b = b;
-    this.c = c;
-    this.variables = variables;
-    this.coefficients = coefficients;
+    this(A, b, c, variables, coefficients, m, n);
     this.v = v;
-    this.m = m;
-    this.n = n;
-    this.printRounder = DEF_PRINT_ROUNDER;
-    this.rounder = DEF_ROUNDER;
-    this.epsilon = DEF_EPSILON;
-    this.INF = DEF_INF;
   }
 
   public static LPState convertIntoLPState(LPStandardForm standardForm) {
@@ -251,7 +253,7 @@ public class LPState {
 
   public int getEntering() {
     int positiveInC = -1;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < m; i++) {
       if (c[i].compareTo(epsilon) > 0) {
         positiveInC = i;
         break;
