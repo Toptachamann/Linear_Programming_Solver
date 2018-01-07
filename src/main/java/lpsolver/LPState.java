@@ -102,7 +102,7 @@ public class LPState {
   }
 
   public void pivot(int entering, int leaving) throws SolutionException {
-    if (A.length >= PARALLEL_THRESHOLD) {
+    if (m >= PARALLEL_THRESHOLD) {
       try {
         pivotConcurrently(entering, leaving);
       } catch (InterruptedException e) {
@@ -116,7 +116,7 @@ public class LPState {
   }
 
   @SuppressWarnings("Duplicates")
-  private void pivotSequentially(int entering, int leaving) {
+  void pivotSequentially(int entering, int leaving) {
     // recalculate leaving row
     BigDecimal[] pivotRow = A[leaving];
     BigDecimal pivEntCoef = pivotRow[entering];
@@ -162,7 +162,7 @@ public class LPState {
   }
 
   @SuppressWarnings("Duplicates")
-  private void pivotConcurrently(int entering, int leaving) throws InterruptedException {
+  void pivotConcurrently(int entering, int leaving) throws InterruptedException {
     if (pool == null) {
       pool = Executors.newFixedThreadPool(THREAD_AMOUNT);
     }
