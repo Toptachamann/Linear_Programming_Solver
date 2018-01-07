@@ -145,9 +145,7 @@ public class LPSolver {
     // log printProgress(entering, indexOfx0 - n);
     return entering;
   }
-
-  // need to refactor
-
+  
   private LPState restoreInitialLP(
       LPState auxLP, LPStandardForm initial, int indexOfx0, String x0Identifier) {
     BigDecimal[] c = new BigDecimal[initial.n];
@@ -217,8 +215,8 @@ public class LPSolver {
       auxA[i][n] = x0Coeff;
     }
     standardForm.A = auxA;
-
-    BigDecimal[] auxC = (BigDecimal[]) Collections.nCopies(n + 1, BigDecimal.ZERO).toArray();
+    BigDecimal[] auxC = new BigDecimal[n + 1];
+    Arrays.fill(auxC, BigDecimal.ZERO);
     auxC[n] = x0Coeff;
     standardForm.c = auxC;
 
@@ -226,6 +224,7 @@ public class LPSolver {
     standardForm.variables.put(n, x0Identifier);
     standardForm.coefficients.put(x0Identifier, n);
 
+    standardForm.n += 1;
     return new ImmutablePair<>(convertIntoSlackForm(standardForm), x0Identifier);
   }
 
