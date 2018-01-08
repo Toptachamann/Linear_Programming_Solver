@@ -1,6 +1,5 @@
 package lpsolver
 
-import spock.lang.IgnoreRest
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -17,7 +16,7 @@ class LPStateSpec extends Specification {
     BigDecimal v = 0
     HashMap<Integer, String> variables = new HashMap<>()
     HashMap<String, Integer> coefficients = new HashMap<>()
-    def state = new LPState(A, b, c as BigDecimal[], v, variables, coefficients, c.size(), 0)
+    def state = new LPState(A, b, c as BigDecimal[], v, variables, coefficients, 0, c.size())
     expect:
     state.getEntering() == entering
     where:
@@ -138,7 +137,7 @@ class LPStateSpec extends Specification {
   }
 
   @Unroll
-  def "test parallel pivot 2"() {
+  def "test concurrent pivot 2"() {
     given:
     BigDecimal[][] A = [[2, 4], [7, 2], [5, 4], [1, 3], [4, 1], [6, 2], [1, 7]]
     BigDecimal[] b = [3, 6, 5, 10, 2, 1, 4]
@@ -161,8 +160,8 @@ class LPStateSpec extends Specification {
     state.v == resV
     state.variables == resVariables
     state.coefficients == resCoefficients
-    /*cleanup:
-    thresholdField.setInt(null, 30)*/
+    cleanup:
+    thresholdField.setInt(null, 30)
     where:
     entering | leaving || resB                              || resC     || resV
     0        | 3       || [-17, -64, -45, 10, -38, -59, -6] || [-4, -9] || 40
