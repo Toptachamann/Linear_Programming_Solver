@@ -24,14 +24,9 @@ public class LPStandardForm {
       int m,
       int n,
       boolean maximize) {
-    this.A = A;
-    this.b = b;
-    this.c = c;
+    this(A, b, c, m, n, maximize);
     this.coefficients = coefficients;
     this.variables = variables;
-    this.m = m;
-    this.n = n;
-    this.maximize = maximize;
   }
 
   @SuppressWarnings("unchecked")
@@ -45,14 +40,25 @@ public class LPStandardForm {
       int n,
       boolean maximize) {
     this.A = new BigDecimal[m][n];
-    ArrayList<BigDecimal>[] arr = (ArrayList<BigDecimal>[]) A.toArray();
     for (int i = 0; i < m; i++) {
-      this.A[i] = (BigDecimal[]) arr[i].toArray();
+      for (int j = 0; j < n; j++) {
+        this.A[i][j] = A.get(i).get(j);
+      }
     }
-    this.b = (BigDecimal[]) b.toArray();
-    this.c = (BigDecimal[]) c.toArray();
+    this.b = b.toArray(new BigDecimal[b.size()]);
+    this.c = c.toArray(new BigDecimal[c.size()]);
     this.coefficients = coefficients;
     this.variables = variables;
+    this.m = m;
+    this.n = n;
+    this.maximize = maximize;
+  }
+
+  public LPStandardForm(
+      BigDecimal[][] A, BigDecimal[] b, BigDecimal[] c, int m, int n, boolean maximize) {
+    this.A = A;
+    this.b = b;
+    this.c = c;
     this.m = m;
     this.n = n;
     this.maximize = maximize;
@@ -128,16 +134,24 @@ public class LPStandardForm {
           B[i][j] = A[j][i];
         }
       }
-      HashMap<Integer, String> variables = new HashMap<>(n);
-      HashMap<String, Integer> coefficients = new HashMap<>(m);
-      String x = "x";
-      for (int i = 1; i <= n; i++) {
-        variables.put(i - 1, x + i);
-        coefficients.put(x + i, i - 1);
+      if (hasVariableNames()) {
+        HashMap<Integer, String> variables = new HashMap<>(n);
+        HashMap<String, Integer> coefficients = new HashMap<>(m);
+        String x = "x";
+        for (int i = 1; i <= n; i++) {
+          variables.put(i - 1, x + i);
+          coefficients.put(x + i, i - 1);
+        }
+        return new LPStandardForm(B, c, b, variables, coefficients, n, m, !maximize);
+      } else {
+        return new LPStandardForm(B, c, b, n, m, !maximize);
       }
-      return new LPStandardForm(B, c, b, variables, coefficients, m, n, !maximize);
     } else {
       return null;
     }
+  }
+
+  public boolean hasVariableNames() {
+    return variables != null && coefficients != null;
   }
 }

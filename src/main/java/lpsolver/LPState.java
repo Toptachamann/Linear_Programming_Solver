@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class LPState {
-  public static final MathContext DEF_ROUNDER = new MathContext(12, RoundingMode.HALF_UP);
+  public static final MathContext DEF_ROUNDER = new MathContext(15, RoundingMode.HALF_UP);
   public static final MathContext DEF_PRINT_ROUNDER = new MathContext(4, RoundingMode.HALF_UP);
   public static final BigDecimal DEF_EPSILON = new BigDecimal(BigInteger.ONE, 9);
   public static final BigDecimal DEF_INF = new BigDecimal(BigInteger.ONE, -50);
@@ -48,6 +48,7 @@ public class LPState {
       BigDecimal epsilon,
       BigDecimal INF) {
     this(A, b, c, variables, coefficients, m, n);
+    this.v = v;
     this.printRounder = printRounder;
     this.rounder = rounder;
     this.epsilon = epsilon;
@@ -62,16 +63,37 @@ public class LPState {
       HashMap<String, Integer> coefficients,
       int m,
       int n) {
+    this(A, b, c, m, n);
+    this.variables = variables;
+    this.coefficients = coefficients;
+  }
+
+  LPState(
+      BigDecimal[][] A,
+      BigDecimal[] b,
+      BigDecimal[] c,
+      int m,
+      int n,
+      MathContext rounder,
+      MathContext printRounder,
+      BigDecimal epsilon,
+      BigDecimal INF) {
+    this(A, b, c, m, n);
+    this.rounder = rounder;
+    this.printRounder = printRounder;
+    this.epsilon = epsilon;
+    this.INF = INF;
+  }
+
+  LPState(BigDecimal[][] A, BigDecimal[] b, BigDecimal[] c, int m, int n) {
     this.A = A;
     this.b = b;
     this.c = c;
-    this.variables = variables;
-    this.coefficients = coefficients;
     this.v = BigDecimal.ZERO;
     this.m = m;
     this.n = n;
-    this.printRounder = DEF_PRINT_ROUNDER;
     this.rounder = DEF_ROUNDER;
+    this.printRounder = DEF_PRINT_ROUNDER;
     this.epsilon = DEF_EPSILON;
     this.INF = DEF_INF;
   }
@@ -243,17 +265,9 @@ public class LPState {
     latch3.await();
   }
 
-  private void exchangeIndexes(int entering, int leaving) {
-    String enteringVarName = variables.get(entering), leavingVarName = variables.get(leaving + n);
-    variables.put(entering, leavingVarName);
-    variables.put(leaving + n, enteringVarName);
-    coefficients.put(enteringVarName, leaving + n);
-    coefficients.put(leavingVarName, entering);
-  }
-
   public int getEntering() {
     int positiveInC = -1;
-    for (int i = 0; i < m; i++) {
+    for (int i = 0; i < n; i++) {
       if (c[i].compareTo(epsilon) > 0) {
         positiveInC = i;
         break;
@@ -282,12 +296,18 @@ public class LPState {
     return leaving;
   }
 
-  public int getM() {
-    return m;
+  public boolean hasVariablesNames() {
+    return variables != null && coefficients != null;
   }
 
-  public int getN() {
-    return n;
+  private void exchangeIndexes(int entering, int leaving) {
+    if (hasVariablesNames()) {
+      String enteringVarName = variables.get(entering), leavingVarName = variables.get(leaving + n);
+      variables.put(entering, leavingVarName);
+      variables.put(leaving + n, enteringVarName);
+      coefficients.put(enteringVarName, leaving + n);
+      coefficients.put(leavingVarName, entering);
+    }
   }
 
   public String toString() {

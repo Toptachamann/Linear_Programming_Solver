@@ -1,15 +1,13 @@
 package lpsolver;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 
 public class LPSolver {
 
@@ -20,21 +18,32 @@ public class LPSolver {
   private BigDecimal epsilon;
   private BigDecimal inf;
 
-  public LPSolver() {}
+  public LPSolver() {
+    printRounder = LPState.DEF_PRINT_ROUNDER;
+    rounder = LPState.DEF_ROUNDER;
+    epsilon = LPState.DEF_EPSILON;
+    inf = LPState.DEF_INF;
+  }
 
   public LPSolver(MathContext printRounder) {
     this.printRounder = printRounder;
+    rounder = LPState.DEF_ROUNDER;
+    epsilon = LPState.DEF_EPSILON;
+    inf = LPState.DEF_INF;
   }
 
   public LPSolver(MathContext printRounder, MathContext rounder) {
     this.printRounder = printRounder;
     this.rounder = rounder;
+    epsilon = LPState.DEF_EPSILON;
+    inf = LPState.DEF_INF;
   }
 
   public LPSolver(MathContext printRounder, MathContext rounder, BigDecimal epsilon) {
     this.printRounder = printRounder;
     this.rounder = rounder;
     this.epsilon = epsilon;
+    inf = LPState.DEF_INF;
   }
 
   public LPSolver(
@@ -45,12 +54,23 @@ public class LPSolver {
     this.inf = inf;
   }
 
-  public BigDecimal simplex(LPStandardForm stForm) throws SolutionException {
+  public BigDecimal solve(LPStandardForm stForm) throws SolutionException {
+    if (stForm.maximize) {
+      return simplex(stForm).round(printRounder);
+    } else {
+      BigDecimal[] c = stForm.c;
+      for (int i = 0; i < c.length; i++) {
+        c[i] = c[i].negate();
+      }
+      return simplex(stForm).negate().round(printRounder);
+    }
+  }
+
+  private BigDecimal simplex(LPStandardForm stForm) throws SolutionException {
     LPState lpState = initializeSimplex(stForm);
     // log printState();
-    int entering, leaving, iterationCount = 0;
+    int entering, leaving;
     while ((entering = lpState.getEntering()) != -1) {
-      ++iterationCount;
       leaving = lpState.getLeaving(entering);
       if (leaving == -1) {
         // log printStatement("This linear program is unbounded\n\n");
@@ -86,19 +106,21 @@ public class LPSolver {
       return convertIntoSlackForm(standardForm);
     } else {
       logger.info("Basic solution is infeasible");
-      Pair<LPState, String> result = convertIntoAuxLP(standardForm);
-      LPState auxLP = result.getKey();
-      String x0Identifier = result.getValue();
-      int indexOfx0 = auxLP.getN() - 1;
-      solveLaux(auxLP, indexOfx0, minInB);
-      return handleInitialization(auxLP, standardForm, x0Identifier);
+      if (!standardForm.hasVariableNames()) {
+        fillWithVariables(standardForm);
+      }
+      LPState auxLP = convertIntoAuxLP(standardForm);
+      int indexOfx0 = auxLP.n - 1;
+      int x0CurrentIndex = solveAuxLP(auxLP, indexOfx0, minInB);
+      return handleInitialization(auxLP, standardForm, x0CurrentIndex);
     }
   }
 
-  private void solveLaux(LPState auxLP, int indexOfx0, int minInB) throws SolutionException {
-    // initial pivot
+  private int solveAuxLP(LPState auxLP, int indexOfx0, int minInB) throws SolutionException {
+    int n = auxLP.n;
     auxLP.pivot(indexOfx0, minInB);
-    for (int i = 0; ; i++) {
+    int x0CurrentIndex = minInB + n;
+    for (; ; ) {
       int entering = auxLP.getEntering();
       if (entering == -1) {
         break;
@@ -107,15 +129,18 @@ public class LPSolver {
       if (leaving == -1) {
         throw logger.throwing(new SolutionException("Auxiliary lp is unbounded"));
       }
+      if (entering == x0CurrentIndex) {
+        x0CurrentIndex = leaving + n;
+      } else if (leaving + n == x0CurrentIndex) {
+        x0CurrentIndex = entering;
+      }
       auxLP.pivot(entering, leaving);
-      // log printProgress(entering, leaving);
     }
+    return x0CurrentIndex;
   }
 
-  private LPState handleInitialization(LPState auxLP, LPStandardForm initial, String x0Identifier)
+  private LPState handleInitialization(LPState auxLP, LPStandardForm initial, int currentIndexOfX0)
       throws SolutionException {
-    BigDecimal[] initialC = initial.c;
-    int currentIndexOfX0 = auxLP.coefficients.get(x0Identifier);
 
     BigDecimal x0Value =
         (currentIndexOfX0 < auxLP.n) ? BigDecimal.ZERO : auxLP.b[currentIndexOfX0 - auxLP.n];
@@ -126,7 +151,7 @@ public class LPSolver {
       logger.info("Performing degenerate pivot");
       currentIndexOfX0 = performDegeneratePivot(auxLP, currentIndexOfX0);
     }
-    return restoreInitialLP(auxLP, initial, currentIndexOfX0, x0Identifier);
+    return restoreInitialLP(auxLP, initial, currentIndexOfX0);
   }
 
   private int performDegeneratePivot(LPState auxLP, int indexOfx0) throws SolutionException {
@@ -145,24 +170,32 @@ public class LPSolver {
     // log printProgress(entering, indexOfx0 - n);
     return entering;
   }
-  
-  private LPState restoreInitialLP(
-      LPState auxLP, LPStandardForm initial, int indexOfx0, String x0Identifier) {
-    BigDecimal[] c = new BigDecimal[initial.n];
-    Arrays.fill(c, BigDecimal.ZERO);
-    String[] initialVariables = (String[]) initial.coefficients.keySet().toArray();
-    BigDecimal[] initialC = initial.c;
-    BigDecimal v = BigDecimal.ZERO;
 
-    for (int i = 0; i < initial.n; i++) {
-      String varToPutInC = initialVariables[i];
-      BigDecimal initialCoefficient = initialC[i];
-      int currentIndex = auxLP.coefficients.get(varToPutInC);
+  private LPState restoreInitialLP(LPState auxLP, LPStandardForm initial, int indexOfX0) {
+    int n = initial.n;
+    int m = auxLP.m;
+
+    // restoring A
+    BigDecimal[][] A = new BigDecimal[m][n];
+    BigDecimal[][] auxA = auxLP.A;
+    for (int i = 0; i < m; i++) {
+      System.arraycopy(auxA[i], 0, A[i], 0, indexOfX0);
+      System.arraycopy(auxA[i], indexOfX0 + 1, A[i], indexOfX0, n - indexOfX0);
+    }
+
+    Set<String> initialVariables = initial.coefficients.keySet();
+    BigDecimal v = BigDecimal.ZERO;
+    BigDecimal[] c = new BigDecimal[n];
+    Arrays.fill(c, BigDecimal.ZERO);
+    for (String currentVar : initialVariables) {
+      int index = initial.coefficients.get(currentVar);
+      BigDecimal initialCoefficient = initial.c[index];
+      int currentIndex = auxLP.coefficients.get(currentVar);
       if (currentIndex >= auxLP.n) {
         // basis variable, need to substitute
         v = v.add(auxLP.b[currentIndex - auxLP.n].multiply(initialCoefficient, rounder), rounder);
-        BigDecimal[] row = auxLP.A[currentIndex - auxLP.n];
-        for (int j = 0; j < auxLP.n; j++) {
+        BigDecimal[] row = A[currentIndex - auxLP.n];
+        for (int j = 0; j < n; j++) {
           BigDecimal varCoefficient = row[j].negate();
           c[j] = c[j].add(varCoefficient.multiply(initialCoefficient, rounder), rounder);
         }
@@ -171,42 +204,57 @@ public class LPSolver {
         c[currentIndex] = c[currentIndex].add(initialCoefficient, rounder);
       }
     }
-    return new LPState(
-        auxLP.A, auxLP.b, c, v, initial.variables, initial.coefficients, initial.m, initial.n);
-  }
 
-  public LPState convertIntoSlackForm(LPStandardForm standardForm) {
-    HashMap<String, Integer> coefficients = standardForm.coefficients;
-    HashMap<Integer, String> variables = standardForm.variables;
-    int m = standardForm.m;
-    int n = standardForm.n;
-    int addedVariables = 0;
-    int variableIndexCounter = 1;
-    while (addedVariables < m) {
-      String varName = "x" + String.valueOf(variableIndexCounter);
-      if (!coefficients.containsKey(varName)) {
-        variables.put(n + addedVariables, varName);
-        coefficients.put(varName, n + addedVariables);
-
-        ++addedVariables;
-      }
-      ++variableIndexCounter;
+    HashMap<Integer, String> variables = auxLP.variables;
+    HashMap<String, Integer> coefficients = auxLP.coefficients;
+    String x0 = variables.get(indexOfX0);
+    coefficients.remove(x0);
+    for (int i = indexOfX0; i < n + m; i++) {
+      String varName = variables.get(i + 1);
+      variables.put(i, varName);
+      coefficients.put(varName, i);
     }
-    return new LPState(
-        standardForm.A,
-        standardForm.b,
-        standardForm.c,
-        variables,
-        coefficients,
-        m,
-        n);
+    variables.remove(n + m);
+    return new LPState(A, auxLP.b, c, v, variables, coefficients, initial.m, initial.n);
   }
 
+  public LPState convertIntoSlackForm(LPStandardForm stForm) {
+    if (stForm.hasVariableNames()) {
+      HashMap<String, Integer> coefficients = stForm.coefficients;
+      HashMap<Integer, String> variables = stForm.variables;
+      int m = stForm.m;
+      int n = stForm.n;
+      int addedVariables = 0;
+      int variableIndexCounter = 1;
+      while (addedVariables < m) {
+        String varName = "x" + String.valueOf(variableIndexCounter);
+        if (!coefficients.containsKey(varName)) {
+          variables.put(n + addedVariables, varName);
+          coefficients.put(varName, n + addedVariables);
+
+          ++addedVariables;
+        }
+        ++variableIndexCounter;
+      }
+      return new LPState(stForm.A, stForm.b, stForm.c, variables, coefficients, m, n);
+    } else {
+      return new LPState(stForm.A, stForm.b, stForm.c, stForm.m, stForm.n);
+    }
+  }
+
+  /**
+   * Converts given linear program standard form into corespondent auxiliary linear program.
+   *
+   * @implNote Copies all fields of standard form so that {@code standardForm} and resulting {@code
+   *     LPState} are independent objects
+   * @param standardForm {@code LPStandardForm} to convert into auxiliary linear program
+   * @return resulting auxiliary linear program
+   */
   @SuppressWarnings("unchecked")
-  public Pair<LPState, String> convertIntoAuxLP(LPStandardForm standardForm) {
-    BigDecimal[][] A = standardForm.A;
+  public LPState convertIntoAuxLP(LPStandardForm standardForm) {
     int m = standardForm.m;
     int n = standardForm.n;
+    BigDecimal[][] A = standardForm.A;
     BigDecimal[][] auxA = new BigDecimal[m][n + 1];
     BigDecimal x0Coeff = BigDecimal.ONE.negate();
 
@@ -214,18 +262,32 @@ public class LPSolver {
       System.arraycopy(A[i], 0, auxA[i], 0, n);
       auxA[i][n] = x0Coeff;
     }
-    standardForm.A = auxA;
+
+    BigDecimal[] b = standardForm.b.clone();
+
     BigDecimal[] auxC = new BigDecimal[n + 1];
     Arrays.fill(auxC, BigDecimal.ZERO);
     auxC[n] = x0Coeff;
-    standardForm.c = auxC;
+
+    HashMap<Integer, String> variables = (HashMap<Integer, String>) standardForm.variables.clone();
+    HashMap<String, Integer> coefficients =
+        (HashMap<String, Integer>) standardForm.coefficients.clone();
 
     String x0Identifier = getNameForX0(standardForm.coefficients);
-    standardForm.variables.put(n, x0Identifier);
-    standardForm.coefficients.put(x0Identifier, n);
+    variables.put(n, x0Identifier);
+    coefficients.put(x0Identifier, n);
 
-    standardForm.n += 1;
-    return new ImmutablePair<>(convertIntoSlackForm(standardForm), x0Identifier);
+    LPStandardForm auxStForm =
+        new LPStandardForm(
+            auxA,
+            b,
+            auxC,
+            variables,
+            coefficients,
+            standardForm.m,
+            standardForm.n + 1,
+            standardForm.maximize);
+    return convertIntoSlackForm(auxStForm);
   }
 
   private String getNameForX0(HashMap<String, Integer> coefficients) {
@@ -276,7 +338,6 @@ public class LPSolver {
     }
     printStatement("\n\n");
   }*/
-
   private int minInB(BigDecimal[] b) {
     BigDecimal minInB = LPState.DEF_INF;
     int indexOfMinInB = -1;
@@ -287,5 +348,18 @@ public class LPSolver {
       }
     }
     return indexOfMinInB;
+  }
+
+  private void fillWithVariables(LPStandardForm stForm) {
+    int n = stForm.n;
+    HashMap<Integer, String> variables = new HashMap<>();
+    HashMap<String, Integer> coefficients = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String var = "x" + (i + 1);
+      variables.put(i, var);
+      coefficients.put(var, i);
+    }
+    stForm.variables = variables;
+    stForm.coefficients = coefficients;
   }
 }
