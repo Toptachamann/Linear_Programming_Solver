@@ -51,9 +51,9 @@ class LPSolverSpec extends Specification {
     then:
     resState.coefficients.size() == resState.variables.size()
     resState.A == resA
-    Arrays.equals(resState.c, resC)
-    coefficients.containsKey("x0")
-    variables.containsValue("x0")
+    resState.c == resC
+    resState.coefficients.containsKey("x0")
+    resState.variables.containsValue("x0")
   }
 
   def "conversion into slack form"() {
@@ -97,7 +97,7 @@ class LPSolverSpec extends Specification {
     ans == -17
   }
 
-  def "infeasible"() {
+  def "initial infeasible solution"() {
     BigDecimal[][] A = [[1, 0], [-1, 0], [0, 1], [0, -1]]
     BigDecimal[] b = [10, -2, 10, -2]
     BigDecimal[] c = [1, 1]
@@ -146,6 +146,49 @@ class LPSolverSpec extends Specification {
     result.v == 4
     result.variables == [0: "x6", 1: "x4", 2: "x3", 3: "x2", 4: "x5", 5: "x1"]
     result.coefficients == [x6: 0, x4: 1, x3: 2, x2: 3, x5: 4, x1: 5]
+  }
+
+  def "unbounded linear program"() {
+    given:
+    BigDecimal[][] A = [[1, 0]]
+    BigDecimal[] b = [1]
+    BigDecimal[] c = [1, 1]
+    def form = new LPStandardForm(A, b, c, 1, 2, true)
+    def solver = new LPSolver()
+    when:
+    solver.solve(form)
+    then:
+    def e = thrown(SolutionException)
+    e.getMessage() == "This linear program is unbounded"
+  }
+
+  def "unbounded with initial infeasible solution"() {
+    given:
+    BigDecimal[][] A = [[-1, 0], [0, 1], [0, -1]]
+    BigDecimal[] b = [-2, 4, -2]
+    BigDecimal[] c = [1, 1]
+    def form = new LPStandardForm(A, b, c, 3, 2, true)
+    def solver = new LPSolver()
+    when:
+    solver.solve(form)
+    then:
+    def e = thrown(SolutionException)
+    e.getMessage() == "This linear program is unbounded"
+  }
+
+  @Unroll
+  def "infeasible linear program, one variable"() {
+    def form = new LPStandardForm(A as BigDecimal[][], b as BigDecimal[], c as BigDecimal[], m, n, true)
+    def solver = new LPSolver()
+    when:
+    solver.solve(form)
+    then:
+    def e = thrown(SolutionException)
+    e.getMessage() == "This linear program is infeasible"
+    where:
+    A           | b       | c      | m | n
+    [[1], [-1]] | [0, -1] | [1]    | 2 | 1
+    [[1, 1]]    | [-1]    | [1, 1] | 1 | 2
   }
 
 }

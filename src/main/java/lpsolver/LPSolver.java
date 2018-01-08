@@ -73,8 +73,8 @@ public class LPSolver {
     while ((entering = lpState.getEntering()) != -1) {
       leaving = lpState.getLeaving(entering);
       if (leaving == -1) {
-        // log printStatement("This linear program is unbounded\n\n");
-        throw new LPException("This linear program is unbounded");
+        logger.error("This linear program is unbounded");
+        throw new SolutionException("This linear program is unbounded");
       }
       lpState.pivot(entering, leaving);
       // log printProgress(entering, leaving);
@@ -145,7 +145,8 @@ public class LPSolver {
     BigDecimal x0Value =
         (currentIndexOfX0 < auxLP.n) ? BigDecimal.ZERO : auxLP.b[currentIndexOfX0 - auxLP.n];
     if (x0Value.abs().compareTo(epsilon) > 0) {
-      throw logger.throwing(new LPException("This linear program is infeasible"));
+      logger.error("This linear program is infeasible");
+      throw new LPException("This linear program is infeasible");
     }
     if (currentIndexOfX0 >= auxLP.n) { // x0 is basis variable
       logger.info("Performing degenerate pivot");
