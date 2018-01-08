@@ -28,7 +28,7 @@ class LPInputReaderTest {
   @Test
   @DisplayName("Maximization/minimization parameter processing test")
   public void maxMinTest()
-      throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+      throws NoSuchMethodException {
     Method maxOrMinMethod = reader.getClass().getDeclaredMethod("processMaxMinParam", String.class);
     maxOrMinMethod.setAccessible(true);
     String s = null;
