@@ -2,6 +2,8 @@ package lpsolver;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,6 +21,7 @@ public class LPInputReader {
   private static final Pattern tokenPattern;
   private static final Pattern objectivePattern;
   private static final Pattern constraintPattern;
+  private static final Logger logger = LogManager.getLogger(LPInputReader.class);
 
   static {
     objectivePattern = Pattern.compile("^((\\s*[+-]?\\s*\\d*\\.?\\d*)\\*?([a-zA-Z]+\\d*))+\\s*$");
@@ -48,6 +51,7 @@ public class LPInputReader {
 
   @Contract("null -> fail")
   public LPStandardForm readLP(@NotNull File file) throws SolutionException, IOException {
+    logger.entry(file);
     Validate.isTrue(file.isFile(), "File should be a file");
     Validate.isTrue(file.canRead(), "File should be a readable file");
     reload();
@@ -68,7 +72,7 @@ public class LPInputReader {
         } else if (constraintCounter > 0) {
           break;
         } else {
-          throw new IOException("No constraints in the input file");
+          throw new LPException("No constraints in the input file");
         }
       }
     }
@@ -79,6 +83,7 @@ public class LPInputReader {
 
   @Contract("null -> fail")
   public LPStandardForm readLP(@NotNull String lp) throws SolutionException {
+    logger.traceEntry();
     reload();
     String[] lines = lp.split("\n");
     Validate.isTrue(lines.length >= 3, "Incomplete lp");
@@ -89,8 +94,9 @@ public class LPInputReader {
       processConstraint(lines[i]);
     }
     normalizeConstraintMatrix();
-    return new LPStandardForm(
-        A, b, c, variables, coefficients, numOfVariables, numOfInequalities, maximized);
+    return logger.traceExit(
+        new LPStandardForm(
+            A, b, c, variables, coefficients, numOfInequalities, numOfVariables, maximized));
   }
 
   @Contract("null -> fail")
