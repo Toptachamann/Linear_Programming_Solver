@@ -172,7 +172,7 @@ class LPSolverSpec extends Specification {
     when:
     solver.solve(form)
     then:
-    def e = thrown(SolutionException)
+    def e = thrown(LPException)
     e.getMessage() == "This linear program is unbounded"
   }
 
@@ -183,7 +183,7 @@ class LPSolverSpec extends Specification {
     when:
     solver.solve(form)
     then:
-    def e = thrown(SolutionException)
+    def e = thrown(LPException)
     e.getMessage() == "This linear program is infeasible"
     where:
     A           | b       | c      | m | n

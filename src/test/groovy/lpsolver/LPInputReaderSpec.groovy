@@ -47,4 +47,6 @@ class LPInputReaderSpec extends Specification {
     form.n == 2
     !form.maximize
   }
+
+
 }

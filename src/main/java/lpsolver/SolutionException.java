@@ -1,6 +1,6 @@
 package lpsolver;
 
-public class SolutionException extends Exception {
+public class SolutionException extends LPException {
   public SolutionException() {}
 
   public SolutionException(String message) {

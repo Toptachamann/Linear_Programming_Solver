@@ -1,3 +1,4 @@
+import lpsolver.LPException;
 import lpsolver.LPInputReader;
 import lpsolver.LPSolver;
 import lpsolver.LPStandardForm;
@@ -23,6 +24,12 @@ public class Main {
       new File("C:\\Java_Projects\\LPSolver\\conf\\config.properties");
 
   public static void main(String[] args) {
+    LPInputReader reader = new LPInputReader();
+    try {
+      LPStandardForm standardForm = reader.readLP(new File("C:\\Java_Projects\\LPSolver\\io_files\\input.txt"));
+    } catch (LPException | IOException e) {
+      e.printStackTrace();
+    }
     /*Properties properties = new Properties();
 
     Options options = new Options();

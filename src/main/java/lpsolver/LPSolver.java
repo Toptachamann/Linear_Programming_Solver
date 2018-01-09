@@ -54,10 +54,12 @@ public class LPSolver {
     this.inf = inf;
   }
 
-  public BigDecimal solve(LPStandardForm stForm) throws SolutionException {
+  public BigDecimal solve(LPStandardForm stForm) throws LPException {
+    logger.trace("Start solving linear program {}", stForm);
     if (stForm.maximize) {
       return simplex(stForm).round(printRounder);
     } else {
+      logger.trace("Converting into maximization problem");
       BigDecimal[] c = stForm.c;
       for (int i = 0; i < c.length; i++) {
         c[i] = c[i].negate();
@@ -66,7 +68,8 @@ public class LPSolver {
     }
   }
 
-  private BigDecimal simplex(LPStandardForm stForm) throws SolutionException {
+  private BigDecimal simplex(LPStandardForm stForm) throws LPException {
+    logger.trace("Starting simplex");
     LPState lpState = initializeSimplex(stForm);
     // log printState();
     int entering, leaving;
@@ -98,8 +101,8 @@ public class LPSolver {
     return lpState.v;
   }
 
-  private LPState initializeSimplex(LPStandardForm standardForm) throws SolutionException {
-    // log printStatement("Initializing simplex\n\n");
+  private LPState initializeSimplex(LPStandardForm standardForm) throws LPException {
+    logger.trace("Starting simplex initialization");
     int minInB = minInB(standardForm.b);
     if (minInB == -1 || standardForm.b[minInB].compareTo(BigDecimal.ZERO) >= 0) {
       logger.info("Basic solution is feasible");
@@ -107,7 +110,8 @@ public class LPSolver {
     } else {
       logger.info("Basic solution is infeasible");
       if (!standardForm.hasVariableNames()) {
-        fillWithVariables(standardForm);
+        logger.trace("Standard form has no variable names, need to add default");
+        addDefaultVariables(standardForm);
       }
       LPState auxLP = convertIntoAuxLP(standardForm);
       int indexOfx0 = auxLP.n - 1;
@@ -117,6 +121,7 @@ public class LPSolver {
   }
 
   private int solveAuxLP(LPState auxLP, int indexOfx0, int minInB) throws SolutionException {
+    logger.trace("Solving auxiliary linear program");
     int n = auxLP.n;
     auxLP.pivot(indexOfx0, minInB);
     int x0CurrentIndex = minInB + n;
@@ -127,7 +132,8 @@ public class LPSolver {
       }
       int leaving = auxLP.getLeaving(entering);
       if (leaving == -1) {
-        throw logger.throwing(new SolutionException("Auxiliary lp is unbounded"));
+        logger.error("Auxiliary linear program is unbounded, something went really wrong");
+        throw new SolutionException("Auxiliary lp is unbounded");
       }
       if (entering == x0CurrentIndex) {
         x0CurrentIndex = leaving + n;
@@ -136,11 +142,12 @@ public class LPSolver {
       }
       auxLP.pivot(entering, leaving);
     }
+    logger.trace("Index of auxiliary variable after solving aux. lp is {}", x0CurrentIndex);
     return x0CurrentIndex;
   }
 
   private LPState handleInitialization(LPState auxLP, LPStandardForm initial, int currentIndexOfX0)
-      throws SolutionException {
+      throws LPException {
 
     BigDecimal x0Value =
         (currentIndexOfX0 < auxLP.n) ? BigDecimal.ZERO : auxLP.b[currentIndexOfX0 - auxLP.n];
@@ -149,13 +156,14 @@ public class LPSolver {
       throw new LPException("This linear program is infeasible");
     }
     if (currentIndexOfX0 >= auxLP.n) { // x0 is basis variable
-      logger.info("Performing degenerate pivot");
+      logger.trace("Auxiliary variables is basis variables, need to perform degenerate pivot");
       currentIndexOfX0 = performDegeneratePivot(auxLP, currentIndexOfX0);
     }
     return restoreInitialLP(auxLP, initial, currentIndexOfX0);
   }
 
   private int performDegeneratePivot(LPState auxLP, int indexOfx0) throws SolutionException {
+    logger.trace("Performing degenerate pivot");
     int entering = -1;
     BigDecimal[] row = auxLP.A[indexOfx0 - auxLP.n];
     for (int i = 0; i < auxLP.n; i++) {
@@ -173,6 +181,7 @@ public class LPSolver {
   }
 
   private LPState restoreInitialLP(LPState auxLP, LPStandardForm initial, int indexOfX0) {
+    logger.trace("Restoring initial linear program after initialization");
     int n = initial.n;
     int m = auxLP.m;
 
@@ -220,6 +229,7 @@ public class LPSolver {
   }
 
   public LPState convertIntoSlackForm(LPStandardForm stForm) {
+    logger.trace("Converting into slack form");
     if (stForm.hasVariableNames()) {
       HashMap<String, Integer> coefficients = stForm.coefficients;
       HashMap<Integer, String> variables = stForm.variables;
@@ -239,6 +249,7 @@ public class LPSolver {
       }
       return new LPState(stForm.A, stForm.b, stForm.c, variables, coefficients, m, n);
     } else {
+      logger.trace("This standard form has no variable names, no need to convert into slack form");
       return new LPState(stForm.A, stForm.b, stForm.c, stForm.m, stForm.n);
     }
   }
@@ -253,6 +264,7 @@ public class LPSolver {
    */
   @SuppressWarnings("unchecked")
   public LPState convertIntoAuxLP(LPStandardForm standardForm) {
+    logger.trace("Converting into auxiliary linear program");
     int m = standardForm.m;
     int n = standardForm.n;
     BigDecimal[][] A = standardForm.A;
@@ -264,15 +276,15 @@ public class LPSolver {
       auxA[i][n] = x0Coeff;
     }
 
-    BigDecimal[] b = standardForm.b.clone();
+    BigDecimal[] b = new BigDecimal[standardForm.m];
+    System.arraycopy(standardForm.b, 0, b, 0, standardForm.m);
 
     BigDecimal[] auxC = new BigDecimal[n + 1];
     Arrays.fill(auxC, BigDecimal.ZERO);
     auxC[n] = x0Coeff;
 
-    HashMap<Integer, String> variables = (HashMap<Integer, String>) standardForm.variables.clone();
-    HashMap<String, Integer> coefficients =
-        (HashMap<String, Integer>) standardForm.coefficients.clone();
+    HashMap<Integer, String> variables = new HashMap<>(standardForm.variables);
+    HashMap<String, Integer> coefficients = new HashMap<>(standardForm.coefficients);
 
     String x0Identifier = getNameForX0(standardForm.coefficients);
     variables.put(n, x0Identifier);
@@ -292,17 +304,21 @@ public class LPSolver {
   }
 
   private String getNameForX0(HashMap<String, Integer> coefficients) {
+    logger.trace("Getting name for auxiliary variable");
     if (!coefficients.containsKey("x0")) {
+      logger.trace("Name for auxiliary variable is x0");
       return "x0";
     } else {
       String var = "auxVar";
       if (!coefficients.containsKey(var)) {
+        logger.trace("Name for auxiliary variable is auxVar");
         return var;
       } else {
         int i = 1;
         while (coefficients.containsKey(var + i)) {
           ++i;
         }
+        logger.trace("Name for auxiliary variable is {}", var + i);
         return var + i;
       }
     }
@@ -340,6 +356,7 @@ public class LPSolver {
     printStatement("\n\n");
   }*/
   private int minInB(BigDecimal[] b) {
+    logger.trace("Finding minimum element in b");
     BigDecimal minInB = LPState.DEF_INF;
     int indexOfMinInB = -1;
     for (int i = 0; i < b.length; i++) {
@@ -351,7 +368,8 @@ public class LPSolver {
     return indexOfMinInB;
   }
 
-  private void fillWithVariables(LPStandardForm stForm) {
+  private void addDefaultVariables(LPStandardForm stForm) {
+    logger.trace("Adding default variables");
     int n = stForm.n;
     HashMap<Integer, String> variables = new HashMap<>();
     HashMap<String, Integer> coefficients = new HashMap<>();

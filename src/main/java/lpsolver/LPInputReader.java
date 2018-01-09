@@ -1,7 +1,6 @@
 package lpsolver;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
@@ -50,16 +49,25 @@ public class LPInputReader {
   }
 
   @Contract("null -> fail")
-  public LPStandardForm readLP(@NotNull File file) throws SolutionException, IOException {
-    logger.entry(file);
-    Validate.isTrue(file.isFile(), "File should be a file");
-    Validate.isTrue(file.canRead(), "File should be a readable file");
+  public LPStandardForm readLP(@NotNull File file) throws LPException, IOException {
+    logger.trace("Start reading linear program from {}", file);
+    if (!file.isFile()) {
+      logger.error("{} is not a file file", file);
+      throw new IllegalArgumentException();
+    }
+    if (!file.canRead()) {
+      logger.error("{} should be a readable file", file);
+      throw new IllegalArgumentException();
+    }
     reload();
     boolean maximized;
     int constraintCounter = 0;
     try (BufferedReader in = new BufferedReader(new FileReader(file))) {
       String maxOrMin = in.readLine();
-      Validate.notNull(maxOrMin, "Input file is empty");
+      if (maxOrMin == null) {
+        logger.error("Input file is empty");
+        throw new LPException("Input file is empty");
+      }
       maximized = processMaxMinParam(maxOrMin);
 
       String objective = in.readLine();
@@ -72,48 +80,60 @@ public class LPInputReader {
         } else if (constraintCounter > 0) {
           break;
         } else {
+          logger.error("No constraints in the input file");
           throw new LPException("No constraints in the input file");
         }
       }
     }
     normalizeConstraintMatrix();
+    logger.info(
+        "Linear program has {} inequalities and {} variables", numOfInequalities, numOfVariables);
     return new LPStandardForm(
-        A, b, c, variables, coefficients, numOfVariables, numOfInequalities, maximized);
+        A, b, c, variables, coefficients, numOfInequalities, numOfVariables, maximized);
   }
 
   @Contract("null -> fail")
-  public LPStandardForm readLP(@NotNull String lp) throws SolutionException {
-    logger.traceEntry();
+  public LPStandardForm readLP(@NotNull String lp) throws LPException {
+    logger.trace("Start reading lp {}", lp);
     reload();
     String[] lines = lp.split("\n");
-    Validate.isTrue(lines.length >= 3, "Incomplete lp");
-
+    if (lines.length < 3) {
+      logger.error("Linear program {} is incomplete", lp);
+      throw new LPException("Incomplete lp");
+    }
     boolean maximized = processMaxMinParam(lines[0]);
     c = processObjective(lines[1]);
     for (int i = 2; i < lines.length; i++) {
       processConstraint(lines[i]);
     }
     normalizeConstraintMatrix();
-    return logger.traceExit(
-        new LPStandardForm(
-            A, b, c, variables, coefficients, numOfInequalities, numOfVariables, maximized));
+    logger.info(
+        "Linear program has {} inequalities and {} variables", numOfInequalities, numOfVariables);
+    return new LPStandardForm(
+        A, b, c, variables, coefficients, numOfInequalities, numOfVariables, maximized);
   }
 
   @Contract("null -> fail")
-  private boolean processMaxMinParam(@NotNull String maxOrMin) throws SolutionException {
+  private boolean processMaxMinParam(@NotNull String maxOrMin) throws LPException {
+    logger.trace("Processing max\\min parameter: {}", maxOrMin);
     maxOrMin = maxOrMin.trim();
     if (maxOrMin.equalsIgnoreCase("min")) {
       return false;
     } else if (maxOrMin.equalsIgnoreCase("max")) {
       return true;
     } else {
-      throw new SolutionException("Incorrect max/min parameter");
+      logger.error("Incorrect max/min parameter");
+      throw new LPException("Incorrect max/min parameter");
     }
   }
 
   @Contract("null -> fail")
-  private ArrayList<BigDecimal> processObjective(@NotNull String objective) {
-    Validate.matchesPattern(objective, objectivePattern.pattern(), "Can't recognize objective");
+  private ArrayList<BigDecimal> processObjective(@NotNull String objective) throws LPException {
+    logger.trace("Processing objective {}", objective);
+    if (!Pattern.matches(objectivePattern.pattern(), objective)) {
+      logger.error("Can't recognize objective {}", objective);
+      throw new LPException("Can't recognize objective");
+    }
     ArrayList<BigDecimal> objectiveCoefficients = new ArrayList<>();
     Matcher tokenMatcher = tokenPattern.matcher(objective);
     String t;
@@ -135,9 +155,13 @@ public class LPInputReader {
   }
 
   @Contract("null -> fail")
-  private void processConstraint(@NotNull String constraint) throws SolutionException {
+  private void processConstraint(@NotNull String constraint) throws LPException {
+    logger.trace("Processing constraint {}", constraint);
     Matcher constraintMatcher = constraintPattern.matcher(constraint);
-    Validate.isTrue(constraintMatcher.matches(), "Can't recognize constraint");
+    if (!constraintMatcher.find()) {
+      logger.error("Can't recognize constraint {}", constraint);
+      throw new LPException("Can't recognize constraint");
+    }
     ArrayList<BigDecimal> coefficients = new ArrayList<>(numOfVariables + 1);
     for (int i = 0; i < numOfVariables; i++) {
       coefficients.add(BigDecimal.ZERO);
@@ -172,7 +196,7 @@ public class LPInputReader {
       A.add(coefficients);
       this.numOfInequalities += 1;
     } else if (inequalitySign.compareTo("==") == 0 || inequalitySign.compareTo("=") == 0) {
-      ArrayList<BigDecimal> auxiliaryCoefficients = (ArrayList<BigDecimal>) coefficients.clone();
+      ArrayList<BigDecimal> auxiliaryCoefficients = new ArrayList<>(coefficients);
       for (int i = 0; i < coefficients.size(); i++) {
         auxiliaryCoefficients.set(i, coefficients.get(i).negate());
       }
@@ -189,6 +213,7 @@ public class LPInputReader {
   }
 
   private void normalizeConstraintMatrix() {
+    logger.trace("Normalizing constraint matrix");
     for (ArrayList<BigDecimal> row : A) {
       int size = row.size();
       for (int j = 0; j < numOfVariables - size; j++) {
