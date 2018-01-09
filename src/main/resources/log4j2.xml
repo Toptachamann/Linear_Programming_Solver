@@ -14,7 +14,7 @@
             <PatternLayout pattern="%d{HH:mm:ss,SSS}  {%t} [%level] %c - %m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="6" modulate="true"/>
-                <SizeBasedTriggeringPolicy size="5 MB"/>
+                <SizeBasedTriggeringPolicy size="500 MB"/>
             </Policies>
             <DefaultRolloverStrategy max="10" min="1" fileIndex="min"/>
         </RollingFile>
@@ -23,26 +23,26 @@
             <PatternLayout pattern="%d{HH:mm:ss,SSS}  {%t} [%level] %c - %m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="6" modulate="true"/>
-                <SizeBasedTriggeringPolicy size="1 MB"/>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
             </Policies>
             <DefaultRolloverStrategy max="10" min="1" fileIndex="min"/>
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="trace">
+        <Root level="OFF">
             <AppenderRef ref="STDOUT"/>
         </Root>
         <Logger name="lpsolver.LPSolver" additivity="true">
-            <AppenderRef ref="ALL" level="ALL"/>
-            <AppenderRef ref="ERROR" level="ERROR"/>
+            <AppenderRef ref="ALL" level="OFF"/>
+            <AppenderRef ref="ERROR" level="OFF"/>
         </Logger>
         <Logger name="lpsolver.LPState" additivity="true">
-            <AppenderRef ref="ALL" level="ALL"/>
-            <AppenderRef ref="ERROR" level="ERROR"/>
+            <AppenderRef ref="ALL" level="OFF"/>
+            <AppenderRef ref="ERROR" level="OFF"/>
         </Logger>
         <Logger name="lpsolver.LPInputReader" additivity="true">
-            <AppenderRef ref="ALL" level="ALL"/>
-            <AppenderRef ref="ERROR" level="ERROR"/>
+            <AppenderRef ref="ALL" level="OFF"/>
+            <AppenderRef ref="ERROR" level="OFF"/>
         </Logger>
     </Loggers>
 </Configuration>

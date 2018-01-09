@@ -20,7 +20,7 @@ public class LPState {
   public static final BigDecimal DEF_EPSILON = new BigDecimal(BigInteger.ONE, 9);
   public static final BigDecimal DEF_INF = new BigDecimal(BigInteger.ONE, -50);
   public static final int THREAD_AMOUNT = 4;
-  public static final int PARALLEL_THRESHOLD = 30;
+  public static final int PARALLEL_THRESHOLD = 3000000;
   private static final Logger logger = LogManager.getLogger(LPState.class);
   BigDecimal[][] A;
   BigDecimal[] b, c;
@@ -111,19 +111,11 @@ public class LPState {
     this.v = v;
   }
 
-  public static LPState convertIntoLPState(LPStandardForm standardForm) {
-    return new LPState(
-        standardForm.A,
-        standardForm.b,
-        standardForm.c,
-        BigDecimal.ZERO,
-        standardForm.variables,
-        standardForm.coefficients,
-        standardForm.m,
-        standardForm.n);
-  }
-
   public void pivot(int entering, int leaving) throws SolutionException {
+    logger.trace(
+        "Start pivoting with, entering - {}, leaving - {}",
+        hasVariablesNames() ? variables.get(entering) : entering,
+        hasVariablesNames() ? variables.get(leaving) : leaving);
     if (m >= PARALLEL_THRESHOLD) {
       try {
         pivotConcurrently(entering, leaving);
@@ -139,7 +131,9 @@ public class LPState {
 
   @SuppressWarnings("Duplicates")
   void pivotSequentially(int entering, int leaving) {
+    logger.trace("Start pivoting sequentially");
     // recalculate leaving row
+    logger.trace("Recalculating leaving row");
     BigDecimal[] pivotRow = A[leaving];
     BigDecimal pivEntCoef = pivotRow[entering];
     pivotRow[entering] = BigDecimal.ONE.divide(pivEntCoef, rounder);
@@ -152,6 +146,7 @@ public class LPState {
     b[leaving] = b[leaving].divide(pivEntCoef, rounder);
 
     // recalculate other rows
+    logger.trace("Recalculating other rows");
     BigDecimal bEntering = b[leaving];
     for (int i = 0; i < m; i++) {
       if (i == leaving) {
@@ -167,9 +162,11 @@ public class LPState {
         currentRow[j] = currentRow[j].subtract(curEntCoef.multiply(pivotRow[j], rounder), rounder);
       }
       b[i] = b[i].subtract(curEntCoef.multiply(bEntering, rounder), rounder);
+      logger.trace("Finished pivoting");
     }
 
     // computing new objective function
+    logger.trace("Computing new objective function");
     BigDecimal pivotCoefficientInC = c[entering];
     v = v.add(b[leaving].multiply(pivotCoefficientInC, rounder), rounder);
     c[entering] = pivotCoefficientInC.divide(pivEntCoef, rounder).negate();
@@ -185,6 +182,7 @@ public class LPState {
 
   @SuppressWarnings("Duplicates")
   void pivotConcurrently(int entering, int leaving) throws InterruptedException {
+    logger.trace("Start pivoting concurrently");
     if (pool == null) {
       pool = Executors.newFixedThreadPool(THREAD_AMOUNT);
     }
@@ -200,6 +198,7 @@ public class LPState {
           () -> {
             int from = (effectivelyFinalK * n) / THREAD_AMOUNT;
             int to = ((effectivelyFinalK + 1) * n) / THREAD_AMOUNT;
+            logger.trace("Recalculating leaving row from {} to {}", from, to);
             for (int i = from; i < to; i++) {
               if (i == entering) {
                 continue;
@@ -207,6 +206,7 @@ public class LPState {
               pivotRow[i] = pivotRow[i].divide(pivEntCoef, rounder);
             }
             latch1.countDown();
+            logger.trace("Finished recalculating leaving row from {} to {}", from, to);
           });
     }
     latch1.await();
@@ -221,6 +221,7 @@ public class LPState {
           () -> {
             int from = (effectivelyFinalK * m) / THREAD_AMOUNT;
             int to = ((effectivelyFinalK + 1) * m) / THREAD_AMOUNT;
+            logger.trace("Recalculating constraint matrix from {} to {}", from, to);
             for (int i = from; i < to; i++) {
               if (i == leaving) {
                 continue;
@@ -238,6 +239,7 @@ public class LPState {
               b[i] = b[i].subtract(curEntCoef.multiply(bEntering, rounder), rounder);
             }
             latch2.countDown();
+            logger.trace("Finished recalculating constraint matrix from {} to {}", from, to);
           });
     }
     latch2.await();
@@ -253,19 +255,24 @@ public class LPState {
           () -> {
             int from = (effectivelyFinalK * n) / THREAD_AMOUNT;
             int to = ((effectivelyFinalK + 1) * n) / THREAD_AMOUNT;
+            logger.trace("Computing new objective function from {} to {}", from, to);
             for (int i = from; i < to; i++) {
               if (i == entering) {
                 continue;
               }
               c[i] = c[i].subtract(pivotCoefficientInC.multiply(pivotRow[i], rounder), rounder);
             }
+            logger.trace("Finished computing new objective function from {} to {}", from, to);
             latch3.countDown();
           });
     }
     latch3.await();
+    exchangeIndexes(entering, leaving);
+    logger.trace("Finished concurrent pivot");
   }
 
   public int getEntering() {
+    logger.trace("Getting entering");
     int positiveInC = -1;
     for (int i = 0; i < n; i++) {
       if (c[i].compareTo(epsilon) > 0) {
@@ -273,6 +280,7 @@ public class LPState {
         break;
       }
     }
+    logger.trace("Entering is {}", hasVariablesNames() ? variables.get(positiveInC) : positiveInC);
     return positiveInC;
   }
 
@@ -302,6 +310,7 @@ public class LPState {
 
   private void exchangeIndexes(int entering, int leaving) {
     if (hasVariablesNames()) {
+      logger.trace("Exchanging indexes");
       String enteringVarName = variables.get(entering), leavingVarName = variables.get(leaving + n);
       variables.put(entering, leavingVarName);
       variables.put(leaving + n, enteringVarName);

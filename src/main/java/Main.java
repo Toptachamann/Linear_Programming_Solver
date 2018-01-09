@@ -1,22 +1,4 @@
-import lpsolver.LPException;
-import lpsolver.LPInputReader;
-import lpsolver.LPSolver;
-import lpsolver.LPStandardForm;
-import lpsolver.SolutionException;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
 
 /** Created by Timofey on 8/3/2017. */
 public class Main {
@@ -24,12 +6,7 @@ public class Main {
       new File("C:\\Java_Projects\\LPSolver\\conf\\config.properties");
 
   public static void main(String[] args) {
-    LPInputReader reader = new LPInputReader();
-    try {
-      LPStandardForm standardForm = reader.readLP(new File("C:\\Java_Projects\\LPSolver\\io_files\\input.txt"));
-    } catch (LPException | IOException e) {
-      e.printStackTrace();
-    }
+
     /*Properties properties = new Properties();
 
     Options options = new Options();

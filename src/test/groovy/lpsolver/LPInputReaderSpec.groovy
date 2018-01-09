@@ -3,6 +3,7 @@ package lpsolver
 import spock.lang.Specification
 
 class LPInputReaderSpec extends Specification {
+
   def "Simple lp reading test"() {
     def lp = "max\nx1 + x2\nx1 + x2 <= 0"
     BigDecimal[][] A = [[1, 1]]

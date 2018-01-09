@@ -23,4 +23,6 @@ class LPStandardFormSpec extends Specification {
     dual.n == 3
     !dual.maximize
   }
+
+
 }

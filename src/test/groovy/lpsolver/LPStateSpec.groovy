@@ -99,7 +99,7 @@ class LPStateSpec extends Specification {
   }
 
   @Unroll
-  def "test parallel pivot 1"() {
+  def "test concurrent pivot 1"() {
     given:
     BigDecimal[][] A = [[1, 2, 4, 2, 2], [5, 5, 2, 1, 1], [2, 2, 1, 1, 4], [4, 2, 4, 1, 2]]
     BigDecimal[] b = [2, 1, 4, 2]
@@ -107,14 +107,8 @@ class LPStateSpec extends Specification {
     HashMap<Integer, String> variables = [0: "x1", 1: "x2", 2: "x3", 3: "x4", 4: "x5", 5: "x6", 6: "x7", 7: "x8", 8: "x9"]
     HashMap<String, Integer> coefficients = ["x1": 0, "x2": 1, "x3": 2, "x4": 3, "x5": 4, "x6": 5, "x7": 6, "x8": 7, "x9": 8]
     def state = new LPState(A, b, c, variables, coefficients, b.size(), c.size())
-
-    Field thresholdField = LPState.class.getDeclaredField("PARALLEL_THRESHOLD")
-    Field modifiersField = thresholdField.class.getDeclaredField("modifiers")
-    modifiersField.setAccessible(true)
-    modifiersField.setInt(thresholdField, thresholdField.getModifiers() & ~Modifier.FINAL)
-    thresholdField.setInt(null, 4)
     when:
-    state.pivot(entering, leaving)
+    state.pivotConcurrently(entering, leaving)
     then:
     state.A == resA as BigDecimal[][]
     Arrays.equals(state.b, resB as BigDecimal[])
@@ -146,13 +140,8 @@ class LPStateSpec extends Specification {
     HashMap<String, Integer> coefficients = ["x1": 0, "x2": 1, "x3": 2, "x4": 3, "x5": 4, "x6": 5, "x7": 6, "x8": 7, "x9": 8]
     def state = new LPState(A, b, c, variables, coefficients, b.size(), c.size())
 
-    Field thresholdField = LPState.class.getDeclaredField("PARALLEL_THRESHOLD")
-    Field modifiersField = thresholdField.class.getDeclaredField("modifiers")
-    modifiersField.setAccessible(true)
-    modifiersField.setInt(thresholdField, thresholdField.getModifiers() & ~Modifier.FINAL)
-    thresholdField.setInt(null, 4)
     when:
-    state.pivot(entering, leaving)
+    state.pivotConcurrently(entering, leaving)
     then:
     state.A == resA as BigDecimal[][]
     Arrays.equals(state.b, resB as BigDecimal[])
@@ -160,8 +149,6 @@ class LPStateSpec extends Specification {
     state.v == resV
     state.variables == resVariables
     state.coefficients == resCoefficients
-    cleanup:
-    thresholdField.setInt(null, 30)
     where:
     entering | leaving || resB                              || resC     || resV
     0        | 3       || [-17, -64, -45, 10, -38, -59, -6] || [-4, -9] || 40
@@ -211,4 +198,5 @@ class LPStateSpec extends Specification {
     1 * state.pivotSequentially(0, 0)
     0 * state.pivotConcurrently(0, 0)
   }
+
 }

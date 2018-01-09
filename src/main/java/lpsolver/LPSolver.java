@@ -3,8 +3,11 @@ package lpsolver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
@@ -54,25 +57,47 @@ public class LPSolver {
     this.inf = inf;
   }
 
+  public static void main(String[] args) {
+    LPInputReader reader = new LPInputReader();
+    try {
+      LPStandardForm standardForm =
+          reader.readLP(
+              new File(
+                  "C:\\Java_Projects\\Combinatorial_Optimization\\MaximumFlow\\src\\MaximumFlowAsLinearProgramme.txt"));
+      LPSolver solver = new LPSolver();
+      long time1 = System.nanoTime();
+      BigDecimal result = solver.solve(standardForm);
+      long time2 = System.nanoTime();
+      System.out.println((time2 - time1)/1000000000 + "seconds passed");
+//      System.out.println(result);
+    } catch (LPException | IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   public BigDecimal solve(LPStandardForm stForm) throws LPException {
     logger.trace("Start solving linear program {}", stForm);
     if (stForm.maximize) {
-      return simplex(stForm).round(printRounder);
+      BigDecimal result = simplex(stForm);
+      logger.info("Optimal objective function value is {}", result);
+      return result;
     } else {
       logger.trace("Converting into maximization problem");
       BigDecimal[] c = stForm.c;
       for (int i = 0; i < c.length; i++) {
         c[i] = c[i].negate();
       }
-      return simplex(stForm).negate().round(printRounder);
+      BigDecimal result = simplex(stForm).negate();
+      logger.info("Optimal objective function value is {}", result);
+      return result;
     }
   }
 
   private BigDecimal simplex(LPStandardForm stForm) throws LPException {
     logger.trace("Starting simplex");
     LPState lpState = initializeSimplex(stForm);
-    // log printState();
     int entering, leaving;
+    int numberOfIterationgs = 0;
     while ((entering = lpState.getEntering()) != -1) {
       leaving = lpState.getLeaving(entering);
       if (leaving == -1) {
@@ -80,25 +105,12 @@ public class LPSolver {
         throw new SolutionException("This linear program is unbounded");
       }
       lpState.pivot(entering, leaving);
-      // log printProgress(entering, leaving);
+      ++numberOfIterationgs;
+      if (numberOfIterationgs % 10 == 0) {
+        logger.info("Number of iterations is {}", numberOfIterationgs);
+      }
     }
-    // log
-    /*if (iterationInterval > 0 && iterationCount % iterationInterval == 0) {
-      System.out.println(
-          "Current objective function value is "
-              + this.v.toPlainString()
-              + ", number of iterations "
-              + iterationCount);
-    }*/
-    // log printSolution();
-    /*System.out.println(
-    "This linear program has optimal objective function value: "
-        + this.v
-            .setScale(printRounder.getPrecision(), printRounder.getRoundingMode())
-            .toPlainString()
-        + ", number of iterations: "
-        + iterationCount);*/
-    return lpState.v;
+    return lpState.v.setScale(6, RoundingMode.HALF_UP);
   }
 
   private LPState initializeSimplex(LPStandardForm standardForm) throws LPException {
@@ -125,6 +137,7 @@ public class LPSolver {
     int n = auxLP.n;
     auxLP.pivot(indexOfx0, minInB);
     int x0CurrentIndex = minInB + n;
+    int numberOfIterations = 0;
     for (; ; ) {
       int entering = auxLP.getEntering();
       if (entering == -1) {
@@ -141,6 +154,10 @@ public class LPSolver {
         x0CurrentIndex = entering;
       }
       auxLP.pivot(entering, leaving);
+      ++numberOfIterations;
+      if (numberOfIterations % 10 == 0) {
+        logger.info("Number of iterations if {}", numberOfIterations);
+      }
     }
     logger.trace("Index of auxiliary variable after solving aux. lp is {}", x0CurrentIndex);
     return x0CurrentIndex;
