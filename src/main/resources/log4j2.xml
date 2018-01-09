@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Configuration>
+<Configuration status="warn" name="LPSolve" schema="">
+    <Properties>
+        <Property name="baseDir">logs</Property>
+        <Property name="trace_file_name">lp_solver.log</Property>
+        <Property name="error_file_name">lp_solver.err</Property>
+    </Properties>
     <Appenders>
         <Console name="STDOUT">
-            <PatternLayout pattern="%level - %m%n"/>
+            <PatternLayout pattern="%highlight{%d{HH:mm:ss,SSS} [%level] {%t} %c{1} - %m%n}{FATAL:red, ERROR:red, WARN:yellow, INFO:blue, DEBUG:cyan, TRACE:black}"/>
         </Console>
-
+        <RollingFile name="ALL" fileName="${baseDir}/${trace_file_name}"
+                     filePattern="${baseDir}/$${date:MM-yyyy}/lp_solver-%d{dd-MM-yyyy}-%i.log.zip">
+            <PatternLayout pattern="%d{HH:mm:ss,SSS}  {%t} [%level] %c - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="6" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10" min="1" fileIndex="min"/>
+        </RollingFile>
+        <RollingFile name="ERROR" fileName="${baseDir}/${error_file_name}"
+                     filePattern="${baseDir}/$${date:MM-yyyy}/lp_solver-%d{dd-MM-yyyy}-%i.err.zip">
+            <PatternLayout pattern="%d{HH:mm:ss,SSS}  {%t} [%level] %c - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="6" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="1 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10" min="1" fileIndex="min"/>
+        </RollingFile>
     </Appenders>
     <Loggers>
         <Root level="trace">
             <AppenderRef ref="STDOUT"/>
         </Root>
+        <Logger name="lpsolver.LPSolver" additivity="true">
+            <AppenderRef ref="ALL" level="ALL"/>
+            <AppenderRef ref="ERROR" level="ERROR"/>
+        </Logger>
+        <Logger name="lpsolver.LPState" additivity="true">
+            <AppenderRef ref="ALL" level="ALL"/>
+            <AppenderRef ref="ERROR" level="ERROR"/>
+        </Logger>
+        <Logger name="lpsolver.LPInputReader" additivity="true">
+            <AppenderRef ref="ALL" level="ALL"/>
+            <AppenderRef ref="ERROR" level="ERROR"/>
+        </Logger>
     </Loggers>
 </Configuration>

@@ -1,0 +1,40 @@
+This linear program is unbounded
+This linear program is unbounded
+This linear program is infeasible
+This linear program is infeasible
+highlight{2018 Jan 09 00:03:00,859  {main} [ERROR]  --- This linear program is unbounded
+}{}highlight{2018 Jan 09 00:03:00,859  {main} [ERROR]  --- This linear program is unbounded
+}{}highlight{2018 Jan 09 00:03:00,859  {main} [ERROR]  --- This linear program is infeasible
+}{}highlight{2018 Jan 09 00:03:00,859  {main} [ERROR]  --- This linear program is infeasible
+}{}2018 Jan 09 00:04:08,568  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:04:08,584  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:04:08,588  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:04:08,592  {main} [ERROR]  --- This linear program is infeasible
+highlight{2018 Jan 09 00:09:14,618  {main} [ERROR]  --- This linear program is unbounded
+}{FATAL:red, ERROR:red, WARN:yellow, INFO:blue, DEBUG:cyan, TRACE:black}highlight{2018 Jan 09 00:09:14,618  {main} [ERROR]  --- This linear program is unbounded
+}{FATAL:red, ERROR:red, WARN:yellow, INFO:blue, DEBUG:cyan, TRACE:black}highlight{2018 Jan 09 00:09:14,618  {main} [ERROR]  --- This linear program is infeasible
+}{FATAL:red, ERROR:red, WARN:yellow, INFO:blue, DEBUG:cyan, TRACE:black}highlight{2018 Jan 09 00:09:14,634  {main} [ERROR]  --- This linear program is infeasible
+}{FATAL:red, ERROR:red, WARN:yellow, INFO:blue, DEBUG:cyan, TRACE:black}2018 Jan 09 00:10:06,390  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:10:06,405  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:10:06,405  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:10:06,405  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:10:49,150  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:10:49,150  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:10:49,150  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:10:49,150  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:15:25,456  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:15:25,472  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:15:25,472  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:15:25,472  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 10:21:20,942  {main} [ERROR] lpsolver.LPInputReader -  is not a file file
+2018 Jan 09 10:21:20,942  {main} [ERROR] lpsolver.LPInputReader - C:\ is not a file file
+2018 Jan 09 10:21:20,942  {main} [ERROR] lpsolver.LPInputReader - C:\Java_Projects is not a file file
+11:59:11,909  {main} [ERROR] lpsolver.LPSolver - This linear program is unbounded
+12:03:01,858  {main} [ERROR] lpsolver.LPSolver - This linear program is unbounded
+12:03:01,873  {main} [ERROR] lpsolver.LPSolver - This linear program is unbounded
+12:03:01,873  {main} [ERROR] lpsolver.LPSolver - This linear program is infeasible
+12:03:01,889  {main} [ERROR] lpsolver.LPSolver - This linear program is infeasible
+12:03:33,115  {main} [ERROR] lpsolver.LPSolver - This linear program is unbounded
+12:03:33,131  {main} [ERROR] lpsolver.LPSolver - This linear program is unbounded
+12:03:33,131  {main} [ERROR] lpsolver.LPSolver - This linear program is infeasible
+12:03:33,131  {main} [ERROR] lpsolver.LPSolver - This linear program is infeasible

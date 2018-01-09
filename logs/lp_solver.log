@@ -1,0 +1,439 @@
+Basic solution is feasible
+Basic solution is feasible
+Basic solution is infeasible
+Basic solution is feasible
+This linear program is unbounded
+Basic solution is infeasible
+This linear program is unbounded
+Basic solution is infeasible
+This linear program is infeasible
+Basic solution is infeasible
+This linear program is infeasible
+highlight{2018 Jan 09 00:03:00,835  {main} [INFO]  --- Basic solution is feasible
+}{}highlight{2018 Jan 09 00:03:00,835  {main} [INFO]  --- Basic solution is feasible
+}{}highlight{2018 Jan 09 00:03:00,852  {main} [INFO]  --- Basic solution is infeasible
+}{}highlight{2018 Jan 09 00:03:00,859  {main} [INFO]  --- Basic solution is feasible
+}{}highlight{2018 Jan 09 00:03:00,859  {main} [ERROR]  --- This linear program is unbounded
+}{}highlight{2018 Jan 09 00:03:00,859  {main} [INFO]  --- Basic solution is infeasible
+}{}highlight{2018 Jan 09 00:03:00,859  {main} [ERROR]  --- This linear program is unbounded
+}{}highlight{2018 Jan 09 00:03:00,859  {main} [INFO]  --- Basic solution is infeasible
+}{}highlight{2018 Jan 09 00:03:00,859  {main} [ERROR]  --- This linear program is infeasible
+}{}highlight{2018 Jan 09 00:03:00,859  {main} [INFO]  --- Basic solution is infeasible
+}{}highlight{2018 Jan 09 00:03:00,859  {main} [ERROR]  --- This linear program is infeasible
+}{}2018 Jan 09 00:04:08,547  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:04:08,568  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:04:08,568  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:04:08,568  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:04:08,568  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:04:08,584  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:04:08,584  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:04:08,588  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:04:08,588  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:04:08,592  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:04:08,592  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:09:14,596  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:09:14,613  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:09:14,615  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:09:14,618  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:09:14,618  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:09:14,618  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:09:14,618  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:09:14,618  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:09:14,618  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:09:14,634  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:09:14,634  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:10:06,358  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:10:06,374  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:10:06,374  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:10:06,390  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:10:06,390  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:10:06,405  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:10:06,405  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:10:06,405  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:10:06,405  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:10:06,405  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:10:06,405  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:10:49,119  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:10:49,134  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:10:49,134  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:10:49,150  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:10:49,150  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:10:49,150  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:10:49,150  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:10:49,150  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:10:49,150  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:10:49,150  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:10:49,150  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:15:25,432  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:15:25,452  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:15:25,452  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:15:25,456  {main} [INFO]  --- Basic solution is feasible
+2018 Jan 09 00:15:25,456  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:15:25,472  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:15:25,472  {main} [ERROR]  --- This linear program is unbounded
+2018 Jan 09 00:15:25,472  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:15:25,472  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 00:15:25,472  {main} [INFO]  --- Basic solution is infeasible
+2018 Jan 09 00:15:25,472  {main} [ERROR]  --- This linear program is infeasible
+2018 Jan 09 10:21:20,926  {main} [TRACE] lpsolver.LPInputReader - Enter
+2018 Jan 09 10:21:20,926  {main} [TRACE] lpsolver.LPInputReader - Enter
+2018 Jan 09 10:21:20,926  {main} [TRACE] lpsolver.LPInputReader - Enter
+2018 Jan 09 10:21:20,926  {main} [TRACE] lpsolver.LPInputReader - Enter
+2018 Jan 09 10:21:20,942  {main} [TRACE] lpsolver.LPInputReader - Enter Start reading linear program from {1}
+2018 Jan 09 10:21:20,942  {main} [ERROR] lpsolver.LPInputReader -  is not a file file
+2018 Jan 09 10:21:20,942  {main} [TRACE] lpsolver.LPInputReader - Enter Start reading linear program from {1}
+2018 Jan 09 10:21:20,942  {main} [ERROR] lpsolver.LPInputReader - C:\ is not a file file
+2018 Jan 09 10:21:20,942  {main} [TRACE] lpsolver.LPInputReader - Enter Start reading linear program from {1}
+2018 Jan 09 10:21:20,942  {main} [ERROR] lpsolver.LPInputReader - C:\Java_Projects is not a file file
+2018 Jan 09 10:21:43,853  {main} [TRACE] lpsolver.LPInputReader - Enter Start reading linear program from {1}
+2018 Jan 09 10:25:34,385  {main} [TRACE] lpsolver.LPInputReader - Enter Start reading linear program from {1}
+10:26:11,207  {main} [TRACE] lpsolver.LPInputReader - Enter Start reading linear program from {1}
+10:26:52,511  {main} [TRACE] lpsolver.LPInputReader - Enter Start reading linear program from {1}
+10:27:00,171  {main} [TRACE] lpsolver.LPInputReader - Enter Start reading linear program from {1}
+10:27:45,786  {main} [TRACE] lpsolver.LPInputReader - Enter Start reading linear program from {1}
+10:28:32,484  {main} [TRACE] lpsolver.LPInputReader - Enter Start reading linear program from C:\Java_Projects\LPSolver\io_files\input.txt
+10:29:24,498  {main} [TRACE] lpsolver.LPInputReader - Start reading linear program from C:\Java_Projects\LPSolver\io_files\input.txt
+10:39:11,274  {main} [TRACE] lpsolver.LPInputReader - Start reading linear program from C:\Java_Projects\LPSolver\io_files\input.txt
+10:39:11,290  {main} [INFO] lpsolver.LPInputReader - Linear program has 14 inequalities and 18 variables
+11:24:17,143  {main} [TRACE] lpsolver.LPInputReader - Start reading linear program from C:\Java_Projects\LPSolver\io_files\input.txt
+11:24:17,143  {main} [TRACE] lpsolver.LPInputReader - Processing objective x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15 + x16 + x17 + x18
+11:24:17,159  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x1 + x2 <= 1
+11:27:09,305  {main} [TRACE] lpsolver.LPInputReader - Start reading linear program from C:\Java_Projects\LPSolver\io_files\input.txt
+11:27:09,305  {main} [TRACE] lpsolver.LPInputReader - Processing objective x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15 + x16 + x17 + x18
+11:27:09,305  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x1 + x2 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x3 + x4 + x5 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x6 + x7 + x8 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x9 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x10 + x11 + x12 + x13 + x14 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x15 + x16 + x17 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x18 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x1 + x3 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x4 + x6 + x10 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x2 + x5 + x9 + x11 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x7 + x12 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x13 + x15 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x8 + x14 + x16 + x18 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x17 <= 1
+11:27:09,321  {main} [TRACE] lpsolver.LPInputReader - Normalizing constraint matrix
+11:27:09,321  {main} [INFO] lpsolver.LPInputReader - Linear program has 14 inequalities and 18 variables
+11:28:46,986  {main} [TRACE] lpsolver.LPInputReader - Start reading linear program from C:\Java_Projects\LPSolver\io_files\input.txt
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing objective x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15 + x16 + x17 + x18
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x1 + x2 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x3 + x4 + x5 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x6 + x7 + x8 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x9 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x10 + x11 + x12 + x13 + x14 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x15 + x16 + x17 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x18 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x1 + x3 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x4 + x6 + x10 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x2 + x5 + x9 + x11 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x7 + x12 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x13 + x15 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x8 + x14 + x16 + x18 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x17 <= 1
+11:28:47,002  {main} [TRACE] lpsolver.LPInputReader - Normalizing constraint matrix
+11:28:47,002  {main} [INFO] lpsolver.LPInputReader - Linear program has 14 inequalities and 18 variables
+11:29:46,059  {main} [TRACE] lpsolver.LPInputReader - Start reading linear program from C:\Java_Projects\LPSolver\io_files\input.txt
+11:29:46,059  {main} [TRACE] lpsolver.LPInputReader - Processing objective x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15 + x16 + x17 + x18
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x1 + x2 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x3 + x4 + x5 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x6 + x7 + x8 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x9 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x10 + x11 + x12 + x13 + x14 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x15 + x16 + x17 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x18 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x1 + x3 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x4 + x6 + x10 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x2 + x5 + x9 + x11 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x7 + x12 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x13 + x15 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x8 + x14 + x16 + x18 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Processing constraint x17 <= 1
+11:29:46,075  {main} [TRACE] lpsolver.LPInputReader - Normalizing constraint matrix
+11:29:46,075  {main} [INFO] lpsolver.LPInputReader - Linear program has 14 inequalities and 18 variables
+11:59:11,362  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,409  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,409  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,409  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,409  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,409  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+11:59:11,409  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+11:59:11,424  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+11:59:11,424  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is auxVar
+11:59:11,424  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+11:59:11,424  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is auxVar2
+11:59:11,456  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+11:59:11,456  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+11:59:11,456  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+11:59:11,456  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+11:59:11,878  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@71d8cfe7
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,893  {main} [INFO] lpsolver.LPSolver - Basic solution is feasible
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@7be7e15
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Converting into maximization problem
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,893  {main} [INFO] lpsolver.LPSolver - Basic solution is feasible
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - This standard form has no variable names, no need to convert into slack form
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@7a0f244f
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,893  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+11:59:11,893  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+11:59:11,909  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+11:59:11,909  {main} [TRACE] lpsolver.LPSolver - Index of auxiliary variable after solving aux. lp is 1
+11:59:11,909  {main} [TRACE] lpsolver.LPSolver - Restoring initial linear program after initialization
+11:59:11,909  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@3a01773b
+11:59:11,909  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+11:59:11,909  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+11:59:11,909  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,909  {main} [INFO] lpsolver.LPSolver - Basic solution is feasible
+11:59:11,909  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+11:59:11,909  {main} [TRACE] lpsolver.LPSolver - This standard form has no variable names, no need to convert into slack form
+11:59:11,909  {main} [ERROR] lpsolver.LPSolver - This linear program is unbounded
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@7942a854
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,924  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Standard form has no variable names, need to add default
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Adding default variables
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@93f432e
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,924  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Standard form has no variable names, need to add default
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Adding default variables
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+11:59:11,924  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+11:59:11,940  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@28501a4b
+11:59:11,940  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+11:59:11,940  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+11:59:11,940  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+11:59:11,940  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+11:59:11,940  {main} [TRACE] lpsolver.LPSolver - Standard form has no variable names, need to add default
+11:59:11,940  {main} [TRACE] lpsolver.LPSolver - Adding default variables
+11:59:11,940  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:01:03,381  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@470a9030
+12:01:06,899  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:01:14,569  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:01:22,846  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:01:27,628  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+12:01:30,329  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:01:30,345  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:01:30,345  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:01:30,345  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:01:48,903  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+12:03:01,311  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,358  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,358  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,358  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,358  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,358  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:01,358  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:01,373  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:01,373  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is auxVar
+12:03:01,373  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:01,373  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is auxVar2
+12:03:01,405  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:03:01,405  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:01,405  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:01,405  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:01,826  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@71d8cfe7
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,842  {main} [INFO] lpsolver.LPSolver - Basic solution is feasible
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@7be7e15
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Converting into maximization problem
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,842  {main} [INFO] lpsolver.LPSolver - Basic solution is feasible
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - This standard form has no variable names, no need to convert into slack form
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@7a0f244f
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,842  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Index of auxiliary variable after solving aux. lp is 1
+12:03:01,842  {main} [TRACE] lpsolver.LPSolver - Restoring initial linear program after initialization
+12:03:01,858  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+12:03:01,858  {main} [TRACE] lpsolver.LPSolver - Index of auxiliary variable after solving aux. lp is 1
+12:03:01,858  {main} [TRACE] lpsolver.LPSolver - Restoring initial linear program after initialization
+12:03:01,858  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@36fc05ff
+12:03:01,858  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:01,858  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:01,858  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,858  {main} [INFO] lpsolver.LPSolver - Basic solution is feasible
+12:03:01,858  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:01,858  {main} [TRACE] lpsolver.LPSolver - This standard form has no variable names, no need to convert into slack form
+12:03:01,858  {main} [ERROR] lpsolver.LPSolver - This linear program is unbounded
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@75a118e6
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,873  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Standard form has no variable names, need to add default
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Adding default variables
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Index of auxiliary variable after solving aux. lp is 1
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Restoring initial linear program after initialization
+12:03:01,873  {main} [ERROR] lpsolver.LPSolver - This linear program is unbounded
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@acdcf71
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,873  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Standard form has no variable names, need to add default
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Adding default variables
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+12:03:01,873  {main} [TRACE] lpsolver.LPSolver - Index of auxiliary variable after solving aux. lp is 3
+12:03:01,873  {main} [ERROR] lpsolver.LPSolver - This linear program is infeasible
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@93f432e
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:01,889  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Standard form has no variable names, need to add default
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Adding default variables
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+12:03:01,889  {main} [TRACE] lpsolver.LPSolver - Index of auxiliary variable after solving aux. lp is 3
+12:03:01,889  {main} [ERROR] lpsolver.LPSolver - This linear program is infeasible
+12:03:32,584  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:32,615  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:32,615  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:32,615  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:32,615  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:32,615  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:32,615  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:32,631  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:32,631  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is auxVar
+12:03:32,631  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:32,646  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is auxVar2
+12:03:32,662  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:03:32,662  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:32,662  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:32,662  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:33,068  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:33,084  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@71d8cfe7
+12:03:33,084  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:33,084  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:33,084  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:33,084  {main} [INFO] lpsolver.LPSolver - Basic solution is feasible
+12:03:33,084  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@7be7e15
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Converting into maximization problem
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:33,100  {main} [INFO] lpsolver.LPSolver - Basic solution is feasible
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - This standard form has no variable names, no need to convert into slack form
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@7a0f244f
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:33,100  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Index of auxiliary variable after solving aux. lp is 1
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Restoring initial linear program after initialization
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+12:03:33,100  {main} [TRACE] lpsolver.LPSolver - Index of auxiliary variable after solving aux. lp is 1
+12:03:33,115  {main} [TRACE] lpsolver.LPSolver - Restoring initial linear program after initialization
+12:03:33,115  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@36fc05ff
+12:03:33,115  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:33,115  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:33,115  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:33,115  {main} [INFO] lpsolver.LPSolver - Basic solution is feasible
+12:03:33,115  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:33,115  {main} [TRACE] lpsolver.LPSolver - This standard form has no variable names, no need to convert into slack form
+12:03:33,115  {main} [ERROR] lpsolver.LPSolver - This linear program is unbounded
+12:03:33,115  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@75a118e6
+12:03:33,115  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:33,131  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Standard form has no variable names, need to add default
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Adding default variables
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Index of auxiliary variable after solving aux. lp is 1
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Restoring initial linear program after initialization
+12:03:33,131  {main} [ERROR] lpsolver.LPSolver - This linear program is unbounded
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@acdcf71
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:33,131  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Standard form has no variable names, need to add default
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Adding default variables
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Index of auxiliary variable after solving aux. lp is 3
+12:03:33,131  {main} [ERROR] lpsolver.LPSolver - This linear program is infeasible
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Start solving linear program lpsolver.LPStandardForm@77d680e6
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Starting simplex
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Starting simplex initialization
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Finding minimum element in b
+12:03:33,131  {main} [INFO] lpsolver.LPSolver - Basic solution is infeasible
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Standard form has no variable names, need to add default
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Adding default variables
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Converting into auxiliary linear program
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Getting name for auxiliary variable
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Name for auxiliary variable is x0
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Converting into slack form
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Solving auxiliary linear program
+12:03:33,131  {main} [TRACE] lpsolver.LPSolver - Index of auxiliary variable after solving aux. lp is 3
+12:03:33,131  {main} [ERROR] lpsolver.LPSolver - This linear program is infeasible
