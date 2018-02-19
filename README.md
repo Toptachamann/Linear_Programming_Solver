@@ -1,8 +1,8 @@
-#LPSolver
+# LPSolver
 ====================
 A bunch of classes for dealing with linear programming.
 
-###Description
+### Description
 ====================
 LPSolver - main class for solving linear programs. Accepts objects of LPStandardForm, returns optimal objective function value.
 LPInputReader - a class for reading lp from a source using several assumptions about the input,
@@ -26,7 +26,7 @@ A variable name is a sequence of letters (capitalized or not) with an optional i
 For example, x, y, x1, t125, var, var125 are considered a valid variable names.
 As always, feel free to fork, collaborate, pull requests or report bugs.
 
-###Changes
+### Changes
 ========================
 * In the version 1.1 several bugs were fixed and the way of reading and writing data to external sources
 was changed in order to improve performance (cause if the number of variables is greater than 10K, running time leaves much to
